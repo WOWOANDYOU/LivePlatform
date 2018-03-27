@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.mapper.UserMapper">
+	<resultMap type="cn.edu.zhku.pojo.UserEntity" id="BaseResultMap">
+		<id column="user_id" jdbcType="VARCHAR" property="userId" />
+	    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+	    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+	    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+	    <result column="user_gender" jdbcType="VARCHAR" property="userGender" />
+	    <result column="user_university_name" jdbcType="VARCHAR" property="userUniversityName" />
+	    <result column="user_major" jdbcType="VARCHAR" property="userMajor" />
+	    <result column="user_grade" jdbcType="VARCHAR" property="userGrade" />
+	    <result column="user_class_num" jdbcType="VARCHAR" property="userClassNum" />
+	    <result column="user_photo_path" jdbcType="VARCHAR" property="userPhotoPath" />
+	    <result column="user_register_time" jdbcType="TIMESTAMP" property="userRegisterTime" />
+	    <result column="user_recent_in_time" jdbcType="TIMESTAMP" property="userRecentInTime" />
+	    <result column="user_recent_out_time" jdbcType="TIMESTAMP" property="userRecentOutTime" />
+	   		
+	  <!--   <association column="goods_item" jdbcType="VARCHAR" property="item"
+	            select="cn.beautyprof.dao.GoodsItemEntityMapper.selectByPrimaryKey" />
+	    <association column="goods_pro_id" jdbcType="VARCHAR" property="pro"
+	            select="cn.beautyprof.dao.ProEntityMapper.selectByPrimaryKey" />
+	    <association column="goods_admin_id" jdbcType="VARCHAR" property="admin"
+	            select="cn.beautyprof.dao.UserEntityMapper.selectByPrimaryKey" />
+	    <association column="goods_detail_id" jdbcType="VARCHAR" property="detail"
+	            select="cn.beautyprof.dao.MallDissertationEntityMapper.selectByPrimaryKey" />
+	   -->
+	    <!-- 查出外表 -->       
+	   <!--  <collection column="goods_id" javaType="java.util.ArrayList" property="goodsSubitemList"
+	    select="cn.beautyprof.dao.GoodsSubitemEntityMapper.selectByGoodsKey" />
+	    <collection column="goods_id" javaType="java.util.ArrayList" property="goodsImageList"
+	    select="cn.beautyprof.dao.GoodsImageEntityMapper.selectByGoodsKey" /> 
+	    -->
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		user_id,user_name,user_password,user_email,user_gender,user_university_name,
+		user_major,user_grade,user_class_num,user_photo_path,user_register_time,
+		user_recent_in_time,user_recent_out_time
+	</sql>
+	
+	<!-- 查询 所有用户 -->
+	<select id="selectAllUser" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from t_user
+	</select>
+
+	<!-- 查询一个 操作 有如：登录查询 以及后面其他查询单个数据的操作 -->
+	<select id="seleceOne" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from t_user
+		where 1=1
+		<!-- 用户登录 查询 -->
+		<if test="userName!=null and userPassword!=null">
+			and user_name=#{userName,jdbcType=VARCHAR}
+			and user_password=#{userPassword,jdbcType=VARCHAR}
+		</if>
+		
+		<!-- 当用户 忘记密码 那么 输入邮箱 查到 该用户信息 然后重新设置密码 -->
+		<if test="userEmail!=null and userEmail!=''">
+			and user_email=#{userEmail,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<delete id="deleteUser" parameterType="java.lang.String">
+		delete from t_user where user_id=#{userId,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 更新数据 包括普通的update 还有 更新密码操作 -->
+	<update id="updateUser" parameterType="UserEntity">
+		update t_user
+		<set>
+			<if test="userName!=null and userName!=''">
+				user_name=#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userPassword!=null and userPassword!=''">
+				user_password=#{userPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail!=null and userEmail!=''">
+				user_email=#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userGender!=null and userGender!=''">
+				user_gender=#{userGender,jdbcType=VARCHAR},
+			</if>
+			<if test="userUniversityName!=null and userUniversityName!=''">
+				user_university_name=#{userUniversityName,jdbcType=VARCHAR},
+			</if>
+			<if test="userMajor!=null and userMajor!=''">
+				user_major=#{userMajor,jdbcType=VARCHAR},
+			</if>
+			<if test="userGrade!=null and userGrade!=''">
+				user_grade=#{userGrade,jdbcType=VARCHAR},
+			</if>
+			<if test="userClassNum!=null and userClassNum!=''">
+				user_class_num=#{userClassNum,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhotoPath!=null and userPhotoPath!=''">
+				user_photo_path=#{userPhotoPath,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where user_id=#{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="addUser" parameterType="UserEntity">
+		insert into 
+		t_user(user_id,user_name,user_password,user_email,user_gender,user_university_name,
+		user_major,user_grade,user_class_num,user_photo_path,user_register_time,
+		user_recent_in_time,user_recent_out_time)
+		values(#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},
+			#{userPassword,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},
+			#{userGender,jdbcType=VARCHAR},#{userUniversityName,jdbcType=VARCHAR},
+			#{userMajor,jdbcType=VARCHAR},#{userGrade,jdbcType=VARCHAR},
+			#{userClassNum,jdbcType=VARCHAR},#{userPhotoPath,jdbcType=VARCHAR},
+			#{userRegisterTime,jdbcType=TIMESTAMP},#{userRecentInTime,jdbcType=TIMESTAMP},
+			#{userRecentOutTime,jdbcType=TIMESTAMP}
+		);
+	</insert>
+
+</mapper>

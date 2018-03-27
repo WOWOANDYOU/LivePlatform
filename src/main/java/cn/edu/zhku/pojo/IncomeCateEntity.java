@@ -1,6 +1,6 @@
 package cn.edu.zhku.pojo;
 
-public class IncomeCate {
+public class IncomeCateEntity {
 	private String incomeCateId;
 	private String incomeCateName;
 	public String getIncomeCateId() {

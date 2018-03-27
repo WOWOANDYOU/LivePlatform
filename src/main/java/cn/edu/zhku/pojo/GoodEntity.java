@@ -2,7 +2,7 @@ package cn.edu.zhku.pojo;
 
 import java.util.Date;
 
-public class Good {
+public class GoodEntity {
 	private String goodId;
 	private String goodName;
 	private Integer goodPrice;

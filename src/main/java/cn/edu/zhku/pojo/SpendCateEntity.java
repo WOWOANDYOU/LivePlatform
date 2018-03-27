@@ -1,6 +1,6 @@
 package cn.edu.zhku.pojo;
 
-public class SpendCate {
+public class SpendCateEntity {
 	private String spendCateId;
 	private String spendCateName;
 	public String getSpendCateId() {

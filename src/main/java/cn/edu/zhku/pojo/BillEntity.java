@@ -2,7 +2,7 @@ package cn.edu.zhku.pojo;
 
 import java.util.Date;
 
-public class Bill {
+public class BillEntity {
 	private String billId;
 	private Integer billAmount;//账单金额
 	private Date billDate;//账单记录时间
@@ -11,6 +11,7 @@ public class Bill {
 	private String incomeCateId;
 	private String userId;
 	private Integer cateNum;//-1 表示该记录是消费，1 表示该记录是收入
+	
 	public String getBillId() {
 		return billId;
 	}

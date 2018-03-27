@@ -3,7 +3,7 @@ package cn.edu.zhku.pojo;
 import java.util.Date;
 
 //评论pojo
-public class Comment {
+public class CommentEntity {
 	private String commentId;
 	private String commentContent;
 	private String commentGoodId;

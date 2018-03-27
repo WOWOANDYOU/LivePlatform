@@ -2,7 +2,7 @@ package cn.edu.zhku.pojo;
 
 import java.util.Date;
 
-public class User {
+public class UserEntity {
 	private String userId;
 	private String userName;
 	private String userPassword;
