@@ -1,19 +1,169 @@
-LivePlatform ´óÑ§ÉúÉú»î¹ÜÀíÆ½Ì¨
-ÏîÄ¿ĞèÇó¹¦ÄÜ£º
-1£º¸öÈË³É¼¨¹ÜÀí¡£
-ËµÃ÷£ºÑ§ÉúÓÃ»§¿ÉÒÔÔÚ¸ÃÏµÍ³ÖĞÌí¼Ó¿¼ÊÔ³É¼¨£¬¼ÇÂ¼³É¼¨Êı¾İ¡£ºóÌ¨ÄÃµ½³É¼¨Êı¾İ£¬¸øÑ§ÉúÓÃ»§×ö¼òµ¥µÄÊı¾İ·ÖÎö£¨¾ßÌå¿É±íÏÖ	ÎªÓÃHighChartsÍ¼±í»æÖÆ²å¼ş·ÖÑ§ÆÚ¡¢·Ö¿ÆÄ¿Õ¹Ê¾Êı¾İÍ¼±í£©¡£
-¹¦ÄÜ£ºÑ§Éú¿ÉÔöÉ¾¸Ä²é Êı¾İ¡£
-2£º¸öÈËÉú»îÀí²Æ¼ÇÕË¡£
-ËµÃ÷£ºÑ§Éú¿ÉÌí¼ÓÕËµ¥ĞÅÏ¢£¨Ïû·ÑÒÔ¼°ÊÕÈëĞÅÏ¢£©£¬È»ºó·ÖÕËµ¥Àà	±ğ¡¢Ê±¼äÕ¹Ê¾ÓÃ»§ÕËµ¥Í¼±íĞÅÏ¢¡£¸ø³ö¼òµ¥·ÖÎö¡£
-¹¦ÄÜ£ºÑ§Éú¿ÉÔöÉ¾¸Ä²é Êı¾İ£¬Ìí¼ÓĞÄÔ¸µ¥ ĞÄÔ¸µ¥¸ÃÈçºÎÊµÏÖÄØ¡£
-3£ºÏĞÖÃÊĞ³¡
-ËµÃ÷£ºÑ§Éú¿ÉÒÔ·¢²¼¶şÊÖÏĞÖÃ£¨µ«ÊÇ²»ÄÜÔÚ¸ÃÏµÍ³ÖĞ½»Ò×£¬¿ÉÔÚÆÀÂÛÇøÌ¸ºÃ½»Ò×¼Û¸ñ¡¢Ê±¼äÒÔ¼°µØµã£©¡£
-¹¦ÄÜ£ºÓÃ»§¿Éä¯ÀÀ¶şÊÖÊĞ³¡¡£¿ÉÔÚÏ²»¶µÄÏĞÖÃÉÌÆ·ÖĞµÄÆÀÂÛÇø ±íÊ¾¹ºÂòÒâÏò£¬Ô¼¶¨½»Ò×Ê±¼ä¡£
-´ËÍâ£¬ÓÃ»§Ò²¿ÉÒÔ²é¿´×Ô¼º·¢²¼µÄ ÏĞÖÃÉÌÆ·£¨ÏÈÌá½»µ½ºóÌ¨ÉóºË£¬	ÉóºËÍ¨¹ıºó ±ã¿ÉÒÔÉÏ¼Ü£©£¬ĞŞ¸ÄÉÌÆ·ĞÅÏ¢¡£¿ÉÒÔÏÂ¼ÜÏĞÖÃÉÌÆ·¡£
-4£ºÉú»îÓéÀÖ£ºĞ´¸öÅÀ³æÅÀÈ¡¶¹°êµçÓ°Êı¾İ¡£Õ¹Ê¾ÈÈÃÅÒÔ¼°ÀäÃÅµçÓ°¡£Õâ¸öÅÀ³æÓ¦¸Ã²»ºÃ´¦Àí£¬¿´Ê±¼äÇé¿ö£¬Ì«¸Ï¾ÍÈ¥µô¿©¡£
-ËµÃ÷£ºÓÃ»§²é¿´µçÓ° Ó°ÆÀÒÔ¼°ÆäËûÊı¾İ ¿ÉÒÔµã»÷ ¡°Ïë¿´¡± ½«µçÓ°Ìí¼Ó½ø×Ô¼ºµÄ ÊÕ²ØÁĞ±íÖĞ¡££¨PS Õâ¸ö½Ï¸´ÔÓ Ê±¼ä¶Ì¿ÉÄÜ×ö²»³öÀ´¡£¡£¡££©
+LivePlatform å¤§å­¦ç”Ÿç”Ÿæ´»ç®¡ç†å¹³å°
 
-À©Õ¹µã£º
-¸öÈË¿Õ¼ä£¨±ÈÈç£º¸öÈËÈÕ¼Ç¡¢¸öÈËÏà²áµÈ£©
-¾ÍÒµÖ°Î»ĞÅÏ¢Çé¿öµÄÊı¾İÕ¹Ê¾¡£
-·¢Æğ»°Ìâ£¬²ÎÓëÌÖÂÛ»°ÌâµÈ¡£
+é¡¹ç›®éœ€æ±‚åŠŸèƒ½ï¼š
+
+1ï¼šä¸ªäººæˆç»©ç®¡ç†ã€‚
+è¯´æ˜ï¼šå­¦ç”Ÿç”¨æˆ·å¯ä»¥åœ¨è¯¥ç³»ç»Ÿä¸­æ·»åŠ è€ƒè¯•æˆç»©ï¼Œè®°å½•æˆç»©æ•°æ®ã€‚åå°æ‹¿åˆ°æˆç»©æ•°æ®ï¼Œç»™å­¦ç”Ÿç”¨æˆ·åšç®€å•çš„æ•°æ®åˆ†æï¼ˆå…·ä½“å¯è¡¨ç°ä¸ºç”¨HighChartså›¾è¡¨ç»˜åˆ¶æ’ä»¶åˆ†å­¦æœŸã€åˆ†ç§‘ç›®å±•ç¤ºæ•°æ®å›¾è¡¨ï¼‰ã€‚
+åŠŸèƒ½ï¼šå­¦ç”Ÿå¯å¢åˆ æ”¹æŸ¥ æ•°æ®ã€‚
+
+2ï¼šä¸ªäººç”Ÿæ´»ç†è´¢è®°è´¦ã€‚
+è¯´æ˜ï¼šå­¦ç”Ÿå¯æ·»åŠ è´¦å•ä¿¡æ¯ï¼ˆæ¶ˆè´¹ä»¥åŠæ”¶å…¥ä¿¡æ¯ï¼‰ï¼Œç„¶ååˆ†è´¦å•ç±»	åˆ«ã€æ—¶é—´å±•ç¤ºç”¨æˆ·è´¦å•å›¾è¡¨ä¿¡æ¯ã€‚ç»™å‡ºç®€å•åˆ†æã€‚
+åŠŸèƒ½ï¼šå­¦ç”Ÿå¯å¢åˆ æ”¹æŸ¥ æ•°æ®ï¼Œæ·»åŠ å¿ƒæ„¿å• å¿ƒæ„¿å•è¯¥å¦‚ä½•å®ç°å‘¢ã€‚
+
+3ï¼šé—²ç½®å¸‚åœº
+è¯´æ˜ï¼šå­¦ç”Ÿå¯ä»¥å‘å¸ƒäºŒæ‰‹é—²ç½®ï¼ˆä½†æ˜¯ä¸èƒ½åœ¨è¯¥ç³»ç»Ÿä¸­äº¤æ˜“ï¼Œå¯åœ¨è¯„è®ºåŒºè°ˆå¥½äº¤æ˜“ä»·æ ¼ã€æ—¶é—´ä»¥åŠåœ°ç‚¹ï¼‰ã€‚
+åŠŸèƒ½ï¼šç”¨æˆ·å¯æµè§ˆäºŒæ‰‹å¸‚åœºã€‚å¯åœ¨å–œæ¬¢çš„é—²ç½®å•†å“ä¸­çš„è¯„è®ºåŒº è¡¨ç¤ºè´­ä¹°æ„å‘ï¼Œçº¦å®šäº¤æ˜“æ—¶é—´ã€‚
+æ­¤å¤–ï¼Œç”¨æˆ·ä¹Ÿå¯ä»¥æŸ¥çœ‹è‡ªå·±å‘å¸ƒçš„ é—²ç½®å•†å“ï¼ˆå…ˆæäº¤åˆ°åå°å®¡æ ¸ï¼Œ	å®¡æ ¸é€šè¿‡å ä¾¿å¯ä»¥ä¸Šæ¶ï¼‰ï¼Œä¿®æ”¹å•†å“ä¿¡æ¯ã€‚å¯ä»¥ä¸‹æ¶é—²ç½®å•†å“ã€‚
+
+4ï¼šç”Ÿæ´»å¨±ä¹ï¼šå†™ä¸ªçˆ¬è™«çˆ¬å–è±†ç“£ç”µå½±æ•°æ®ã€‚å±•ç¤ºçƒ­é—¨ä»¥åŠå†·é—¨ç”µå½±ã€‚è¿™ä¸ªçˆ¬è™«åº”è¯¥ä¸å¥½å¤„ç†ï¼Œçœ‹æ—¶é—´æƒ…å†µï¼Œå¤ªèµ¶å°±å»æ‰å’¯ã€‚
+è¯´æ˜ï¼šç”¨æˆ·æŸ¥çœ‹ç”µå½± å½±è¯„ä»¥åŠå…¶ä»–æ•°æ® å¯ä»¥ç‚¹å‡» â€œæƒ³çœ‹â€ å°†ç”µå½±æ·»åŠ è¿›è‡ªå·±çš„ æ”¶è—åˆ—è¡¨ä¸­ã€‚ï¼ˆPS è¿™ä¸ªè¾ƒå¤æ‚ æ—¶é—´çŸ­å¯èƒ½åšä¸å‡ºæ¥ã€‚ã€‚ã€‚ï¼‰
+
+æ‰©å±•ç‚¹ï¼š
+ä¸ªäººç©ºé—´ï¼ˆæ¯”å¦‚ï¼šä¸ªäººæ—¥è®°ã€ä¸ªäººç›¸å†Œç­‰ï¼‰
+å°±ä¸šèŒä½ä¿¡æ¯æƒ…å†µçš„æ•°æ®å±•ç¤ºã€‚
+å‘èµ·è¯é¢˜ï¼Œå‚ä¸è®¨è®ºè¯é¢˜ç­‰ã€‚
+
+æ•°æ®åº“è¡¨çš„è®¾è®¡
+æ•°æ®åº“ï¼ˆ```liveplatform```ï¼‰
+create database liveplatform;
+use liveplatform;
+```ç”¨æˆ·è¡¨ t_user```
+```
+CREATE TABLE `t_user` (
+`user_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ä¸»é”®ç”±UUIDè®¾ç½®' ,
+`user_name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`user_password`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`user_email`  varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`user_gender`  varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'æ€§åˆ«' ,
+`user_university_name`  varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ç”¨æˆ·å¤§å­¦åç§°' ,
+`user_major`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ä¸“ä¸šåç§°' ,
+`user_grade`  varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'å¹´çº§' ,
+`user_class_num`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ç­çº§åç§°' ,
+`user_photo_path`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ç”¨æˆ·å¤´åƒè·¯å¾„' ,
+`user_register_time`  datetime NULL DEFAULT NULL COMMENT 'ç”¨æˆ·æ³¨å†Œæ—¶é—´' ,
+`user_recent_in_time`  datetime NULL DEFAULT NULL COMMENT 'ç”¨æˆ·æœ€è¿‘ç™»å½•æ—¶é—´' ,
+`user_recent_out_time`  datetime NULL DEFAULT NULL COMMENT 'ç”¨æˆ·æœ€è¿‘ç™»å‡ºæ—¶é—´' ,
+PRIMARY KEY (`user_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=DYNAMIC
+;
+```
+
+```æ¶ˆè´¹ç±»åˆ«è¡¨ t_spend_cate```
+```
+CREATE TABLE `t_spend_cate` (
+`spend_cate_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`spend_cate_name`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`spend_cate_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=DYNAMIC
+;
+```
+
+```æ”¶å…¥ç±»åˆ«è¡¨ t_income_cate```
+```
+CREATE TABLE `t_income_cate` (
+`income_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`income_name`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`income_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=DYNAMIC
+;
+```
+
+```è´¦å•è¡¨ t_bill```
+```
+CREATE TABLE `t_bill` (
+`bill_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'è´¦å•ä¸»é”® UUID' ,
+`bill_amount`  int(11) NULL DEFAULT NULL COMMENT 'é‡‘é¢' ,
+`bill_date`  date NULL DEFAULT NULL ,
+`bill_comment`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'è´¦å•å¤‡æ³¨' ,
+`spend_cate_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'æ¶ˆè´¹è´¦å•ç±»åˆ«åid' ,
+`income_cate_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'æ”¶å…¥è´¦å•ç±»åˆ«åid' ,
+`user_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`cate_num`  int(5) NULL DEFAULT NULL COMMENT '-1 è¡¨ç¤ºè¯¥è®°å½•æ˜¯æ¶ˆè´¹ï¼Œ1 è¡¨ç¤ºè¯¥è®°å½•æ˜¯æ”¶å…¥' ,
+PRIMARY KEY (`bill_id`),
+FOREIGN KEY (`user_id`) REFERENCES `t_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`spend_cate_id`) REFERENCES `t_spend_cate` (`spend_cate_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`income_cate_id`) REFERENCES `t_income_cate` (`income_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX `user_id` (`user_id`) USING BTREE ,
+INDEX `spend_cate_id` (`spend_cate_id`) USING BTREE ,
+INDEX `income_cate_id` (`income_cate_id`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='è´¦å•è¡¨'
+ROW_FORMAT=DYNAMIC
+;
+```
+
+```æˆç»©è¡¨ t_course_record```
+```
+CREATE TABLE `t_course_record` (
+`course_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`course_name`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`course_record`  int(11) NULL DEFAULT NULL COMMENT 'è¯¾ç¨‹åˆ†æ•°' ,
+`course_phy_art_cate`  int(11) NULL DEFAULT NULL COMMENT '0 è¡¨ç¤º æ–‡ç§‘ç±»ï¼Œ1 è¡¨ç¤ºç†ç§‘ç±»' ,
+`course_major_cate`  int(11) NULL DEFAULT NULL COMMENT '0 è¡¨ç¤ºé€‰ä¿®ï¼Œ1è¡¨ç¤ºä¸»ä¿®' ,
+`course_record_date`  date NULL DEFAULT NULL COMMENT 'è¯¾ç¨‹æˆç»©è®°å½•æ—¶é—´ ç³»ç»Ÿç”Ÿæˆ' ,
+`course_record_user_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'è¯¥æ¡è®°å½• æ‰€å±å­¦ç”Ÿçš„id' ,
+PRIMARY KEY (`course_id`),
+FOREIGN KEY (`course_record_user_id`) REFERENCES `t_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX `course_record_user_id` (`course_record_user_id`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=DYNAMIC
+;
+
+```
+
+```é—²ç½®è´§ç‰©å•†å“è¡¨ t_good```
+```
+CREATE TABLE `t_good` (
+`good_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`good_name`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`good_price`  int(11) NULL DEFAULT NULL ,
+`good_up_time`  datetime NULL DEFAULT NULL COMMENT 'å•†å“ä¸Šæ¶å‘å¸ƒæ—¶é—´' ,
+`good_number`  int(11) NULL DEFAULT NULL COMMENT 'å•†å“åº“å­˜' ,
+`good_user_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'å•†å“æ‰€å±å•†å®¶' ,
+`good_cate`  int(11) NULL DEFAULT NULL COMMENT 'å•†å“çš„ç±»åˆ«  åªæœ‰2ç±» 1è¡¨ç¤º ä¹¦ç±  0è¡¨ç¤º å…¶ä»–ç”Ÿæ´»å·¥å…·ç±»' ,
+`good_img_path`  text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'è®°å½•å›¾ç‰‡çš„ç¡¬ç›˜è·¯å¾„' ,
+PRIMARY KEY (`good_id`),
+FOREIGN KEY (`good_user_id`) REFERENCES `t_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX `t_good_ibfk_1` (`good_user_id`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=DYNAMIC
+;
+```
+
+```è¯„è®ºè¡¨ t_comment ```
+```
+CREATE TABLE `t_comment` (
+`comment_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`comment_content`  text CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
+`comment_good_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'è¯¥è¯„è®ºæ˜¯æŒ‚åœ¨å“ªä¸ªå•†å“ä¸‹é¢çš„' ,
+`comment_from_user_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'å‘èµ·è¯„è®ºçš„äººçš„id' ,
+`comment_to_user_id`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'æ¥å—è¯„è®ºçš„äººçš„id' ,
+`comment_time`  datetime NULL DEFAULT NULL COMMENT 'è¯„è®ºæ—¶é—´' ,
+PRIMARY KEY (`comment_id`),
+FOREIGN KEY (`comment_good_id`) REFERENCES `t_good` (`good_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`comment_from_user_id`) REFERENCES `t_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`comment_to_user_id`) REFERENCES `t_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX `comment_good_id` (`comment_good_id`) USING BTREE ,
+INDEX `comment_from_user_id` (`comment_from_user_id`) USING BTREE ,
+INDEX `comment_to_user_id` (`comment_to_user_id`) USING BTREE 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=DYNAMIC
+;
+```
