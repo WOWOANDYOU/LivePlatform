@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,9 +22,19 @@ public class TestMybatis {
 	@Autowired
 	private UserService userService;
 	
+	private JavaMailSenderImpl senderImpl;
+	private SimpleMailMessage mailMessage;
+	
+	
 	@Test
 	public void testUserSelect() {
+		
+		
 		ArrayList<UserEntity> list = userService.selectAllUser();
+		double d = Math.random();
+		double a = d * 10;
+		Integer x =(int)((Math.random()*10+1)*100000);
+		System.out.println(x.toString()+" "+d+" "+a);
 		for(UserEntity userEntity:list) {
 		}
 	}

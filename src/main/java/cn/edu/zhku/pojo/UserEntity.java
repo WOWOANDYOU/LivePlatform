@@ -17,6 +17,14 @@ public class UserEntity {
 	private Date userRecentInTime;//最近登录时间
 	private Date userRecentOutTime;//最近登出时间
 	
+	private String emailCode;
+	
+	public String getEmailCode() {
+		return emailCode;
+	}
+	public void setEmailCode(String emailCode) {
+		this.emailCode = emailCode;
+	}
 	public String getUserId() {
 		return userId;
 	}

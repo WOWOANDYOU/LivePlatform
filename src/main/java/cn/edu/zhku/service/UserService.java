@@ -15,4 +15,8 @@ public interface UserService {
 	public int deleteUser(String userId);
 	
 	public int updateUser(UserEntity userEntity);
+	
+	public String sendMail(String to);//发送验证码
+	
+	public Integer checkCode(String emailCode,String originMailTime); 
 }

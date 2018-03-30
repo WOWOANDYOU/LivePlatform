@@ -9,4 +9,8 @@
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 	<!-- 配置扫描 service包 -->
 	<context:component-scan base-package="cn.edu.zhku.service"/>
+	
+	<!-- 创建邮件实例 -->
+	<!-- <bean id="senderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl"/>
+	<bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage"/> -->
 </beans>

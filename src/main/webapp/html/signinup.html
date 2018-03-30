@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>生活管理平台</title>
+
+	<script type="text/javascript" src="../js/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery.form.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/signinup.css" rel="stylesheet">
+
+	<script type="text/javascript" src="../js/signinup.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+    	<form class="form-signin" id="userSignin" method="post">
+	        <h2 class="form-signin-heading">请登录</h2>
+	        <input type="text" id="inputName" name="userName" class="form-control inputName2" placeholder="输入用户名" onfocus="removeClassFun(this)">
+	        <!-- <span style="color:red;display:in-block;">*</span><p class="hide">请输入用户名</p> -->
+	        <input type="password" id="inputPassword" name="userPassword" class="form-control" placeholder="输入密码" onfocus="removeClassFun(this)">
+	        <label>
+	        	<input type="text" id="megCode" class="form-control" placeholder="输入验证码" onfocus="removeClassFun(this)">
+	        	<input type="text" id="messCode" class="form-control" onclick="createCode()" onfocus="this.blur()">
+	        </label>
+	        <div class="checkbox">
+	          <label>
+	            <input type="checkbox" value="remember-me"> 记住我
+	          </label>
+	          <label class="findPad">
+	            <a href="" style="text-decoration:none;">忘记密码?</a>
+	          </label>
+	        </div>
+	        <button  type="button" class="btn btn-lg btn-primary btn-block signupSub signinSub" >登录</button>
+	        <labe class="sigupInfo">
+	        	没有账号？<button type="button" class="btn btn-link" id="toSignup">去注册</button>
+	        </labe>
+      	</form>
+      	
+      	<form class="form-signin" id="userSignup" method="post">
+	        <h2 class="form-signin-heading">欢迎注册</h2>
+	        <input type="text" id="inputName2" name="userName" class="form-control inputName2" placeholder="输入用户名">
+	        <input type="password" id="inputPassword2" name="userPassword" class="form-control" placeholder="输入密码6位数或以上">
+	        <input type="email" id="inputEmail" name="userEmail" class="form-control inputName2" placeholder="输入邮箱">
+	        
+	        <label>
+	        	<input type="text" id="inputEmailCode" name="emailCode" class="form-control" placeholder="输入验证码">
+	        	<button type="button" class="btn btn-primary btn-getCode">获取验证码</button>
+	        </label>
+	        
+	        <button type="button" class="btn btn-lg btn-primary btn-block signupSub">注册</button>
+	        <labe class="sigupInfo">
+	        	已有账号？<button type="button" class="btn btn-link" id="toSignin">去登录</button>
+	        </labe>
+      	</form>
+   </div> <!-- /container -->
+  </body>
+</html>

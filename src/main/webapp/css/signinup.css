@@ -1,0 +1,87 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.checkbox,.radio{
+	position:relative;
+	display:block;
+	margin-top:1px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin .inputName2 {
+/* background-color:transparent; */
+  margin-bottom: 5px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.findPad{
+	float:right;
+}
+.sigupInfo{
+	float:right;
+	margin-top:10px;
+}
+#megCode{
+	float:left;
+	width:55%;
+}
+#messCode{
+	float:right;
+	width:42%;
+	/* background-color: transparent; */
+	border:none;
+}
+
+.invalid:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color: red;
+     opacity: 1;
+}
+.invalid::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: red;
+    opacity: 1;
+}
+input.invalid:-ms-input-placeholder{
+    color: red;
+}
+input.invalid::-webkit-input-placeholder {
+    color: red;
+}
+#inputEmailCode{
+	float:left;
+	width:60%;
+}
+.btn-getCode{
+	float:right;
+	width:38%;
+	height:44px;
+}
