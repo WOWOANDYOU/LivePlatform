@@ -14,15 +14,15 @@ public class MailUtil {
 	public boolean sendMail(String to,String text) {
 		boolean istrue = false;
 		try {
-			senderImpl.setHost("smtp.163.com");
-			
+			senderImpl.setHost("smtp.163.com");  //smtp.exmail.qq.com
 			mailMessage.setTo(to); 
+			mailMessage.setCc("13535528187@163.com");
             mailMessage.setFrom( "13535528187@163.com" ); 
             mailMessage.setSubject( "【生活管理平台】验证码" ); 
             mailMessage.setText("验证码为:" + text); 
 
             senderImpl.setUsername("13535528187@163.com");
-            senderImpl.setPassword("184008,wentao");
+            senderImpl.setPassword("184008,wentao"); //vpnruhobaliidjgi
 
             Properties prop = System.getProperties();
             prop.put("mail.smtp.auth","true");

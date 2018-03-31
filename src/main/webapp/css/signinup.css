@@ -48,8 +48,9 @@ body {
 	float:right;
 }
 .sigupInfo{
-	float:right;
-	margin-top:10px;
+	/* float:right;
+	margin-top:10px; */
+	margin-left:90px;
 }
 #megCode{
 	float:left;
@@ -84,4 +85,20 @@ input.invalid::-webkit-input-placeholder {
 	float:right;
 	width:38%;
 	height:44px;
+}
+.spanInfo{
+	/* float:right;
+	margin-top:40px; */
+	margin-left:90px;
+}
+.pInfo font{
+	/* margin-left:50px; */
+	/* margin:auto; */
+	/* text-align:center; */
+}
+.modal-dialog{
+	margin-top:20%;
+	margin-left:auto;
+	width:35px;
+	height:35px;
 }

@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and user_password=#{userPassword,jdbcType=VARCHAR}
 		</if>
 		
-		<!-- 当用户 忘记密码 那么 输入邮箱 查到 该用户信息 然后重新设置密码 -->
+		<!-- 当用户 忘记密码 那么 输入邮箱 查到 该用户信息 然后重新设置密码 同时检查 是否已存在-->
 		<if test="userEmail!=null and userEmail!=''">
 			and user_email=#{userEmail,jdbcType=VARCHAR}
 		</if>
