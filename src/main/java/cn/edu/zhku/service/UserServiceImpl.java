@@ -3,6 +3,7 @@ package cn.edu.zhku.service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 		Timestamp time = new Timestamp(new Date().getTime());
 		userEntity.setUserRegisterTime(time);
 		userEntity.setUserRecentInTime(time);
-		
+		userEntity.setUserId(UUID.randomUUID().toString());
 		return userMapper.addUser(userEntity);
 	}
 
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	public Integer checkCode(String emailCode, String originMailTime) {
 		//private Integer megInfo;//-1 表示验证码错误  -2表示验证码超时   1表示验证码正确
 		String [] mailTime = originMailTime.split("#");
-		if(mailTime.equals(emailCode)) {
+		if(mailTime[0].equals(emailCode)) {
 			String time = mailTime[1];
 			long oringTime = Long.parseLong(time);
 			long nowTime = new Date().getTime();

@@ -4,10 +4,14 @@ $(document).ready(function(){
 	$("#userSignup").hide();
 	
 	$("#toSignup").click(function(){
+		$(".pInfo").text("");
+		$("input").val();
 		$("#userSignin").hide();
 		$("#userSignup").show();
 	});
 	$("#toSignin").click(function(){
+		$(".pInfo").text("");
+		$("input").val();
 		$("#userSignup").hide();
 		$("#userSignin").show();
 	});
@@ -19,8 +23,31 @@ $(document).ready(function(){
 	$(".signupSub").click(signupValidate);
 	
 	$("#testbtn").click(function(){
-		$(".img-gifInfo").attr("src","../img/loadding2.gif");
-		$("#myModal_gifInfo").modal("show");
+		/*window.location.replace("../index.action");*/
+		/*var time = 10;// 定义时间变量。用于倒计时用
+	    var timer = null;// 定义一个定时器；
+	    timer = setInterval(function(){//开启定时器。函数内执行
+	    	$("#testbtn").attr("disabled","true");
+	        $('#testbtn').text(time+"秒后重发"); //点击发生后，按钮的文本内容变成之前定义好的时间值。
+	        time--;// 时间值自减
+	        if(time ==0){     // 判断,当时间值小于等于0的时候
+	        	$('#testbtn').text("");// 其文本内容变成……点击重新发送……
+	            $('#testbtn').text("重发验证码");
+	            $('#testbtn').removeAttr("disabled");
+	            clearInterval(timer); // 清除定时器
+	        }
+	    },1000)*/
+	});
+	
+	$("#btnSubhaha").click(function(){
+		alert("hah");
+		$("#testForm").ajaxSubmit({
+			url:'./haha.action',
+			dataType:'json',
+			success:function(data){
+				alert("hahah");
+			}
+		});
 	});
 });
 var code ; //在全局 定义验证码  
@@ -43,6 +70,7 @@ function signinValidate(){
 	var name = $("#inputName").val();
 	var password = $("#inputPassword").val();
 	var checkCode = $("#megCode").val();
+	
 	if(name==""){
 		$("#inputName").addClass("invalid");
 		$("#inputName").attr("placeholder","用户名不能为空");
@@ -55,6 +83,8 @@ function signinValidate(){
 		$("#megCode").attr("placeholder","验证码错误");
 		createCode();
 	}else{
+		$(".signinSub").attr("disabled","true");
+		$("#myModal_gifInfo").modal("show");
 		signinFun();
 	}
 }
@@ -86,18 +116,22 @@ function signupValidate(){
 		$("#inputEmailCode").val("");
 		$("#inputEmailCode").addClass("invalid");
 		$("#inputEmailCode").attr("placeholder","请先获取验证码");
+	}else if(isExistence == 1){
+		$(".pInfo").text("该邮箱已注册，请直接登录");
 	}else if(messCode == ""){
 		$("#inputEmailCode").addClass("invalid");
 		$("#inputEmailCode").attr("placeholder","验证码不能为空");
 	}else{
-		SigupFun();
+		$(".signupSub").attr("disabled","true");
+		$("#myModal_gifInfo").modal("show");
+		signupFun();
 	}
 }
 function isEmail(emailStr){
-	 var reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	 var reg=/^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
 	 var istrue = reg.test(emailStr);
 	 return istrue;
-	}
+}
 function removeClassFun(a){
 	var isFirefox=navigator.userAgent.indexOf("Firefox"); 
 	if(a.placeholder == "用户名不能为空"){
@@ -172,6 +206,7 @@ function removeClassFun2(a){
 	}else{
 	}
 }
+var isExistence;//是否存在
 function getMessCodeFun(){
 	var name = $("#inputName2").val();
 	var password = $("#inputPassword2").val();
@@ -196,6 +231,7 @@ function getMessCodeFun(){
 		$("#inputEmail").attr("placeholder","邮箱不正确");
 	}else{
 		getMessCodeNum+=1;
+		$("#myModal_gifInfo").modal("show");
 		$.ajax({
 			url:'./getMegCode.action',
 			type:'post',
@@ -203,15 +239,42 @@ function getMessCodeFun(){
 			dataType:'json',
 			success:function(data){
 				console.log(data);
+				$("#myModal_gifInfo").modal("hide");
+				if(data.existence == 1){
+					isExistence = 1;
+					$(".pInfo").text("该邮箱已注册，请直接登录");
+					return;
+				}
 				if(data.existence == -1 && data.info == "true"){
-					
+					isExistence = -1;
+					run("btn-getCode");
+				}
+				if(data.info == "false"){
+					$(".pInfo").text("邮件未能发送，请稍后再试");
 				}
 			},
 			error:function(error){
 				console.log(error);
+				$("#myModal_gifInfo").modal("hide");
+				$(".pInfo").text("出错了，请稍后重试");
 			}
 		});
 	}
+}
+function run(className){
+	var time = 120;// 定义时间变量。用于倒计时用
+    var timer = null;// 定义一个定时器；
+    timer = setInterval(function(){//开启定时器。函数内执行
+    	$("."+className).attr("disabled","true");
+        $("."+className).text(time+"秒后重发"); //点击发生后，按钮的文本内容变成之前定义好的时间值。
+        time--;// 时间值自减
+        if(time ==0){     // 判断,当时间值小于等于0的时候
+        	$("."+className).text("");// 其文本内容变成……点击重新发送……
+            $("."+className).text("重发验证码");
+            $("."+className).removeAttr("disabled");
+            clearInterval(timer); // 清除定时器
+        }
+    },1000)
 }
 var ajax_option={
 	url:"../user/signin.action",//默认是form action
@@ -222,29 +285,54 @@ var ajax_option={
 }
 
 function signinFun(){
-	alert('wowo');
-	$("#userSignin").ajaxSubmit(ajax_option);
-	/*$("#userSignin").ajaxForm({
-		url:'../user/signin.action',
+	$("#userSignin").ajaxSubmit({
+		url:'./signin.action',
+		type:'post',
 		dataType:'json',
 		success:function(data){
 			console.log(data);
+			$(".signinSub").removeAttr("disabled");
+			$("#myModal_gifInfo").modal("hide");
+			if(data.info == "error"){
+				$(".pInfo").text("用户名或者密码错误");
+			}else if(data.info == "false"){
+				$(".pInfo").text("服务器出错，请稍后再试");
+			}else{
+				window.location.replace("../index.action");
+			}
 		},
 		error:function(error){
-			console.log(error);
+			$(".signinSub").removeAttr("disabled");
+			$("#myModal_gifInfo").modal("hide");
+			$(".pInfo").text("出错了，请稍后重试");
 		}
-	});*/
+	});
+	
 }
-function SigupFun(){
-	$("#userSignup").ajaxForm({
+function signupFun(){
+	debugger
+	$("#userSignup").ajaxSubmit({
 		url:'./signup.action',
 		type:'post',
 		dataType:'json',
 		success:function(data){
-			
+			$(".signupSub").removeAttr("disabled");
+			$("#myModal_gifInfo").modal("hide");
+			console.log(data);
+			if(data.megInfo == 1 && data.info == "true"){
+				window.location.replace("../index.action"); 
+			}else if(data.megInfo == -1){
+				$(".pInfo").text("验证码错误，请重新输入");
+			}else if(data.megInfo == -2){
+				$(".pInfo").text("验证码超时，请重新获取");
+			}else{
+				$(".pInfo").text("服务器异常，请稍后重试");
+			}
 		},
 		error:function(error){
-			
+			$(".signupSub").attr("disabled","false");
+			$("#myModal_gifInfo").modal("hide");
+			$(".pInfo").text("出错拉，请稍后重试");
 		}
 	});
 }
