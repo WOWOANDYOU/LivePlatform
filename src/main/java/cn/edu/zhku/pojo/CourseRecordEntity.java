@@ -10,6 +10,14 @@ public class CourseRecordEntity {
 	private Integer courseMajorCate;
 	private Date courseRecordDate;
 	private String courseRecordUserId;
+	private Integer courseTermNum;
+	
+	public Integer getCourseTermNum() {
+		return courseTermNum;
+	}
+	public void setCourseTermNum(Integer courseTermNum) {
+		this.courseTermNum = courseTermNum;
+	}
 	public String getCourseId() {
 		return courseId;
 	}

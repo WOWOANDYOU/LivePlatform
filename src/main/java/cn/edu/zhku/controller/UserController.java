@@ -206,6 +206,8 @@ public class UserController {
 				jr.setObject(user);
 				jr.setInfo("true");
 				request.getSession().setAttribute("userSession", user);
+				UserEntity userEntity2 = (UserEntity) request.getSession().getAttribute("userSession");
+				System.out.println(userEntity2.getUserName());
 			} else {
 				jr.setInfo("error"); //表示 用户名或者密码错误
 			}
@@ -216,25 +218,9 @@ public class UserController {
 		}
 	}
 	
-	//找回密码
-	@SuppressWarnings("finally")
-	@RequestMapping(value = "findPassword", method = RequestMethod.POST)
-	@ResponseBody
-	public String findPassword(UserEntity userEntity, HttpServletRequest request) {
-		JsonReturn jr = new JsonReturn();
-		try {
-			UserEntity user = userService.selectOne(userEntity);
-			if (user != null) {
-				jr.setObject(user);
-				jr.setInfo("true");
-				request.getSession().setAttribute("userSession", user);
-			} else {
-				jr.setInfo("error"); //表示 用户名或者密码错误
-			}
-		} catch (Exception e) {
-			jr.setInfo("false");//表示 服务器出错
-		} finally {
-			return JSON.toJSONString(jr);
-		}
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("userSession");
+		return "signinup";
 	}
 }

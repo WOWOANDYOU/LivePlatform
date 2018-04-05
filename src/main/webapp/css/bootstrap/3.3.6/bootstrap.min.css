@@ -1652,7 +1652,8 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 ol, ul {
 	margin-top: 0;
-	margin-bottom: 10px
+	margin-bottom: 10px;
+	list-style-type:none;/* 修改 使得 ul li前边没有 圆点 */
 }
 
 ol ol, ol ul, ul ol, ul ul {
@@ -2102,7 +2103,7 @@ pre code {
 		width: 83.33333333%
 	}
 	.col-sm-9 {
-		width: 75%
+		width: 80%
 	}
 	.col-sm-8 {
 		width: 66.66666667%
@@ -2120,7 +2121,7 @@ pre code {
 		width: 33.33333333%
 	}
 	.col-sm-3 {
-		width: 25%
+		width: 20%
 	}
 	.col-sm-2 {
 		width: 16.66666667%
@@ -5396,8 +5397,8 @@ a.badge:focus, a.badge:hover {
 }
 
 .jumbotron {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	margin-bottom: 30px;
 	color: inherit;
 	background-color: #eee

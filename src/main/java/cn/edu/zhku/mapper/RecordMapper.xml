@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.mapper.RecordMapper">
+	<resultMap type="cn.edu.zhku.pojo.CourseRecordEntity" id="BaseResultMap">
+		<id column="course_id" jdbcType="VARCHAR" property="courseId" />
+	    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+	    <result column="course_record" jdbcType="INTEGER" property="courseRecord" />
+	    <result column="course_phy_art_cate" jdbcType="INTEGER" property="coursePhyArtCate" />
+	    <result column="course_major_cate" jdbcType="INTEGER" property="courseMajorCate" />
+	    <result column="course_record_date" jdbcType="TIMESTAMP" property="courseRecordDate" />
+	    <result column="course_record_user_id" jdbcType="VARCHAR" property="courseRecordUserId" />
+	    <result column="course_term_num" jdbcType="INTEGER" property="courseTermNum" />
+	   		
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		course_id,course_name,course_record,course_phy_art_cate,course_major_cate,course_record_date,
+		course_record_user_id,course_term_num
+	</sql>
+	
+	<!-- 查询 所有的 成绩记录  后台管理-->
+	<select id="selectAllRecord" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from t_course_record
+	</select>
+	
+	<!-- 查询 某个用户的 所有的 成绩记录-->
+	<select id="selectUserAllRecord" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from t_course_record
+		where course_user_id=#{courseRecordUserId,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 添加 成绩 -->
+	<insert id="addRecordInfo" parameterType="CourseRecordEntity">
+		insert into 
+		t_course_record(course_id,course_name,course_record,course_phy_art_cate,
+		course_major_cate,course_record_date,course_record_user_id,course_term_num)
+		values(#{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},
+			#{courseRecord,jdbcType=INTEGER},#{coursePhyArtCate,jdbcType=VARCHAR},
+			#{courseMajorCate,jdbcType=INTEGER},#{courseRecordDate,jdbcType=TIMESTAMP},
+			#{courseRecordUserId,jdbcType=VARCHAR},#{courseTermNum,jdbcType=INTEGER})
+		
+	</insert>
+	
+	<!-- 查询一条成绩信息 -->
+	<select id="selectOne" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from t_course_record
+		where course_id=#{courseId,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteRecoreInfo" parameterType="java.lang.String">
+		delete from t_course_record where course_id=#{courseId,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 更新数据 包括普通的update 还有 更新密码操作 -->
+	<update id="updateRecoreInfo" parameterType="CourseRecordEntity">
+		update t_course_record
+		<set>
+			<if test="courseName!=null and courseName!=''">
+				course_name=#{courseName,jdbcType=VARCHAR},
+			</if>
+			<if test="courseRecord!=null">
+				course_record=#{courseRecord,jdbcType=INTEGER},
+			</if>
+			<if test="coursePhyArtCate!=null and coursePhyArtCate!=''">
+				course_phy_art_cate=#{coursePhyArtCate,jdbcType=INTEGER},
+			</if>
+			<if test="courseMajorCate!=null and courseMajorCate!=''">
+				course_major_cate=#{userGender,jdbcType=INTEGER},
+			</if>
+			<if test="courseTermNum!=null and courseTermNum!=''">
+				course_term_num=#{courseTermNum,jdbcType=INTEGER},
+			</if>
+		</set>
+		where
+		course_record_id=#{courseId,jdbcType="VARCHAR"}
+	</update>
+	
+</mapper>

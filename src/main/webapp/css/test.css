@@ -1,0 +1,16 @@
+.wrapper{
+	display:grid;
+	grid-template-columns: 200px 50px 100px;
+    grid-template-rows: 100px 20px;
+}
+.item1{
+	/* grid-column:1/4;  此行与下面的 效果是一样的*/
+	grid-column-start:1;
+	grid-column-end:3;
+}
+.item3{
+	grid-row:2/4;
+}
+.item4{
+	grid-column:2/4;
+}

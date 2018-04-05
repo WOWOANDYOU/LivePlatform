@@ -23,20 +23,6 @@ $(document).ready(function(){
 	$(".signupSub").click(signupValidate);
 	
 	$("#testbtn").click(function(){
-		/*window.location.replace("../index.action");*/
-		/*var time = 10;// 定义时间变量。用于倒计时用
-	    var timer = null;// 定义一个定时器；
-	    timer = setInterval(function(){//开启定时器。函数内执行
-	    	$("#testbtn").attr("disabled","true");
-	        $('#testbtn').text(time+"秒后重发"); //点击发生后，按钮的文本内容变成之前定义好的时间值。
-	        time--;// 时间值自减
-	        if(time ==0){     // 判断,当时间值小于等于0的时候
-	        	$('#testbtn').text("");// 其文本内容变成……点击重新发送……
-	            $('#testbtn').text("重发验证码");
-	            $('#testbtn').removeAttr("disabled");
-	            clearInterval(timer); // 清除定时器
-	        }
-	    },1000)*/
 	});
 	
 	$("#btnSubhaha").click(function(){
@@ -50,6 +36,7 @@ $(document).ready(function(){
 		});
 	});
 });
+
 var code ; //在全局 定义验证码  
 function createCode(){   
   code = "";  
@@ -233,7 +220,7 @@ function getMessCodeFun(){
 		getMessCodeNum+=1;
 		$("#myModal_gifInfo").modal("show");
 		$.ajax({
-			url:'./getMegCode.action',
+			url:'/LivePlatform/user/getMegCode.action',
 			type:'post',
 			data:'userEmail='+email,
 			dataType:'json',
@@ -276,17 +263,10 @@ function run(className){
         }
     },1000)
 }
-var ajax_option={
-	url:"../user/signin.action",//默认是form action
-	dataType:'json',
-	success:function(data){
-		console.log(data);
-	}
-}
 
 function signinFun(){
 	$("#userSignin").ajaxSubmit({
-		url:'./signin.action',
+		url:'/LivePlatform/user/signin.action',
 		type:'post',
 		dataType:'json',
 		success:function(data){
@@ -294,14 +274,17 @@ function signinFun(){
 			$(".signinSub").removeAttr("disabled");
 			$("#myModal_gifInfo").modal("hide");
 			if(data.info == "error"){
+				createCode();
 				$(".pInfo").text("用户名或者密码错误");
 			}else if(data.info == "false"){
+				createCode();
 				$(".pInfo").text("服务器出错，请稍后再试");
 			}else{
-				window.location.replace("../index.action");
+				window.location.replace("/LivePlatform/index.action");
 			}
 		},
 		error:function(error){
+			createCode();
 			$(".signinSub").removeAttr("disabled");
 			$("#myModal_gifInfo").modal("hide");
 			$(".pInfo").text("出错了，请稍后重试");
@@ -309,10 +292,11 @@ function signinFun(){
 	});
 	
 }
+
 function signupFun(){
 	debugger
 	$("#userSignup").ajaxSubmit({
-		url:'./signup.action',
+		url:'/LivePlatform/user/signup.action',
 		type:'post',
 		dataType:'json',
 		success:function(data){

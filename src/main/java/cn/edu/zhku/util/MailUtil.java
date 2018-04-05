@@ -18,14 +18,14 @@ public class MailUtil {
 			mailMessage.setTo(to); 
 			mailMessage.setCc("13535528187@163.com");
             mailMessage.setFrom( "13535528187@163.com" ); 
-            mailMessage.setSubject( "【生活管理平台】验证码" ); 
+            mailMessage.setSubject( "[生活管理平台]验证码" ); 
             mailMessage.setText("验证码为:" + text); 
 
             senderImpl.setUsername("13535528187@163.com");
             senderImpl.setPassword("184008,wentao"); //vpnruhobaliidjgi
 
             Properties prop = System.getProperties();
-            prop.put("mail.smtp.auth","true");
+            //prop.put("mail.smtp.auth","true");     // 是否进行身份认证 如果发送邮件报错了 那么 把身份认证去掉 获取可以
             prop.put("mail.smtp.timeout","25000");
             senderImpl.setJavaMailProperties(prop);
 

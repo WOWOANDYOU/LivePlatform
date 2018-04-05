@@ -48,8 +48,6 @@ body {
 	float:right;
 }
 .sigupInfo{
-	/* float:right;
-	margin-top:10px; */
 	margin-left:90px;
 }
 #megCode{
@@ -59,7 +57,6 @@ body {
 #messCode{
 	float:right;
 	width:42%;
-	/* background-color: transparent; */
 	border:none;
 }
 

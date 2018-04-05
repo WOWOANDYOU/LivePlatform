@@ -5,7 +5,16 @@ public class JsonReturn {
 	private Object object;
 	private Integer megInfo;//-1 表示验证码错误  -2表示验证码超时   1表示验证码正确
 	private Integer existence;//用户注册是否存在  -1不存在  1存在
+	private String isLogin;
 	
+	public String getIsLogin() {
+		return isLogin;
+	}
+
+	public void setIsLogin(String isLogin) {
+		this.isLogin = isLogin;
+	}
+
 	public Integer getExistence() {
 		return existence;
 	}

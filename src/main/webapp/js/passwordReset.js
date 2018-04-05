@@ -30,7 +30,7 @@ function getCode(){
 	$("#myModal_gifInfo").modal("show");
 	var email = $("#inputFindEmail").val();
 	$.ajax({
-		url:'./findPassSendCode.action',
+		url:'/LivePlatform/user/findPassSendCode.action',
 		type:'post',
 		dataType:'json',
 		data:'userEmail='+email,
@@ -42,7 +42,7 @@ function getCode(){
 			}else if(data.existence == 1 && data.info == "true"){
 				run("btn-getCode");
 			}else{
-				$(".pInfo").text("出错拉，邮件未能发出，请稍后再试");
+				$(".pInfo").text("出错啦，邮件未能发出，请稍后再试");
 			}
 		},
 		error:function(error){
@@ -70,7 +70,7 @@ function newPassValidate(){
 }
 function changePass(){
 	$("#userFindPad").ajaxSubmit({
-		url:'./changePass.action',
+		url:'/LivePlatform/user/changePass.action',
 		type:'post',
 		dataType:'json',
 		success:function(data){
@@ -80,7 +80,7 @@ function changePass(){
 			if(data.info == "true"){
 				$(".pInfo").html("密码修改成功,3秒后跳到登录页面");
 				$('body').oneTime('3000ms',function(){
-					window.location.replace("./signinupUI.action");
+					window.location.replace("/LivePlatform/user/signinupUI.action");
 	            });
 			}else{
 				$(".pInfo").html("密码修改失败，请稍后再试");
