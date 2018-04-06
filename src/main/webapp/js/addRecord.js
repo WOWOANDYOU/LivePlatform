@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$(".myAlertFail").hide();
+	$(".myAlertSuccess").hide();
 	$(".mySubBtn").click(recordValidate);
 });
 function recordValidate(){
@@ -10,9 +12,11 @@ function recordValidate(){
 	if(courseName=="" || courseName.trim()==""){
 		 $(".addRecordForm-div1").addClass("has-error");
 		 $(".addRecordForm-div1 label").text("课程名称输入错误");
+		 $(".mySubBtn").button("reset");
 	}else if(!r.test(courseRecord)){
 		$(".addRecordForm-div2").addClass("has-error");
 		$(".addRecordForm-div2 label").text("分数应为正整数");
+		$(".mySubBtn").button("reset");
 	}else{
 		recordSubmit();
 	}
@@ -36,9 +40,20 @@ function recordSubmit(){
 		dataType:'json',
 		success:function(data){
 			console.log(data);
+			$(".mySubBtn").button("reset");
+			var time = new Date().getTime();
+			if(data.isLogin=="false"){
+				window.location.replace("/LivePlatform/user/signinupUI.action?"+time);
+			}else if(data.info=="false"){
+				$(".myAlertFail").show();
+			}else{
+				$(".myAlertSuccess").show();
+				$("#addRecordForm").hide();
+			}
 		},
 		error:function(error){
 			console.log(error);
+			$(".mySubBtn").button("reset");
 		}
 		
 	});

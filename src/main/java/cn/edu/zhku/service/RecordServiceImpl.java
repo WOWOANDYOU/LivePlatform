@@ -3,6 +3,7 @@ package cn.edu.zhku.service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,20 +32,23 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public ArrayList<CourseRecordEntity> selectAllRecord() {
-		// TODO Auto-generated method stub
+	public ArrayList<CourseRecordEntity> selectAllRecordPage(Map map) {
 		return null;
 	}
 
 	@Override
-	public ArrayList<CourseRecordEntity> selectUserAllRecord(String courseRecordUserId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<CourseRecordEntity> selectUserAllRecordPage(Map map) {
+		return recordMapper.selectUserAllRecordPage(map);
 	}
 
 	@Override
 	public int updateRecoreInfo(CourseRecordEntity recordInfo) {
 		return recordMapper.updateRecoreInfo(recordInfo);
+	}
+
+	@Override
+	public int userRecordTotalNum(String userId) {
+		return recordMapper.userRecordTotalNum(userId);
 	}
 
 }

@@ -6,17 +6,29 @@ public class CourseRecordEntity {
 	private String courseId;
 	private String courseName;
 	private Integer courseRecord;
-	private Integer coursePhyArtCate;
-	private Integer courseMajorCate;
+	private String coursePhyArtCateName;
+	private String courseMajorCateName;
 	private Date courseRecordDate;
 	private String courseRecordUserId;
-	private Integer courseTermNum;
+	private String courseTermNumStr;
 	
-	public Integer getCourseTermNum() {
-		return courseTermNum;
+	public String getCourseTermNumStr() {
+		return courseTermNumStr;
 	}
-	public void setCourseTermNum(Integer courseTermNum) {
-		this.courseTermNum = courseTermNum;
+	public void setCourseTermNumStr(String courseTermNumStr) {
+		this.courseTermNumStr = courseTermNumStr;
+	}
+	public String getCoursePhyArtCateName() {
+		return coursePhyArtCateName;
+	}
+	public void setCoursePhyArtCateName(String coursePhyArtCateName) {
+		this.coursePhyArtCateName = coursePhyArtCateName;
+	}
+	public String getCourseMajorCateName() {
+		return courseMajorCateName;
+	}
+	public void setCourseMajorCateName(String courseMajorCateName) {
+		this.courseMajorCateName = courseMajorCateName;
 	}
 	public String getCourseId() {
 		return courseId;
@@ -35,18 +47,6 @@ public class CourseRecordEntity {
 	}
 	public void setCourseRecord(Integer courseRecord) {
 		this.courseRecord = courseRecord;
-	}
-	public Integer getCoursePhyArtCate() {
-		return coursePhyArtCate;
-	}
-	public void setCoursePhyArtCate(Integer coursePhyArtCate) {
-		this.coursePhyArtCate = coursePhyArtCate;
-	}
-	public Integer getCourseMajorCate() {
-		return courseMajorCate;
-	}
-	public void setCourseMajorCate(Integer courseMajorCate) {
-		this.courseMajorCate = courseMajorCate;
 	}
 	public Date getCourseRecordDate() {
 		return courseRecordDate;

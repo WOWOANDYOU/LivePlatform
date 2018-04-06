@@ -7,17 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="course_id" jdbcType="VARCHAR" property="courseId" />
 	    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
 	    <result column="course_record" jdbcType="INTEGER" property="courseRecord" />
-	    <result column="course_phy_art_cate" jdbcType="INTEGER" property="coursePhyArtCate" />
-	    <result column="course_major_cate" jdbcType="INTEGER" property="courseMajorCate" />
+	    <result column="course_phy_art_cate_name" jdbcType="VARCHAR" property="coursePhyArtCateName" />
+	    <result column="course_major_cate_name" jdbcType="VARCHAR" property="courseMajorCateName" />
 	    <result column="course_record_date" jdbcType="TIMESTAMP" property="courseRecordDate" />
 	    <result column="course_record_user_id" jdbcType="VARCHAR" property="courseRecordUserId" />
-	    <result column="course_term_num" jdbcType="INTEGER" property="courseTermNum" />
+	    <result column="course_term_num_str" jdbcType="VARCHAR" property="courseTermNumStr" />
 	   		
 	</resultMap>
 	
 	<sql id="Base_Column_List">
-		course_id,course_name,course_record,course_phy_art_cate,course_major_cate,course_record_date,
-		course_record_user_id,course_term_num
+		course_id,course_name,course_record,course_phy_art_cate_name,course_major_cate_name,course_record_date,
+		course_record_user_id,course_term_num_str
 	</sql>
 	
 	<!-- 查询 所有的 成绩记录  后台管理-->
@@ -27,23 +27,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from t_course_record
 	</select>
 	
-	<!-- 查询 某个用户的 所有的 成绩记录-->
-	<select id="selectUserAllRecord" resultMap="BaseResultMap">
+	<!-- 分页查询 某个用户的 成绩记录-->
+	<select id="selectUserAllRecordPage" resultMap="BaseResultMap" parameterType="java.util.Map">
 		select 
 		<include refid="Base_Column_List"/>
 		from t_course_record
-		where course_user_id=#{courseRecordUserId,jdbcType=VARCHAR}
+		where course_record_user_id=#{userId,jdbcType=VARCHAR}
+		order by course_record_date desc
+		limit #{start,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
 	</select>
 	
+	<!-- 查询用户的成绩记录总数 -->
+	<select id="userRecordTotalNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from t_course_record 
+		where course_record_user_id=#{userId}
+	</select>
 	<!-- 添加 成绩 -->
 	<insert id="addRecordInfo" parameterType="CourseRecordEntity">
 		insert into 
-		t_course_record(course_id,course_name,course_record,course_phy_art_cate,
-		course_major_cate,course_record_date,course_record_user_id,course_term_num)
+		t_course_record(course_id,course_name,course_record,course_phy_art_cate_name,
+		course_major_cate_name,course_record_date,course_record_user_id,course_term_num_str)
 		values(#{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},
-			#{courseRecord,jdbcType=INTEGER},#{coursePhyArtCate,jdbcType=VARCHAR},
-			#{courseMajorCate,jdbcType=INTEGER},#{courseRecordDate,jdbcType=TIMESTAMP},
-			#{courseRecordUserId,jdbcType=VARCHAR},#{courseTermNum,jdbcType=INTEGER})
+			#{courseRecord,jdbcType=INTEGER},#{coursePhyArtCateName,jdbcType=VARCHAR},
+			#{courseMajorCateName,jdbcType=VARCHAR},#{courseRecordDate,jdbcType=TIMESTAMP},
+			#{courseRecordUserId,jdbcType=VARCHAR},#{courseTermNumStr,jdbcType=VARCHAR})
 		
 	</insert>
 	
@@ -69,14 +76,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="courseRecord!=null">
 				course_record=#{courseRecord,jdbcType=INTEGER},
 			</if>
-			<if test="coursePhyArtCate!=null and coursePhyArtCate!=''">
-				course_phy_art_cate=#{coursePhyArtCate,jdbcType=INTEGER},
+			<if test="coursePhyArtCateName!=null and coursePhyArtCateName!=''">
+				course_phy_art_cate_name=#{coursePhyArtCateName,jdbcType=VARCHAR},
 			</if>
-			<if test="courseMajorCate!=null and courseMajorCate!=''">
-				course_major_cate=#{userGender,jdbcType=INTEGER},
+			<if test="courseMajorCateName!=null and courseMajorCateName!=''">
+				course_major_cate_name=#{userGender,jdbcType=VARCHAR},
 			</if>
-			<if test="courseTermNum!=null and courseTermNum!=''">
-				course_term_num=#{courseTermNum,jdbcType=INTEGER},
+			<if test="courseTermNumStr!=null and courseTermNumStr!=''">
+				course_term_num_str=#{courseTermNum,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where

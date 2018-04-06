@@ -1,6 +1,7 @@
 package cn.edu.zhku.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import cn.edu.zhku.pojo.CourseRecordEntity;
 
@@ -12,10 +13,14 @@ public int addRecordInfo(CourseRecordEntity recordInfo);
 	public CourseRecordEntity selectOne(CourseRecordEntity recordInfo);
 	
 	//查询 所有用户的所有记录
-	public ArrayList<CourseRecordEntity> selectAllRecord();
+	public ArrayList<CourseRecordEntity> selectAllRecordPage(Map map);
 	
-	//查询单个用户所有记录
-	public ArrayList<CourseRecordEntity> selectUserAllRecord(String courseRecordUserId);
+	//分页查询单个用户所有记录
+	public ArrayList<CourseRecordEntity> selectUserAllRecordPage(Map map);
 	
 	public int updateRecoreInfo(CourseRecordEntity recordInfo);
+	
+	//查询 用户成绩总记录数
+	public int userRecordTotalNum(String userId);
+
 }

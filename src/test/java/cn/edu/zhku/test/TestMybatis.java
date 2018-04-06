@@ -3,6 +3,8 @@ package cn.edu.zhku.test;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.edu.zhku.pojo.UserEntity;
+import cn.edu.zhku.service.RecordService;
 import cn.edu.zhku.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,6 +24,9 @@ import cn.edu.zhku.service.UserService;
 public class TestMybatis {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RecordService recordService;
+	
 	
 	private JavaMailSenderImpl senderImpl;
 	private SimpleMailMessage mailMessage;
@@ -28,8 +34,6 @@ public class TestMybatis {
 	
 	@Test
 	public void testUserSelect() {
-		
-		
 		ArrayList<UserEntity> list = userService.selectAllUser();
 		double d = Math.random();
 		double a = d * 10;
@@ -59,5 +63,18 @@ public class TestMybatis {
 		if(num>0) {
 			
 		}
+	}
+	@Test
+	public void testSelectNum() {
+		System.out.println(recordService.userRecordTotalNum("061ef367-3e27-4fa1-bace-b6156057cfff"));
+	}
+	@Test
+	public void testSelectPage() {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("start", 0);
+		map.put("pagesize", 8);
+		map.put("userId", "171ea60d-f99f-4be3-84aa-eb3ff83c1f54");
+		ArrayList list = recordService.selectUserAllRecordPage(map);
+		System.out.println(list.toString());
 	}
 }

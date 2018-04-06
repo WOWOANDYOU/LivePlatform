@@ -1,5 +1,8 @@
 package cn.edu.zhku.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 
 import cn.edu.zhku.pojo.CourseRecordEntity;
 import cn.edu.zhku.pojo.JsonReturn;
+import cn.edu.zhku.pojo.PagesEntity;
 import cn.edu.zhku.pojo.UserEntity;
 import cn.edu.zhku.service.RecordService;
 
@@ -65,6 +69,55 @@ public class RecordController {
 					}else{
 						jr.setInfo("false");
 					}
+				}
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="showRecordPage",method=RequestMethod.POST)
+	@ResponseBody
+	public String showRecordPage(String currentPage,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			if(currentPage==null || "".equals(currentPage.trim())) {
+				jr.setInfo("false");
+			}else {
+				int currentPageJ = Integer.parseInt(currentPage);
+				if(currentPageJ<=0) {
+					currentPageJ = 1;
+				}
+				UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+				if(user==null) {
+					jr.setInfo("false");
+				}else {
+					String userId = user.getUserId();
+					PagesEntity pageEntity = new PagesEntity();
+					int start = (currentPageJ-1)*PagesEntity.pageSize;
+					int pagesize = pageEntity.pageSize;
+					pageEntity.setCurrentPage(currentPageJ);
+					if(currentPageJ==1) {
+						pageEntity.setTotalNum(recordService.userRecordTotalNum(userId));//总记录数
+						//总页数
+						if(PagesEntity.totalNum % PagesEntity.pageSize == 0) {
+							pageEntity.setPageTotal(PagesEntity.totalNum / PagesEntity.pageSize);
+						}else{
+							pageEntity.setPageTotal((PagesEntity.totalNum / PagesEntity.pageSize) + 1);
+						}
+					}
+					Map<String,Object> map = new HashMap<String,Object>();
+					map.put("userId", userId);
+					map.put("start", start);
+					map.put("pagesize", pagesize);
+					ArrayList<CourseRecordEntity> list = recordService.selectUserAllRecordPage(map);
+					pageEntity.setObject(list);
+					jr.setObject(pageEntity);
+					jr.setInfo("true");
 				}
 			}
 		}catch(Exception e) {
