@@ -127,4 +127,29 @@ public class RecordController {
 			return JSON.toJSONString(jr);
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="deleteRecord",method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteRecord(String recordId,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				int num = recordService.deleteRecoreInfo(recordId);
+				if(num>0) {
+					jr.setInfo("true");
+				}else {
+					jr.setInfo("false");
+				}
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
 }

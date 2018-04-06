@@ -35,7 +35,7 @@ function showRecordFirst(){
 												+"<a href='"+updateUrl+pageInfo[i].courseId+"'>"
 												+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
-												+"<a href='"+deleteUrl+pageInfo[i].courseId+"'>"
+												+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].courseId+"&quot;)'>"
 												+"<button class='btn btn-danger btn-xs'><i class='fa fa-trash fa-fw'></i>"
 												+"</button></a></td></tr>");
 				});
@@ -171,7 +171,7 @@ function ajaxPageData(currentPageNum){
 												+"<a href='"+updateUrl+pageInfo[i].courseId+"'>"
 												+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
-												+"<a href='"+deleteUrl+pageInfo[i].courseId+"'>"
+												+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].courseId+"&quot;)'>"
 												+"<button class='btn btn-danger btn-xs'><i class='fa fa-trash fa-fw'></i>"
 												+"</button></a></td></tr>");
 				});
@@ -180,5 +180,33 @@ function ajaxPageData(currentPageNum){
 		error:function(error){
 			$('.myAlertFail').show();
 		}
+	});
+}
+
+//确定是否删除
+function sureDelete(deleteUrl){
+	debugger
+	$("#myDeleteModal").modal("show");
+	$(".btnSureDelete").click(function(){
+		$.ajax({
+			url:deleteUrl,
+			type:'post',
+			dataType:'json',
+			success:function(data){
+				var time = new Date().getTime();
+				if(data.isLogin=="false"){
+					window.location.href="/LivePlatform/user/signinupUI.action?"+time;
+				}else{
+					if(data.info=="false"){
+						$(".myAlertFail").show();
+					}else{
+						window.location.href="/LivePlatform/record/showRecordUI.action?"+time;
+					}
+				}
+			},
+			error:function(error){
+				
+			}
+		});
 	});
 }
