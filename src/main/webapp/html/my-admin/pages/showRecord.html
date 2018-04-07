@@ -153,7 +153,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2 class="page-header">查看成绩</h2>
+					<h3 class="page-header">查看成绩</h3>
 				</div>
 				<!--  /.col-lg-12 -->
 			</div>
@@ -193,25 +193,6 @@
 							<!-- /.table-responsive -->
 						</div>
 
-						<div class="modal fade" id="myDeleteModal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-							    	<div class="modal-header">
-							            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-							            <h4 class="modal-title">温馨提示</h4>
-							        </div>
-							        <div class="modal-body">
-							            <p>删除操作将不可逆转</p>
-							        </div>
-						          	<div class="modal-footer">
-						           		<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-						            	<button class="btn btn-primary btnSureDelete" type="button">确定删除</button>
-						          	</div>
-								</div><!-- /.modal-content -->
-							</div><!-- /.modal-dialog -->
-						</div>
-						
-
 						<div class="row">
 							<div class="col-sm-6"></div>
 							<div class="col-sm-6">
@@ -222,18 +203,6 @@
 											href="#"> 上一页 </a></li>
 										<li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
 											<a href="#">1</a>
-										</li>
-										<li class="paginate_button" aria-controls="dataTables-example" tabindex="0">
-											<a href="#">2</a>
-										</li>
-										<li class="paginate_button" aria-controls="dataTables-example" tabindex="0">
-											<a href="#">3</a>
-										</li>
-										<li class="paginate_button" aria-controls="dataTables-example" tabindex="0">
-											<a href="#">4</a>
-										</li>
-										<li class="paginate_button" aria-controls="dataTables-example" tabindex="0">
-											<a href="#">5</a>
 										</li>
 										<li class="paginate_button next"
 											aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
@@ -254,6 +223,112 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
+
+			<div class="modal fade" id="myDeleteModal" data-backdrop="false">
+				<div class="modal-dialog"  style="width:25%;">
+					<div class="modal-content">
+				    	<div class="modal-header">
+				            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				            <h4 class="modal-title">温馨提示</h4>
+				        </div>
+				        <div class="modal-body">
+				            <p>删除操作将不可逆转</p>
+				        </div>
+			          	<div class="modal-footer">
+			           		<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+			            	<button class="btn btn-primary btnSureDelete" type="button">确定删除</button>
+			          	</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+			
+			<!-- 成绩记录修改 -->
+			<div class="modal fade" id="myUpdateModal" data-backdrop="false">
+				<div class="modal-dialog"  style="width:45%;">
+					<div class="modal-content">
+				        <div class="modal-body my-modal-body">
+				        	<div class="row">
+				        		<div class="col-sm-12">
+				        			<div class="panel panel-info">
+				        				<div class="panel-heading">
+				        					<h4>修改课程成绩信息</h4>
+				        				</div>
+				        				<div class="panel-body">
+				        					<div class="alert alert-warning myAlertUpdateFail">
+												<a href="#" class="close" data-dismiss="alert">
+													&times;
+												</a>
+												<strong>修改失败！</strong>请稍后再试！
+											</div>
+				        					<div class="col-sm-12">
+				        						<form id="updateRecordForm">
+				        							<div class="col-sm-6">
+				        								<label class="control-label">课程名称:</label>
+				        								<input class="form-group form-control updateCourseName" name="courseName" type="text">
+				        								<label>学期数:</label>
+				        								<select name="courseTermNumStr" class="form-control">
+						                           			<option value="第一学期">第一学期</option>
+						                           			<option value="第二学期">第二学期</option>
+						                           			<option value="第三学期">第三学期</option>
+						                           			<option value="第四学期">第四学期</option>
+						                           			<option value="第五学期">第五学期</option>
+						                           			<option value="第六学期">第六学期</option>
+						                           			<option value="第七学期">第七学期</option>
+						                           			<option value="第八学期">第八学期</option>
+						                           		</select>
+				        								
+				        								<label class="control-label">课程分数:</label>
+				        								<input class="form-group form-control updateRecordNum" name="courseRecord" type="text">
+				        								<input type="hidden" class="updateCourseId" name="courseId">
+				        							</div>
+				        							<div class="col-sm-6">
+				        								<label>课程类别:</label>
+														<select class="form-control form-group updatePhyArtCate" name="coursePhyArtCateName">
+					                            			<option value="文科类">文科类</option>
+					                            			<option value="理科类">理科类</option>
+					                            		</select>
+				        								<label>课程性质:</label>
+														<select class="form-control form-group updateMajorCate" name="courseMajorCateName">
+					                            			<option value="主修类">必修类</option>
+					                            			<option value="选修类">选修类</option>
+					                            		</select>
+				        							</div>
+				                            	</form>
+				        					</div>
+				        				</div>
+					        			
+				        			</div>
+				        		</div>
+				        	</div>
+				        </div>
+			          	<div class="modal-footer">
+			           		<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+			            	<button class="btn btn-primary btnSureUpdate" type="button">确定修改</button>
+			          	</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+			
+			
+			<div class="modal fade" id="mydetailModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+				    	<div class="modal-header" style="background-color: #f0ad4e70;">
+				            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				            <h4 class="modal-title">课程成绩明细</h4>
+				        </div>
+				        <div class="modal-body">
+				        	<div class="row">
+					            <div class="col-sm-12 recordItem">
+					            </div>
+				            </div>
+				        </div>
+			          	<div class="modal-footer">
+			           		<button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+			          	</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
 
 		</div>
 		<!-- /#page-wrapper -->
@@ -282,7 +357,8 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
-
+	<script type="text/javascript" src="/LivePlatform/js/jquery/jquery.form.js"></script>
+	<script src="/LivePlatform/js/layer/layer.js"></script>
 	<script src="/LivePlatform/js/global.js"></script>
 	
 	<script src="/LivePlatform/js/showRecord.js"></script>

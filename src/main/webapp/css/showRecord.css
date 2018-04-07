@@ -1,3 +1,6 @@
 .tableMy thead tr th{
 	text-align:center;
 }
+.col-sm-4{
+	margin-bottom: 15px;
+}

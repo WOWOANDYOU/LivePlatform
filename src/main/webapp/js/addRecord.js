@@ -1,7 +1,7 @@
 $(document).ready(function(){
-	$(".myAlertFail").hide();
 	$(".myAlertSuccess").hide();
 	$(".mySubBtn").click(recordValidate);
+	$(".btnKeepAddRecord").click(keepAddFun);
 });
 function recordValidate(){
 	//校验数据 
@@ -45,10 +45,12 @@ function recordSubmit(){
 			if(data.isLogin=="false"){
 				window.location.replace("/LivePlatform/user/signinupUI.action?"+time);
 			}else if(data.info=="false"){
-				$(".myAlertFail").show();
+				layer.msg("添加失败，不开心……","{icon,5}");
 			}else{
 				$(".myAlertSuccess").show();
+				layer.msg("添加成功！");
 				$("#addRecordForm").hide();
+				$("#addRecordForm input").val("");
 			}
 		},
 		error:function(error){
@@ -57,4 +59,8 @@ function recordSubmit(){
 		}
 		
 	});
+}
+function keepAddFun(){
+	$(".myAlertSuccess").hide();
+	$("#addRecordForm").show();
 }

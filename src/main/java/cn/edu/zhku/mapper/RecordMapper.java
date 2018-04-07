@@ -10,7 +10,7 @@ public interface RecordMapper {
 	
 	public int deleteRecoreInfo(String courseId);
 	
-	public CourseRecordEntity selectOne(CourseRecordEntity recordInfo);
+	public CourseRecordEntity selectOne(String courseId);
 	
 	//查询 所有用户的所有记录
 	public ArrayList<CourseRecordEntity> selectAllRecord(Map map);

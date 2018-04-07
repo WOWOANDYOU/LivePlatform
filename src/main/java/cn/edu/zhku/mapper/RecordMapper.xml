@@ -55,11 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 查询一条成绩信息 -->
-	<select id="selectOne" resultMap="BaseResultMap">
+	<select id="selectOne" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List"/>
 		from t_course_record
-		where course_id=#{courseId,jdbcType=VARCHAR}
+		where course_id=#{courseId,jdbcType=VARCHAR} 
 	</select>
 	
 	<delete id="deleteRecoreInfo" parameterType="java.lang.String">
@@ -80,14 +80,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				course_phy_art_cate_name=#{coursePhyArtCateName,jdbcType=VARCHAR},
 			</if>
 			<if test="courseMajorCateName!=null and courseMajorCateName!=''">
-				course_major_cate_name=#{userGender,jdbcType=VARCHAR},
+				course_major_cate_name=#{courseMajorCateName,jdbcType=VARCHAR},
 			</if>
 			<if test="courseTermNumStr!=null and courseTermNumStr!=''">
-				course_term_num_str=#{courseTermNum,jdbcType=VARCHAR},
+				course_term_num_str=#{courseTermNumStr,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where
-		course_record_id=#{courseId,jdbcType="VARCHAR"}
+		course_id=#{courseId,jdbcType=VARCHAR}
 	</update>
 	
 </mapper>

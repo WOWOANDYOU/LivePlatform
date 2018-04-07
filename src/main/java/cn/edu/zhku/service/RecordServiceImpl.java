@@ -27,8 +27,8 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
-	public CourseRecordEntity selectOne(CourseRecordEntity recordInfo) {
-		return recordMapper.selectOne(recordInfo);
+	public CourseRecordEntity selectOne(String courseId) {
+		return recordMapper.selectOne(courseId);
 	}
 
 	@Override

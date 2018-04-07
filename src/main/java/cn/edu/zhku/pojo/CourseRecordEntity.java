@@ -9,9 +9,16 @@ public class CourseRecordEntity {
 	private String coursePhyArtCateName;
 	private String courseMajorCateName;
 	private Date courseRecordDate;
+	private String strTime;//上面 时间的 对应的 string格式 时间类型转换 其实也可以不用上面那个时间属性了。。。
 	private String courseRecordUserId;
 	private String courseTermNumStr;
 	
+	public String getStrTime() {
+		return strTime;
+	}
+	public void setStrTime(String strTime) {
+		this.strTime = strTime;
+	}
 	public String getCourseTermNumStr() {
 		return courseTermNumStr;
 	}

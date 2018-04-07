@@ -1,6 +1,8 @@
 package cn.edu.zhku.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -135,7 +137,7 @@ public class RecordController {
 		JsonReturn jr = new JsonReturn();
 		try {
 			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
-			if(user==null) {
+			if(user==null || recordId == null || "".equals(recordId.trim())) {
 				jr.setIsLogin("false");
 			}else {
 				int num = recordService.deleteRecoreInfo(recordId);
@@ -143,6 +145,61 @@ public class RecordController {
 					jr.setInfo("true");
 				}else {
 					jr.setInfo("false");
+				}
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="showRecordDetail",method=RequestMethod.POST)
+	@ResponseBody
+	public String showRecordDetail(String recordId,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null || recordId==null || "".equals(recordId.trim())) {
+				jr.setIsLogin("false");
+			}else {
+				CourseRecordEntity record = recordService.selectOne(recordId);
+				if(record==null) {
+					jr.setInfo("false");
+				}else {
+					jr.setInfo("true");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					record.setStrTime(sdf.format(record.getCourseRecordDate()));//存入转换后的时间字符 方便前端展示
+					record.getCourseRecordDate();
+					jr.setObject(record);
+				}
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="updateRecord",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateRecord(CourseRecordEntity recordEntity,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(recordEntity==null || user==null || "".equals(recordEntity.getCourseId().trim())) {
+				jr.setIsLogin("false");
+			}else {
+				int num = recordService.updateRecoreInfo(recordEntity);
+				if(num<=0) {
+					jr.setInfo("false");
+				}else {
+					jr.setInfo("true");
 				}
 			}
 		}catch(Exception e) {

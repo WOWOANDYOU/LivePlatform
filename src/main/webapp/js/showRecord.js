@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	$('.myAlertFail').hide();
 	showRecordFirst();
+	$(".btnSureDelete").click(relDelete);
+	$(".btnSureUpdate").click(updateRecordValidate);
 });
 var jsTotalPages = 0; //总页数
 var jsCurrentPage = 0; //当前页
@@ -16,10 +18,11 @@ function showRecordFirst(){
 			if(data.info=="false"){
 				$('.myAlertFail').show();
 			}else{
+				$(".tableMy tbody").html("");//清空 后追加
+				$("#dataTables-example_paginate ul").html("");
 				var pageInfo = data.object.object;
 				var time = new Date().getTime();
 				var detailUrl = "/LivePlatform/record/showRecordDetail.action?t="+time+"&recordId=";
-				var updateUrl = "/LivePlatform/record/updateRecord.action?t="+time+"&recordId=";
 				var deleteUrl = "/LivePlatform/record/deleteRecord.action?t="+time+"&recordId=";
 				
 				$.each(pageInfo,function(i){
@@ -29,10 +32,10 @@ function showRecordFirst(){
 												+"<td>"+pageInfo[i].coursePhyArtCateName+"</td>"
 												+"<td>"+pageInfo[i].courseMajorCateName+"</td>"
 												+"<td>"
-												+"<a href='"+detailUrl+pageInfo[i].courseId+"'>"
+												+"<a href='#' onclick='recordDetail(&quot;"+detailUrl+pageInfo[i].courseId+"&quot;)'>"
 												+"<button class='btn btn-info btn-xs'><i class='fa fa-search fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
-												+"<a href='"+updateUrl+pageInfo[i].courseId+"'>"
+												+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].courseId+"&quot;)'>"
 												+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
 												+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].courseId+"&quot;)'>"
@@ -155,7 +158,6 @@ function ajaxPageData(currentPageNum){
 				var pageInfo = data.object.object;
 				var time = new Date().getTime();
 				var detailUrl = "/LivePlatform/record/showRecordDetail.action?t="+time+"&recordId=";
-				var updateUrl = "/LivePlatform/record/updateRecord.action?t="+time+"&recordId=";
 				var deleteUrl = "/LivePlatform/record/deleteRecord.action?t="+time+"&recordId=";
 				
 				$.each(pageInfo,function(i){
@@ -165,10 +167,10 @@ function ajaxPageData(currentPageNum){
 												+"<td>"+pageInfo[i].coursePhyArtCateName+"</td>"
 												+"<td>"+pageInfo[i].courseMajorCateName+"</td>"
 												+"<td>"
-												+"<a href='"+detailUrl+pageInfo[i].courseId+"'>"
+												+"<a href='#' onclick='recordDetail(&quot;"+detailUrl+pageInfo[i].courseId+"&quot;)'>"
 												+"<button class='btn btn-info btn-xs'><i class='fa fa-search fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
-												+"<a href='"+updateUrl+pageInfo[i].courseId+"'>"
+												+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].courseId+"&quot;)'>"
 												+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
 												+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].courseId+"&quot;)'>"
@@ -182,31 +184,145 @@ function ajaxPageData(currentPageNum){
 		}
 	});
 }
-
+var relDeleteUrl = '';
 //确定是否删除
 function sureDelete(deleteUrl){
 	debugger
 	$("#myDeleteModal").modal("show");
-	$(".btnSureDelete").click(function(){
-		$.ajax({
-			url:deleteUrl,
-			type:'post',
-			dataType:'json',
-			success:function(data){
-				var time = new Date().getTime();
-				if(data.isLogin=="false"){
-					window.location.href="/LivePlatform/user/signinupUI.action?"+time;
-				}else{
-					if(data.info=="false"){
-						$(".myAlertFail").show();
-					}else{
-						window.location.href="/LivePlatform/record/showRecordUI.action?"+time;
-					}
-				}
-			},
-			error:function(error){
-				
+	relDeleteUrl = deleteUrl;
+}
+function relDelete(){
+	ajaxFun(relDeleteUrl,null,"post",function(data){
+		debugger
+		var time = new Date().getTime();
+		if(data.isLogin=="false"){
+			window.location.href="/LivePlatform/user/signinupUI.action?"+time;
+		}else{
+			if(data.info=="false"){
+				$(".myAlertFail").show();
+			}else{
+				$("#myDeleteModal").modal("hide");
+				layer.msg("删除成功！");
+				showRecordFirst();
 			}
-		});
+		}
+	});
+}
+
+//查找 detail
+function recordDetail(detatilUrl){
+	ajaxFun(detatilUrl,null,"post",function(data){
+		console.log(data);
+		debugger
+		if(data.info=="false"){
+			$(".myAlertFail").show();
+		}else{
+			var relData = data.object;
+			$(".recordItem").html("");
+			$(".recordItem").append("<div class='col-sm-4'>课程科目:"+relData.courseName+"</div>"
+									+"<div class='col-sm-4'>学期数:"+relData.courseTermNumStr+"</div>"
+									+"<div class='col-sm-4'>分数:"+relData.courseRecord+"</div>"
+									+"<div class='col-sm-4'>课程类别:"+relData.coursePhyArtCateName+"</div>"
+									+"<div class='col-sm-4'>课程性质:"+relData.courseMajorCateName+"</div>"
+									+"<div class='col-sm-4'>&nbsp;</div>"
+									+"<div class='col-sm-8'>记录时间:"+relData.strTime+"</div>");
+			$("#mydetailModal").modal("show");
+		}
+	});
+}
+
+//myUpdateModal  修改成绩
+function sureUpdate(recordId){
+	//先查询数据
+	var updateSearchUrl = "/LivePlatform/record/showRecordDetail.action?recordId="+recordId;
+	ajaxFun(updateSearchUrl,null,"post",function(data){
+		console.log(data);
+		var time = new Date().getTime();
+		if(data.isLogin=="false"){
+			window.location.href="/LivePlatform/user/signinupUI.action?"+time;
+		}else if(data.info=="false"){
+			layer.msg("操作失败……请稍后再试！",{inco:5});
+		}else{
+			$(".myAlertUpdateFail").hide();
+			$(".updateCourseName").val(data.object.courseName);
+			$(".updateCourseTermNum").val(data.object.courseTermNumStr);
+			$(".updateRecordNum").val(data.object.courseRecord);
+			$(".updateCourseId").val(data.object.courseId);
+			if(data.object.courseMajorCateName=="选修类"){
+				$(".updateMajorCate").html("");
+				$(".updateMajorCate").html("<option value='选修类'>选修类</option><option value='必修类'>必修类</option>");
+			}
+			if(data.object.coursePhyArtCateName=="理科类"){
+				$(".updatePhyArtCate").html("");
+				$(".updatePhyArtCate").html("<option value='理科类'>理科类</option><option value='文科类'>文科类</option>");
+			}
+			$("#myUpdateModal").modal("show");
+			debugger
+			relUpdateUrl = "/LivePlatform/record/updateRecord.action?recordId="+recordId;
+		}
+	});
+}
+
+//修改前校验数据
+function updateRecordValidate(){
+	debugger
+	//校验数据 
+	var courseName = $(".updateCourseName").val();
+	var courseRecord = $(".updateRecordNum").val();
+	var r = /^[0-9]*[1-9][0-9]*$/;//正整数
+	//debugger
+	if(courseName=="" || courseName.trim()==""){
+		layer.msg("课程名不能为空！",{icon:5});
+	}else if(!r.test(courseRecord)){
+		layer.msg("课程成绩须为整数！",{icon:5});
+	}else{
+		relUpdate();
+	}
+}
+
+var relUpdateUrl = "";
+//relUpdate
+function relUpdate(){
+	debugger
+	$("#updateRecordForm").ajaxSubmit({
+		url:relUpdateUrl,
+		type:'post',
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			var time = new Date().getTime();
+			if(data.isLogin=="false"){
+				window.location.href="/LivePlatform/user/signinupUI.action?"+time;
+			}else if(data.info=="false"){
+				$(".myAlertUpdateFail").show();
+				layer.msg("修改失败……稍后再试",{icon:5});
+			}else{
+				$("#myUpdateModal").modal("hide");
+				layer.msg("修改成功！");
+				showRecordFirst();
+			}
+		},
+		error:function(error){}
+	});
+}
+//ajax封装函数
+/*
+ * @param 
+ * 	ParUrl url
+ * 	parData 带过来的参数数据
+ * 	parType 请求类型
+ * 	parSucFun ajax请求成功 绑定函数(整个函数带过来 可怕)
+ */
+function ajaxFun(parUrl,parData,parType,parSucFun){
+	debugger
+	$.ajax({
+		url:parUrl,
+		type:parType,
+		data:parData,
+		dataType:'json',
+		success:parSucFun,
+		error:function(error){
+			console.log(error)
+		}
 	});
 }
