@@ -62,5 +62,8 @@ function recordSubmit(){
 }
 function keepAddFun(){
 	$(".myAlertSuccess").hide();
+	$(".courseTermNumStr").val("第一学期");
+	$(".coursePhyArtCate").val("理科类");
+	$(".courseMajorCate").val("必修类");
 	$("#addRecordForm").show();
 }

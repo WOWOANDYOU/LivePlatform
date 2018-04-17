@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>生活管理平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/LivePlatform/html/my-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/LivePlatform/html/my-admin/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/LivePlatform/html/my-admin/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/LivePlatform/index.action">生活管理平台</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>用户设置</a>
+                        </li>
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> -->
+                        <li class="divider"></li>
+                        <li><a href="#" onclick="toPages('/LivePlatform/user/logout.action')"><i class="fa fa-sign-out fa-fw"></i>登出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/LivePlatform/index.action"><i class="fa fa-home fa-fw"></i>首页</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>成绩管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/record/addRecordUI.action')">添加成绩</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/record/analyzeRecordUI.action')">统计分析</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-book fa-fw"></i>财务管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/bill/addBillUI.action')">添加账单记录</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/bill/showBillUI.action')">查看账单详情</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-shopping-cart fa-fw"></i>闲置管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/unused/unusedMarketUI.action')">闲置市场</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="toPages('/LivePlatform/unused/myUnused.action')">我的闲置</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                        <li>
+                            <a href="tables.html"><i class="fa fa-play-circle fa-fw"></i>生活娱乐</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">成绩统计分析</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">  
+	            <!-- .col-xs-* 针对超小屏幕 手机（<768px）  .col-sm-* 小屏幕 平板 (≥768px) 
+	            col-md-* 中等屏幕 桌面显示器 (≥992px)(栅格参数) .col-lg-* 针对特大的（≥1200px）
+	            	相同类相加 >12就变成2行
+	            -->
+	                <div class="col-lg-8">
+	                	<div class="panel panel-info">
+	                		<div class="panel-heading"><i class="fa fa-bar-chart-o fa-fw"></i>学年成绩统计</div>
+	                		<div class="panel-body yearAnaTop">
+	                			<div class="alert alert-warning myAlertFail">
+										<a href="#" class="close" data-dismiss="alert">
+											&times;
+										</a>
+										<strong>出错了我！</strong>操作失败，请稍后再试。
+								</div>
+	                		</div>
+	                	</div>
+	                </div>
+	                <div class="col-lg-4">
+	                   <div class="panel panel-default">
+	                    	<div class="panel-heading">温馨提示</div>
+	                    	<div class="panel-body">
+		                       <ul class="chat">
+	                                <li class="left clearfix">
+	                                    <span class="chat-img pull-left">
+	                                        <img src="/LivePlatform/images/fff.png" alt="User Avatar" class="img-circle" />
+	                                    </span>
+	                                    <div class="chat-body clearfix">
+	                                        <div class="header">
+	                                            <strong class="primary-font">文理、必修选修分析</strong>
+	                                            <small class="pull-right text-muted">
+	                                                <i class="fa fa-clock-o fa-fw"></i> 
+	                                            </small>
+	                                        </div>
+	                                        <p>
+	                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+	                                        </p>
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                    	</div>
+	                    </div>
+	                </div>
+                </div> <!-- row -->
+                <div class="row">
+	                <div class="col-lg-4">
+	                	<div class="panel panel-warning">
+	                    	<div class="panel-heading">温馨提示</div>
+	                    	<div class="panel-body">
+		                       <ul class="chat">
+	                                <li class="left clearfix">
+	                                    <span class="chat-img pull-left">
+	                                        <img src="/LivePlatform/images/fff2.png" alt="User Avatar" class="img-circle" />
+	                                    </span>
+	                                    <div class="chat-body clearfix">
+	                                        <div class="header">
+	                                            <strong class="primary-font">文理、必修选修分析</strong>
+	                                            <small class="pull-right text-muted">
+	                                                <i class="fa fa-clock-o fa-fw"></i> 
+	                                            </small>
+	                                        </div>
+	                                        <p>
+	                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+	                                        </p>
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                    	</div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-8">
+	                	<div class="panel panel-default">
+	                		<div class="panel-heading">
+	                			<i class="fa fa-bar-chart-o fa-fw"></i>成绩统计
+	                			<div class="pull-right">
+	                                <div class="btn-group">
+	                                	<button type="button" style="width:70px;"class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                       	<span value="all" class="span-major-text">所有学科</span>
+	                                        <span class="caret"></span>
+	                                    </button>
+	                                    <ul class="dropdown-menu pull-right" role="menu">
+	                                        <li><a href="javascript:;" onclick="majorSelectChange('必修类')">必修类</a>
+	                                        </li>
+	                                        <li><a href="javascript:;" onclick="majorSelectChange('选修类')">选修类</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="javascript:;" onclick="majorSelectChange('所有学科')">所有学科</a>
+	                                        </li>
+	                                    </ul>
+	                                    <!-- <select class="form-control selectMajor" style="height:32px;" onchange="selectChange()">
+		                                	<option value="all">所有学科</option>
+		                                	<option value="必修类">必修</option>
+		                                	<option value="选修类">选修</option>
+		                                </select> -->
+	                                </div>
+	                            </div>
+	                            <div class="pull-right">&nbsp;</div>
+	                            <div class="pull-right">
+	                                <div class="btn-group">
+	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                       	<span value="1" class="span-year-text">第一学年</span>
+	                                        <span class="caret"></span>
+	                                    </button>
+	                                    <ul class="dropdown-menu pull-right" role="menu">
+	                                        <li><a href="javascript:;" onclick="yearSelectChange('第一学年')">第一学年</a>
+	                                        </li>
+	                                        <li><a href="javascript:;" onclick="yearSelectChange('第二学年')">第二学年</a>
+	                                        </li>
+	                                        <li><a href="javascript:;" onclick="yearSelectChange('第三学年')">第三学年</a>
+	                                        </li>
+	                                        <li><a href="javascript:;" onclick="yearSelectChange('第四学年')">第四学年</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="javascript:;" onclick="yearSelectChange('所有学年')">所有学年</a>
+	                                        </li>
+	                                    </ul>
+	                                    <!-- <select class="form-control selectYearNum" style="height:32px;" onchange="selectChange()">
+	                                        	<option value="1">第一学年</option>
+	                                        	<option value="2">第二学年</option>
+	                                        	<option value="3">第三学年</option>
+	                                        	<option value="4">第四学年</option>
+	                                        	<option value="5">所有学年</option>
+	                                     </select> -->
+	                                </div>
+	                            </div>
+	                		</div>
+	                		<!-- panel heading -->
+	                		<div class="panel-body anaYearMajorType">
+	                			<div class="alert alert-warning myAlertFail2">
+										<a href="#" class="close" data-dismiss="alert">
+											&times;
+										</a>
+										<strong>出错了我！</strong>操作失败，请稍后再试。
+								</div>
+	                		</div>
+	                	</div>
+	                </div>
+	            </div>
+	            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/LivePlatform/html/my-admin/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/LivePlatform/html/my-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/LivePlatform/html/my-admin/vendor/raphael/raphael.min.js"></script>
+    <script src="/LivePlatform/html/my-admin/vendor/morrisjs/morris.min.js"></script>
+    <script src="/LivePlatform/html/my-admin/data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/global.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/highcharts.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/highcharts-3d.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/analyzeRecord.js"></script>
+</body>
+
+</html>

@@ -155,16 +155,16 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">添加成绩</h3>
+                    <h3 class="page-header">添加账单信息</h3>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                          	 输入你的成绩
+                <div class="col-sm-10">
+                    <div class="panel panel-warning panel-warning-succ">
+                        <div class="panel-heading addBillHeading">
+                          	 输入<b>消费支出</b>信息
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -173,59 +173,95 @@
 										&times;
 									</a>
 									<strong>添加成功！</strong>
-									<a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">点击查看成绩</a>
+									<a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">点击查看记录</a>
 									&nbsp;
 									<button type="button" class="btn btn-link btnKeepAddRecord">继续添加</button>
 							</div>
-							
-                            <div class="col-lg-6">
-                            	<form role="form" id="addRecordForm">
-                            		<div class="form-group addRecordForm-div1">
-	                            		<label class="control-label">课程名称:</label>
-	                            		<input type="text" class="form-control courseName" name="courseName" onclick="cleanError('addRecordForm-div1')">
+							<form role="form" id="addRecordForm">
+                            	<div class="col-sm-5">
+                            		<div class="form-group">
+	                            		<div class="input-group">
+											<span class="input-group-addon">选择支出<b> or </b>收入</span> 
+											<label class="radio-inline" style="padding-left: 0px;"> 
+												<select class="form-control" name="i_category_id" onchange="selectChange(this)">
+														<option value="-1">消费支出</option>
+														<option value="1">收入</option>
+												</select>
+											</label>
+										</div>
+									</div>
+                            	</div>
+                            	<div class="col-sm-8">
+                            		<div class="form-group">
+                            			<label>输入金额:</label>
+	                           			<div class="input-group">
+	                           				<span class="input-group-addon">￥</span> <input
+											id="income_input_div" type="text" class="form-control"
+											name="incomenum" placeholder="输入金额"
+											aria-label="Amount (to the nearest dollar)">
+	                           			</div>
+	                           		</div>
+                            	</div>
+                            	<div class="col-sm-9">
+                            		<div class="form-group">
+                            			<label>账单备注:</label>
+                            			<div class="input-group">
+											<textarea rows="6" cols="90" class="form-control" name="comment" placeholder="请输入备注信息"></textarea>
+										</div>
+									</div>
+                            	</div>
+                            	<div class="col-sm-8">
+                            		<div class="form-group">
+                            			<div class="input-group">
+											<span class="input-group-addon textAddBill">选择消费类别</span> 
+											<label class="radio-inline" style="padding-left: 0px;">
+												<select class="form-control" name="i_category_id">
+														<option>选择类别</option>
+												</select>
+											</label> 
+											<label class="radio-inline">
+												<button type="button" class="btn btn-default btnAddBillType">
+													<span class="glyphicon glyphicon-plus"></span>添加类别
+												</button>
+											</label>
+										</div>
+									</div>
+                            	</div>
+                            	<div class="col-sm-9">
+                            		<div class='form-group'>
+                            			<div class="input-group" style="float: right;">
+											<button class="btn btn-primary" type="submit"
+												id="submit_spend_info_btn">提交账单信息</button>
+										</div>
                             		</div>
-                            		<div class="form-group">
-		                           		<label>选择学期:</label>
-		                           		<select name="courseTermNumStr" class="form-control courseTermNumStr">
-		                           			<option value="第一学期">第一学期</option>
-		                           			<option value="第二学期">第二学期</option>
-		                           			<option value="第三学期">第三学期</option>
-		                           			<option value="第四学期">第四学期</option>
-		                           			<option value="第五学期">第五学期</option>
-		                           			<option value="第六学期">第六学期</option>
-		                           			<option value="第七学期">第七学期</option>
-		                           			<option value="第八学期">第八学期</option>
-		                           		</select>
-                            		</div>  
-                            		<div class="form-group addRecordForm-div2">
-		                           		<label class="control-label">期末分数:</label>
-		                           		<input type="text" class="form-control courseRecord" name="courseRecord" placeholder="分数为正整数" onclick="cleanError('addRecordForm-div2')">
-                            		</div>
-                            		<div class="form-group">
-	                            		<label>课程类别:</label>
-	                            		<select class="form-control coursePhyArtCate" name="coursePhyArtCateName">
-	                            			<option value="理科类">理科类</option>
-	                            			<option value="文科类">文科类</option>
-	                            		</select>
-                            		</div> 
-                            		<div class="form-group">
-	                            		<label>选课类别:</label>
-	                            		<select class="form-control courseMajorCate" name="courseMajorCateName">
-	                            			<option value="必修类">必修类</option>
-	                            			<option value="选修类">选修类</option>
-	                            		</select>
-                            		</div> 
-                            		<div class="form-group">
-	                            		<button class="btn btn-success mySubBtn" type="button" data-loading-text="添加中……">添加</button>
-	                            		<button class="btn btn-info mySubBtn2" type="reset">重置</button>
-                            		</div>
-                            	</form>
-                            </div>
+                            	</div>
+                            
+                            </form>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                 </div>
+                
+                <div class="modal fade" id="myAddBillTypeModal" data-backdrop="false">
+					<div class="modal-dialog"  style="width:22%;">
+						<div class="modal-content">
+					    	<div class="modal-header">
+					            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					            <h4 class="modal-title addBillTitle"></h4>
+					        </div>
+					        <div class="modal-body addBillInput">
+					        </div>
+				          	<div class="modal-footer">
+				           		<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+				            	<button class="btn btn-primary btnSureDelete" type="button">添加</button>
+				          	</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+			    </div>
+			
+            </div>
+            <!-- row -->
     </div>
     <!-- /#wrapper -->
 
@@ -251,7 +287,7 @@
     <script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
 	<script src="/LivePlatform/js/jquery/jquery.form.js"></script>
 	<script src="/LivePlatform/js/layer/layer.js"></script>
-	<script type="text/javascript" src="/LivePlatform/js/addRecord.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/addBill.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/global.js"></script>
 </body>
 

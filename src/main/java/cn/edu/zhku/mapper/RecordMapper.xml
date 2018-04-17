@@ -5,67 +5,287 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="cn.edu.zhku.mapper.RecordMapper">
 	<resultMap type="cn.edu.zhku.pojo.CourseRecordEntity" id="BaseResultMap">
 		<id column="course_id" jdbcType="VARCHAR" property="courseId" />
-	    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
-	    <result column="course_record" jdbcType="INTEGER" property="courseRecord" />
-	    <result column="course_phy_art_cate_name" jdbcType="VARCHAR" property="coursePhyArtCateName" />
-	    <result column="course_major_cate_name" jdbcType="VARCHAR" property="courseMajorCateName" />
-	    <result column="course_record_date" jdbcType="TIMESTAMP" property="courseRecordDate" />
-	    <result column="course_record_user_id" jdbcType="VARCHAR" property="courseRecordUserId" />
-	    <result column="course_term_num_str" jdbcType="VARCHAR" property="courseTermNumStr" />
-	   		
+		<result column="course_name" jdbcType="VARCHAR" property="courseName" />
+		<result column="course_record" jdbcType="INTEGER" property="courseRecord" />
+		<result column="course_phy_art_cate_name" jdbcType="VARCHAR"
+			property="coursePhyArtCateName" />
+		<result column="course_major_cate_name" jdbcType="VARCHAR"
+			property="courseMajorCateName" />
+		<result column="course_record_date" jdbcType="TIMESTAMP"
+			property="courseRecordDate" />
+		<result column="course_record_user_id" jdbcType="VARCHAR"
+			property="courseRecordUserId" />
+		<result column="course_term_num_str" jdbcType="VARCHAR"
+			property="courseTermNumStr" />
+		<result column="course_year_num" jdbcType="INTEGER" property="courseYearNum" />
 	</resultMap>
-	
+
+	<resultMap type="cn.edu.zhku.pojo.CourseYearAnaEntity" id="YearAnaResultMap">
+		<result column="course_year_num" jdbcType="INTEGER" property="courseYearNum" />
+		<result column="course_phy_art_cate_name" jdbcType="VARCHAR"
+			property="coursePhyArtCateName" />
+		<result column="course_major_cate_name" jdbcType="VARCHAR"
+			property="courseMajorCateName" />
+		<result column="phy_art_total_record" jdbcType="INTEGER"
+			property="phyArtTotalRecord" />
+		<result column="major_total_record" jdbcType="INTEGER"
+			property="majorTotalRecord" />
+	</resultMap>
 	<sql id="Base_Column_List">
 		course_id,course_name,course_record,course_phy_art_cate_name,course_major_cate_name,course_record_date,
-		course_record_user_id,course_term_num_str
+		course_record_user_id,course_term_num_str,course_year_num
 	</sql>
-	
-	<!-- 查询 所有的 成绩记录  后台管理-->
+
+	<!-- 查询 所有的 成绩记录 后台管理 -->
 	<select id="selectAllRecord" resultMap="BaseResultMap">
-		select 
-		<include refid="Base_Column_List"/>
+		select
+		<include refid="Base_Column_List" />
 		from t_course_record
 	</select>
-	
-	<!-- 分页查询 某个用户的 成绩记录-->
-	<select id="selectUserAllRecordPage" resultMap="BaseResultMap" parameterType="java.util.Map">
-		select 
-		<include refid="Base_Column_List"/>
+
+	<!-- 分页查询 某个用户的 成绩记录 -->
+	<select id="selectUserAllRecordPage" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
 		from t_course_record
-		where course_record_user_id=#{userId,jdbcType=VARCHAR}
-		order by course_record_date desc
-		limit #{start,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
+		where
+		course_record_user_id=#{userId,jdbcType=VARCHAR}
+		order by
+		course_record_date desc
+		limit
+		#{start,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
 	</select>
-	
+
 	<!-- 查询用户的成绩记录总数 -->
-	<select id="userRecordTotalNum" parameterType="java.lang.String" resultType="java.lang.Integer">
-		select count(*) from t_course_record 
+	<select id="userRecordTotalNum" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from t_course_record
 		where course_record_user_id=#{userId}
 	</select>
 	<!-- 添加 成绩 -->
 	<insert id="addRecordInfo" parameterType="CourseRecordEntity">
-		insert into 
+		insert into
 		t_course_record(course_id,course_name,course_record,course_phy_art_cate_name,
-		course_major_cate_name,course_record_date,course_record_user_id,course_term_num_str)
+		course_major_cate_name,course_record_date,course_record_user_id,course_term_num_str,course_year_num)
 		values(#{courseId,jdbcType=VARCHAR},#{courseName,jdbcType=VARCHAR},
-			#{courseRecord,jdbcType=INTEGER},#{coursePhyArtCateName,jdbcType=VARCHAR},
-			#{courseMajorCateName,jdbcType=VARCHAR},#{courseRecordDate,jdbcType=TIMESTAMP},
-			#{courseRecordUserId,jdbcType=VARCHAR},#{courseTermNumStr,jdbcType=VARCHAR})
-		
+		#{courseRecord,jdbcType=INTEGER},#{coursePhyArtCateName,jdbcType=VARCHAR},
+		#{courseMajorCateName,jdbcType=VARCHAR},#{courseRecordDate,jdbcType=TIMESTAMP},
+		#{courseRecordUserId,jdbcType=VARCHAR},#{courseTermNumStr,jdbcType=VARCHAR},#{courseYearNum,jdbcType=INTEGER})
+
 	</insert>
-	
+
 	<!-- 查询一条成绩信息 -->
 	<select id="selectOne" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
-		<include refid="Base_Column_List"/>
+		<include refid="Base_Column_List" />
 		from t_course_record
-		where course_id=#{courseId,jdbcType=VARCHAR} 
+		where course_id=#{courseId,jdbcType=VARCHAR}
 	</select>
-	
+
+	<!-- 查询 学年 文理科 -->
+	<select id="selectYearPhyArtM" parameterType="java.lang.String"
+		resultMap="YearAnaResultMap">
+		SELECT course_year_num,course_phy_art_cate_name,
+		SUM(course_record) as 'phy_art_total_record'
+		from t_course_record
+		WHERE course_record_user_id = #{userId,jdbcType=VARCHAR}
+		GROUP BY course_year_num,course_phy_art_cate_name
+	</select>
+	<!-- 查询 学年 必修 选修 -->
+	<select id="selectYearMajorM" parameterType="java.lang.String"
+		resultMap="YearAnaResultMap">
+		SELECT course_year_num,course_major_cate_name,
+		SUM(course_record) as 'major_total_record'
+		from t_course_record
+		WHERE course_record_user_id = #{userId,jdbcType=VARCHAR}
+		GROUP BY
+		course_year_num,course_major_cate_name;
+	</select>
+
+	<sql id="totalNum">
+		SELECT
+			COUNT(*)
+		FROM
+			t_course_record
+		WHERE
+			course_record_user_id = #{userId,jdbcType=VARCHAR}
+		<if test="yearNum!=5">
+			AND course_year_num = #{yearNum,jdbcType=INTEGER}
+		</if>
+		<if test="majorType!=null">
+			AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<!-- 查询 不同条件下 优秀 良好 中等 不及格 的数据 -->
+	<select id="selectRecordLevel" parameterType="java.util.Map"
+		resultType="RecordLevelEntity">
+		select (
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record >= 85
+		)/(
+			<include refid="totalNum"/>
+		) as 'aLevel',
+		(
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record >= 75
+			AND course_record &lt; 85
+		)/(
+			<include refid="totalNum"/>
+		) as 'bLevel',
+		(
+			SELECT
+					COUNT(*)
+				FROM
+					t_course_record
+				WHERE
+					course_record_user_id = #{userId,jdbcType=VARCHAR}
+				<if test="yearNum!=5">
+					AND course_year_num = #{yearNum,jdbcType=INTEGER}
+				</if>
+				<if test="majorType!=null">
+					AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+				</if>
+				AND course_record >= 60
+				AND course_record &lt; 75
+		)/(
+			<include refid="totalNum"/>
+		) as 'cLevel',
+		(
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record &lt; 60
+		)/(
+			<include refid="totalNum"/>
+		) as 'dLevel';
+		<!-- 符合条件的总数 -->
+		<!-- SET @totalNum = (
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+		); -->
+		<!-- 优秀记录数 -->
+		<!-- SET @aNum = (
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record >= 85
+		); -->
+		
+		<!-- 良好 --> 
+		<!-- SET @bNum = (
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record >= 75
+			AND course_record &lt; 85   &lt; 是 小于符号的转义字符
+		);
+		 -->
+		<!-- 中等 -->
+		<!-- SET @cNum = (
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record >= 60
+			AND course_record &lt; 75
+		); -->
+		<!-- 不及格 -->
+		<!-- SET @dNum = (
+			SELECT
+				COUNT(*)
+			FROM
+				t_course_record
+			WHERE
+				course_record_user_id = #{userId,jdbcType=VARCHAR}
+			<if test="yearNum!=5">
+				AND course_year_num = #{yearNum,jdbcType=INTEGER}
+			</if>
+			<if test="majorType!=null">
+				AND course_major_cate_name = #{majorType,jdbcType=VARCHAR}
+			</if>
+			AND course_record &lt; 60
+		);
+		
+		SELECT
+			@aNum / @totalNum AS 'aLevel',
+			@bNum /@totalNum AS 'bLevel',
+			@cNum /@totalNum AS 'cLevel',
+			@dNum /@totalNum AS 'dLevel'; -->
+	</select>
+
 	<delete id="deleteRecoreInfo" parameterType="java.lang.String">
-		delete from t_course_record where course_id=#{courseId,jdbcType=VARCHAR}
+		delete from
+		t_course_record where course_id=#{courseId,jdbcType=VARCHAR}
 	</delete>
-	
+
 	<!-- 更新数据 包括普通的update 还有 更新密码操作 -->
 	<update id="updateRecoreInfo" parameterType="CourseRecordEntity">
 		update t_course_record
@@ -85,9 +305,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="courseTermNumStr!=null and courseTermNumStr!=''">
 				course_term_num_str=#{courseTermNumStr,jdbcType=VARCHAR},
 			</if>
+			<if test="courseYearNum!=null">
+				course_year_num=#{courseYearNum,jdbcType=INTEGER}
+			</if>
 		</set>
 		where
 		course_id=#{courseId,jdbcType=VARCHAR}
 	</update>
-	
+
 </mapper>

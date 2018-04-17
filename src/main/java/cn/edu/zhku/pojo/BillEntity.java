@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BillEntity {
 	private String billId;
-	private Integer billAmount;//账单金额
+	private Float billAmount;//账单金额
 	private Date billDate;//账单记录时间
 	private String billComment;//账单 备注
 	private String spendCateId;//消费类别id
@@ -18,10 +18,11 @@ public class BillEntity {
 	public void setBillId(String billId) {
 		this.billId = billId;
 	}
-	public Integer getBillAmount() {
+	
+	public Float getBillAmount() {
 		return billAmount;
 	}
-	public void setBillAmount(Integer billAmount) {
+	public void setBillAmount(Float billAmount) {
 		this.billAmount = billAmount;
 	}
 	public Date getBillDate() {

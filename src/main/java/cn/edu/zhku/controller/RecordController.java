@@ -2,7 +2,6 @@ package cn.edu.zhku.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -18,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 
 import cn.edu.zhku.pojo.CourseRecordEntity;
+import cn.edu.zhku.pojo.CourseYearAnaEntity;
 import cn.edu.zhku.pojo.JsonReturn;
 import cn.edu.zhku.pojo.PagesEntity;
+import cn.edu.zhku.pojo.RecordLevelEntity;
 import cn.edu.zhku.pojo.UserEntity;
 import cn.edu.zhku.service.RecordService;
 
@@ -46,6 +47,147 @@ public class RecordController {
 			return "showRecord";
 		}else {
 			return "signinup";
+		}
+	}
+	
+	@RequestMapping("analyzeRecordUI")
+	public String analyzeRecordUI(HttpServletRequest request) {
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+		if(user!=null){
+			return "analyzeRecord";
+		}else {
+			return "signinup";
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="analyzeYearRecord",method=RequestMethod.POST)
+	@ResponseBody
+	public String analyzeYearRecord(HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+		try {
+			if(user!=null){
+				//获取 该用户 4个学年 文科 理科 必修 选修 的数据 
+				ArrayList<CourseYearAnaEntity> listPhyArt = recordService.selectYearPhyArt(user.getUserId());
+				ArrayList<CourseYearAnaEntity> listMajor = recordService.selectYearMajor(user.getUserId());
+				ArrayList<CourseYearAnaEntity> listReturn = new ArrayList<CourseYearAnaEntity>();
+				CourseYearAnaEntity c1 = new CourseYearAnaEntity();
+				c1.setCourseYearNum(1);
+				CourseYearAnaEntity c2 = new CourseYearAnaEntity();
+				c2.setCourseYearNum(2);
+				CourseYearAnaEntity c3 = new CourseYearAnaEntity();
+				c3.setCourseYearNum(3);
+				CourseYearAnaEntity c4 = new CourseYearAnaEntity();
+				c4.setCourseYearNum(4);
+				int num,record;
+				for(CourseYearAnaEntity c:listPhyArt) {
+					num = c.getCourseYearNum();
+					record = c.getPhyArtTotalRecord();
+					if(num==1) {
+						if(c.getCoursePhyArtCateName().equals("文科类")) {
+							c1.setArtTotalRecord(record);
+						}else {
+							c1.setPhyTotalRecord(record);
+						}
+					}else if(num == 2) {
+						if(c.getCoursePhyArtCateName().equals("文科类")) {
+							c2.setArtTotalRecord(record);
+						}else {
+							c2.setPhyTotalRecord(record);
+						}
+					}else if(num==3) {
+						if(c.getCoursePhyArtCateName().equals("文科类")) {
+							c3.setArtTotalRecord(record);
+						}else {
+							c3.setPhyTotalRecord(record);
+						}
+					}else {
+						if(c.getCoursePhyArtCateName().equals("文科类")) {
+							c4.setArtTotalRecord(record);
+						}else {
+							c4.setPhyTotalRecord(record);
+						}
+					}
+				}
+				
+				for(CourseYearAnaEntity c:listMajor) {
+					num = c.getCourseYearNum();
+					record = c.getMajorTotalRecord();
+					if(num==1) {
+						if(c.getCourseMajorCateName().equals("必修类")) {
+							c1.setMainMajorRecord(record);
+						}else {
+							c1.setSelectMajorRecord(record);
+						}
+					}else if(num == 2) {
+						if(c.getCourseMajorCateName().equals("必修类")) {
+							c2.setMainMajorRecord(record);
+						}else {
+							c2.setSelectMajorRecord(record);
+						}
+					}else if(num==3) {
+						if(c.getCourseMajorCateName().equals("必修类")) {
+							c3.setMainMajorRecord(record);
+						}else {
+							c3.setSelectMajorRecord(record);
+						}
+					}else {
+						if(c.getCourseMajorCateName().equals("必修类")) {
+							c4.setMainMajorRecord(record);
+						}else {
+							c4.setSelectMajorRecord(record);
+						}
+					}
+				}
+				listReturn.add(c1);
+				listReturn.add(c2);
+				listReturn.add(c3);
+				listReturn.add(c4);
+				jr.setObject(listReturn);
+				jr.setInfo("true");
+			}else {
+				jr.setIsLogin("false");
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	@SuppressWarnings("finally")
+	@RequestMapping(value="analyYearLevel",method=RequestMethod.POST)
+	@ResponseBody
+	public String analyYearLevel(String yearNum,String majorType,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+		try {
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				if((yearNum==null || "".equals(yearNum.trim())) || (majorType==null || "".equals(majorType.trim()))) {
+					jr.setInfo("false");
+				}else {
+					Map<String,Object> map = new HashMap<String,Object>();
+					Integer year = Integer.parseInt(yearNum);
+					map.put("yearNum", year);
+					if(majorType.equals("all")) {
+						map.put("majorType", null);
+					}else {
+						map.put("majorType", majorType);
+					}
+					map.put("userId", user.getUserId());
+					RecordLevelEntity rle = recordService.selectRecordLevel(map);
+					jr.setInfo("true");
+					jr.setObject(rle);
+				}
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
 		}
 	}
 	

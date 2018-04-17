@@ -116,6 +116,9 @@
 								<li><a href="#"
 									onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
 								</li>
+								<li>
+                                    <a href="#" onclick="toPages('/LivePlatform/record/analyzeRecordUI.action')">统计分析</a>
+                                </li>
 							</ul> <!-- /.nav-second-level --></li>
 
 						<li><a href="#"><i class="fa fa-book fa-fw"></i>财务管理<span
@@ -253,49 +256,8 @@
 				        				<div class="panel-heading">
 				        					<h4>修改课程成绩信息</h4>
 				        				</div>
-				        				<div class="panel-body">
-				        					<div class="alert alert-warning myAlertUpdateFail">
-												<a href="#" class="close" data-dismiss="alert">
-													&times;
-												</a>
-												<strong>修改失败！</strong>请稍后再试！
-											</div>
-				        					<div class="col-sm-12">
-				        						<form id="updateRecordForm">
-				        							<div class="col-sm-6">
-				        								<label class="control-label">课程名称:</label>
-				        								<input class="form-group form-control updateCourseName" name="courseName" type="text">
-				        								<label>学期数:</label>
-				        								<select name="courseTermNumStr" class="form-control">
-						                           			<option value="第一学期">第一学期</option>
-						                           			<option value="第二学期">第二学期</option>
-						                           			<option value="第三学期">第三学期</option>
-						                           			<option value="第四学期">第四学期</option>
-						                           			<option value="第五学期">第五学期</option>
-						                           			<option value="第六学期">第六学期</option>
-						                           			<option value="第七学期">第七学期</option>
-						                           			<option value="第八学期">第八学期</option>
-						                           		</select>
-				        								
-				        								<label class="control-label">课程分数:</label>
-				        								<input class="form-group form-control updateRecordNum" name="courseRecord" type="text">
-				        								<input type="hidden" class="updateCourseId" name="courseId">
-				        							</div>
-				        							<div class="col-sm-6">
-				        								<label>课程类别:</label>
-														<select class="form-control form-group updatePhyArtCate" name="coursePhyArtCateName">
-					                            			<option value="文科类">文科类</option>
-					                            			<option value="理科类">理科类</option>
-					                            		</select>
-				        								<label>课程性质:</label>
-														<select class="form-control form-group updateMajorCate" name="courseMajorCateName">
-					                            			<option value="主修类">必修类</option>
-					                            			<option value="选修类">选修类</option>
-					                            		</select>
-				        							</div>
-				                            	</form>
-				        					</div>
-				        				</div>
+				        				<div class="panel-body updatePanelBody">
+				        				</div><!-- panel-body  -->
 					        			
 				        			</div>
 				        		</div>

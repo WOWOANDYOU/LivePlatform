@@ -243,21 +243,56 @@ function sureUpdate(recordId){
 		}else if(data.info=="false"){
 			layer.msg("操作失败……请稍后再试！",{inco:5});
 		}else{
+			$(".updatePanelBody").html("");
+			var $html = $("<div class='alert alert-warning myAlertUpdateFail'>"+
+								"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+								"<strong>修改失败！</strong>请稍后再试！"+
+							"</div>"+
+							"<div class='col-sm-12'>"+
+								"<form id='updateRecordForm'>"+
+									"<div class='col-sm-6'>"+
+										"<label class='control-label'>课程名称:</label>"+
+										"<input class='form-group form-control updateCourseName' name='courseName' type='text'>"+
+										"<label>学期数:</label>"+
+										"<select name='courseTermNumStr' class='form-control recordTermNum'>"+
+					               			"<option value='第一学期'>第一学期</option>"+
+					               			"<option value='第二学期'>第二学期</option>"+
+					               			"<option value='第三学期'>第三学期</option>"+
+					               			"<option value='第四学期'>第四学期</option>"+
+					               			"<option value='第五学期'>第五学期</option>"+
+					               			"<option value='第六学期'>第六学期</option>"+
+					               			"<option value='第七学期'>第七学期</option>"+
+					               			"<option value='第八学期'>第八学期</option>"+
+					               		"</select>"+
+										"<label class='control-label'>课程分数:</label>"+
+										"<input class='form-group form-control updateRecordNum' name='courseRecord' type='text'>"+
+										"<input type='hidden' class='updateCourseId' name='courseId'>"+
+									"</div>"+
+									"<div class='col-sm-6'>"+
+										"<label>课程类别:</label>"+
+										"<select class='form-control form-group updatePhyArtCate' name='coursePhyArtCateName'>"+
+					            			"<option value='文科类'>文科类</option>"+
+					            			"<option value='理科类'>理科类</option>"+
+					            		"</select>"+
+										"<label>课程性质:</label>"+
+										"<select class='form-control form-group updateMajorCate' name='courseMajorCateName'>"+
+					            			"<option value='必修类'>必修类</option>"+
+					            			"<option value='选修类'>选修类</option>"+
+					            		"</select>"+
+									"</div>"+
+					        	"</form>"+
+							"</div>");
+			$(".updatePanelBody").append($html);
 			$(".myAlertUpdateFail").hide();
 			$(".updateCourseName").val(data.object.courseName);
 			$(".updateCourseTermNum").val(data.object.courseTermNumStr);
 			$(".updateRecordNum").val(data.object.courseRecord);
 			$(".updateCourseId").val(data.object.courseId);
-			if(data.object.courseMajorCateName=="选修类"){
-				$(".updateMajorCate").html("");
-				$(".updateMajorCate").html("<option value='选修类'>选修类</option><option value='必修类'>必修类</option>");
-			}
-			if(data.object.coursePhyArtCateName=="理科类"){
-				$(".updatePhyArtCate").html("");
-				$(".updatePhyArtCate").html("<option value='理科类'>理科类</option><option value='文科类'>文科类</option>");
-			}
+			$(".recordTermNum").val(data.object.courseTermNumStr);
+			$(".updatePhyArtCate").val(data.object.coursePhyArtCateName);
+			$(".updateMajorCate").val(data.object.courseMajorCateName);
 			$("#myUpdateModal").modal("show");
-			debugger
+			
 			relUpdateUrl = "/LivePlatform/record/updateRecord.action?recordId="+recordId;
 		}
 	});

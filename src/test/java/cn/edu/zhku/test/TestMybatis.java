@@ -15,6 +15,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSON;
+
+import cn.edu.zhku.pojo.CourseYearAnaEntity;
+import cn.edu.zhku.pojo.RecordLevelEntity;
 import cn.edu.zhku.pojo.UserEntity;
 import cn.edu.zhku.service.RecordService;
 import cn.edu.zhku.service.UserService;
@@ -76,5 +80,36 @@ public class TestMybatis {
 		map.put("userId", "171ea60d-f99f-4be3-84aa-eb3ff83c1f54");
 		ArrayList list = recordService.selectUserAllRecordPage(map);
 		System.out.println(list.toString());
+	}
+	@Test
+	public void testSelectYearAna() {
+		try {
+			ArrayList<CourseYearAnaEntity> listPhyArt = recordService.selectYearPhyArt("171ea60d-f99f-4be3-84aa-eb3ff83c1f54");
+			ArrayList<CourseYearAnaEntity> listMajor = recordService.selectYearMajor("171ea60d-f99f-4be3-84aa-eb3ff83c1f54");
+			System.out.println("haha");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testSelectYearAna2() {
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("userId", "171ea60d-f99f-4be3-84aa-eb3ff83c1f54");
+			map.put("yearNum", 1);
+			map.put("majorType", null);
+			RecordLevelEntity rle = recordService.selectRecordLevel(map);
+			System.out.println("haha");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testhaha() {
+		RecordLevelEntity r = new RecordLevelEntity();
+		r.setaLevel(1.834f);
+		r.setbLevel(0.88f);
+		System.out.println(JSON.toJSONString(r));
 	}
 }

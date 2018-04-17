@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,17 +25,16 @@
 
     <!-- Custom Fonts -->
     <link href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-	<!-- 我的样式 -->
-	<link href="/LivePlatform/css/record.css" rel="stylesheet">
+	<link href="/LivePlatform/css/unusedMarket.css" rel="stylesheet">
 </head>
 
 <body>
 
+
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="width:100%;margin-bottom: 0;position: fixed;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -60,6 +60,7 @@
                                 </div>
                             </a>
                         </li>
+                        <li class="divider"></li>
                     </ul>
                     <!-- /.dropdown-alerts -->
                 </li>
@@ -71,7 +72,8 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i>用户设置</a>
                         </li>
-                       
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> -->
                         <li class="divider"></li>
                         <li><a href="#" onclick="toPages('/LivePlatform/user/logout.action')"><i class="fa fa-sign-out fa-fw"></i>登出</a>
                         </li>
@@ -100,13 +102,12 @@
                             <a href="/LivePlatform/index.action"><i class="fa fa-home fa-fw"></i>首页</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-book fa-fw"></i> 成绩管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>成绩管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="#" onclick="toPages('/LivePlatform/record/addRecordUI.action')">添加成绩</a>
                                 </li>
                                 <li>
-                                   <!--  <a href="morris.html">查看成绩</a> -->
                                     <a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
                                 </li>
                                 <li>
@@ -152,80 +153,76 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" class="my-row">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">添加成绩</h3>
+                    <h3 class="page-header" style="margin-top:7%;">闲置市场</h3>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                          	 输入你的成绩
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                        	<div class="alert alert-warning myAlertSuccess">
-									<a href="#" class="close" data-dismiss="alert">
-										&times;
-									</a>
-									<strong>添加成功！</strong>
-									<a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">点击查看成绩</a>
-									&nbsp;
-									<button type="button" class="btn btn-link btnKeepAddRecord">继续添加</button>
-							</div>
-							
-                            <div class="col-lg-6">
-                            	<form role="form" id="addRecordForm">
-                            		<div class="form-group addRecordForm-div1">
-	                            		<label class="control-label">课程名称:</label>
-	                            		<input type="text" class="form-control courseName" name="courseName" onclick="cleanError('addRecordForm-div1')">
-                            		</div>
-                            		<div class="form-group">
-		                           		<label>选择学期:</label>
-		                           		<select name="courseTermNumStr" class="form-control courseTermNumStr">
-		                           			<option value="第一学期">第一学期</option>
-		                           			<option value="第二学期">第二学期</option>
-		                           			<option value="第三学期">第三学期</option>
-		                           			<option value="第四学期">第四学期</option>
-		                           			<option value="第五学期">第五学期</option>
-		                           			<option value="第六学期">第六学期</option>
-		                           			<option value="第七学期">第七学期</option>
-		                           			<option value="第八学期">第八学期</option>
-		                           		</select>
-                            		</div>  
-                            		<div class="form-group addRecordForm-div2">
-		                           		<label class="control-label">期末分数:</label>
-		                           		<input type="text" class="form-control courseRecord" name="courseRecord" placeholder="分数为正整数" onclick="cleanError('addRecordForm-div2')">
-                            		</div>
-                            		<div class="form-group">
-	                            		<label>课程类别:</label>
-	                            		<select class="form-control coursePhyArtCate" name="coursePhyArtCateName">
-	                            			<option value="理科类">理科类</option>
-	                            			<option value="文科类">文科类</option>
-	                            		</select>
-                            		</div> 
-                            		<div class="form-group">
-	                            		<label>选课类别:</label>
-	                            		<select class="form-control courseMajorCate" name="courseMajorCateName">
-	                            			<option value="必修类">必修类</option>
-	                            			<option value="选修类">选修类</option>
-	                            		</select>
-                            		</div> 
-                            		<div class="form-group">
-	                            		<button class="btn btn-success mySubBtn" type="button" data-loading-text="添加中……">添加</button>
-	                            		<button class="btn btn-info mySubBtn2" type="reset">重置</button>
-                            		</div>
-                            	</form>
-                            </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
+            <div class="row"> 
+            	<div class="col-lg-10" style="background-color: black;height:250px;">
+            		<div class="col-lg-12" style="background-color: green;height:30px;">个人信息</div>
+            		<div class="col-lg-12" style="background-color: pink;height:30px;">标题</div>
+            		<div class="col-lg-12" style="background-color: orange;height:150px;">
+            			<div class="col-lg-4" style="background-color: blue;height:150px;">图片</div>
+            			<div class="col-lg-8" style="background-color: pink;height:150px;">内容</div>
+					</div>
+					<div class="col-lg-12" style="background-color: pink;height:30px;">
+						<div class="col-lg-3" style="background-color: yellow;height:30px;">评论</div>
+            			<div class="col-lg-3" style="background-color: red;height:30px;">收藏</div>
+					</div>
+            	</div> 
+            </div>
+            <!-- /.row -->
+            <div class="row"> 
+            	<div class="col-lg-10" style="background-color: black;height:250px;">
+            		<div class="col-lg-12" style="background-color: green;height:30px;">个人信息</div>
+            		<div class="col-lg-12" style="background-color: pink;height:30px;">标题</div>
+            		<div class="col-lg-12" style="background-color: orange;height:150px;">
+            			<div class="col-lg-4" style="background-color: blue;height:150px;">图片</div>
+            			<div class="col-lg-8" style="background-color: pink;height:150px;">内容</div>
+					</div>
+					<div class="col-lg-12" style="background-color: pink;height:30px;">
+						<div class="col-lg-3" style="background-color: yellow;height:30px;">评论</div>
+            			<div class="col-lg-3" style="background-color: red;height:30px;">收藏</div>
+					</div>
+            	</div> 
+            </div>
+            <!-- /.row -->
+            <div class="row"> 
+            	<div class="col-lg-10" style="background-color: black;height:250px;">
+            		<div class="col-lg-12" style="background-color: green;height:30px;">个人信息</div>
+            		<div class="col-lg-12" style="background-color: pink;height:30px;">标题</div>
+            		<div class="col-lg-12" style="background-color: orange;height:150px;">
+            			<div class="col-lg-4" style="background-color: blue;height:150px;">图片</div>
+            			<div class="col-lg-8" style="background-color: pink;height:150px;">内容</div>
+					</div>
+					<div class="col-lg-12" style="background-color: pink;height:30px;">
+						<div class="col-lg-3" style="background-color: yellow;height:30px;">评论</div>
+            			<div class="col-lg-3" style="background-color: red;height:30px;">收藏</div>
+					</div>
+            	</div> 
+            </div>
+            <!-- /.row -->
+            <div class="row"> 
+            	<div class="col-lg-10" style="background-color: black;height:250px;">
+            		<div class="col-lg-12" style="background-color: green;height:30px;">个人信息</div>
+            		<div class="col-lg-12" style="background-color: pink;height:30px;">标题</div>
+            		<div class="col-lg-12" style="background-color: orange;height:150px;">
+            			<div class="col-lg-4" style="background-color: blue;height:150px;">图片</div>
+            			<div class="col-lg-8" style="background-color: pink;height:150px;">内容</div>
+					</div>
+					<div class="col-lg-12" style="background-color: pink;height:30px;">
+						<div class="col-lg-3" style="background-color: yellow;height:30px;">评论</div>
+            			<div class="col-lg-3" style="background-color: red;height:30px;">收藏</div>
+					</div>
+            	</div> 
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
     </div>
     <!-- /#wrapper -->
 
@@ -238,20 +235,13 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Flot Charts JavaScript -->
-    <script src="/LivePlatform/html/my-admin/vendor/flot/excanvas.min.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.pie.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.resize.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.time.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-    <script src="/LivePlatform/html/my-admin/data/flot-data.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="/LivePlatform/html/my-admin/vendor/raphael/raphael.min.js"></script>
+    <script src="/LivePlatform/html/my-admin/vendor/morrisjs/morris.min.js"></script>
+    <script src="/LivePlatform/html/my-admin/data/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
-	<script src="/LivePlatform/js/jquery/jquery.form.js"></script>
-	<script src="/LivePlatform/js/layer/layer.js"></script>
-	<script type="text/javascript" src="/LivePlatform/js/addRecord.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/global.js"></script>
 </body>
 
