@@ -173,17 +173,17 @@
 										&times;
 									</a>
 									<strong>添加成功！</strong>
-									<a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">点击查看记录</a>
+									<a href="#" onclick="toPages('/LivePlatform/bill/showBillUI.action')" style="text-decoration:none;">点击查看记录</a>
 									&nbsp;
-									<button type="button" class="btn btn-link btnKeepAddRecord">继续添加</button>
+									<button type="button" class="btn btn-link btnKeepAddRecord" style="text-decoration:none;">继续添加</button>
 							</div>
-							<form role="form" id="addRecordForm">
+							<form role="form" id="addBillForm">
                             	<div class="col-sm-5">
                             		<div class="form-group">
 	                            		<div class="input-group">
 											<span class="input-group-addon">选择支出<b> or </b>收入</span> 
 											<label class="radio-inline" style="padding-left: 0px;"> 
-												<select class="form-control" name="i_category_id" onchange="selectChange(this)">
+												<select class="form-control" name="cateNum" onchange="selectChange(this)">
 														<option value="-1">消费支出</option>
 														<option value="1">收入</option>
 												</select>
@@ -195,9 +195,9 @@
                             		<div class="form-group">
                             			<label>输入金额:</label>
 	                           			<div class="input-group">
-	                           				<span class="input-group-addon">￥</span> <input
-											id="income_input_div" type="text" class="form-control"
-											name="incomenum" placeholder="输入金额"
+	                           				<span class="input-group-addon">￥/元</span> <input
+											type="text" class="form-control inputBillAmount"
+											name="billAmount" placeholder="输入金额"
 											aria-label="Amount (to the nearest dollar)">
 	                           			</div>
 	                           		</div>
@@ -206,7 +206,7 @@
                             		<div class="form-group">
                             			<label>账单备注:</label>
                             			<div class="input-group">
-											<textarea rows="6" cols="90" class="form-control" name="comment" placeholder="请输入备注信息"></textarea>
+											<textarea rows="6" cols="90" class="form-control" name="billComment" placeholder="请输入备注信息"></textarea>
 										</div>
 									</div>
                             	</div>
@@ -215,8 +215,8 @@
                             			<div class="input-group">
 											<span class="input-group-addon textAddBill">选择消费类别</span> 
 											<label class="radio-inline" style="padding-left: 0px;">
-												<select class="form-control" name="i_category_id">
-														<option>选择类别</option>
+												<select class="form-control selectCateJs" name="">  
+														<option value="0">选择类别</option>
 												</select>
 											</label> 
 											<label class="radio-inline">
@@ -230,9 +230,9 @@
                             	<div class="col-sm-9">
                             		<div class='form-group'>
                             			<div class="input-group" style="float: right;">
-											<button class="btn btn-primary" type="submit"
-												id="submit_spend_info_btn">提交账单信息</button>
+											<button class="btn btn-primary submitAddBill" type="button">提交账单信息</button>
 										</div>
+										<button type="reset" class="btnReset"></button>
                             		</div>
                             	</div>
                             
@@ -254,7 +254,7 @@
 					        </div>
 				          	<div class="modal-footer">
 				           		<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-				            	<button class="btn btn-primary btnSureDelete" type="button">添加</button>
+				            	<button class="btn btn-primary btnSureAddType" type="button">添加</button>
 				          	</div>
 						</div><!-- /.modal-content -->
 					</div><!-- /.modal-dialog -->

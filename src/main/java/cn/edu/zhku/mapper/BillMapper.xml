@@ -30,95 +30,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    -->
 	</resultMap>
 	
+	<resultMap type="cn.edu.zhku.pojo.SpendCateEntity" id="spendCateResultMap">
+		<id column="spend_cate_id" jdbcType="VARCHAR" property="spendCateId" />
+	    <result column="spend_cate_name" jdbcType="VARCHAR" property="spendCateName" />
+	</resultMap>
+	
+	<resultMap type="cn.edu.zhku.pojo.IncomeCateEntity" id="incomeCateResultMap">
+		<id column="income_cate_id" jdbcType="VARCHAR" property="incomeCateId" />
+	    <result column="income_cate_name" jdbcType="VARCHAR" property="incomeCateName" />
+	</resultMap>
 	<sql id="Base_Column_List">
-		user_id,user_name,user_password,user_email,user_gender,user_university_name,
-		user_major,user_grade,user_class_num,user_photo_path,user_register_time,
-		user_recent_in_time,user_recent_out_time
+		bill_id,bill_amount,bill_date,bill_comment,spend_cate_id,income_cate_id,user_id,cate_num
 	</sql>
 	
-	<!-- 查询 所有用户 -->
-	<select id="selectAllUser" resultMap="BaseResultMap">
-		select 
-		<include refid="Base_Column_List"/>
-		from t_user
-	</select>
-
-	<!-- 查询一个 操作 有如：登录查询 以及后面其他查询单个数据的操作 -->
-	<select id="seleceOne" resultMap="BaseResultMap">
-		select 
-		<include refid="Base_Column_List"/>
-		from t_user
-		where 1=1
-		<!-- 用户登录 查询 -->
-		<if test="userName!=null and userPassword!=null">
-			and user_name=#{userName,jdbcType=VARCHAR}
-			and user_password=#{userPassword,jdbcType=VARCHAR}
-		</if>
-		
-		<!-- 当用户 忘记密码 那么 输入邮箱 查到 该用户信息 然后重新设置密码 同时检查 是否已存在-->
-		<if test="userEmail!=null and userEmail!=''">
-			and user_email=#{userEmail,jdbcType=VARCHAR}
-		</if>
-	</select>
-	
-	<delete id="deleteUser" parameterType="java.lang.String">
-		delete from t_user where user_id=#{userId,jdbcType=VARCHAR}
-	</delete>
-	
-	<!-- 更新数据 包括普通的update 还有 更新密码操作 -->
-	<update id="updateUser" parameterType="UserEntity">
-		update t_user
-		<set>
-			<if test="userName!=null and userName!=''">
-				user_name=#{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="userPassword!=null and userPassword!=''">
-				user_password=#{userPassword,jdbcType=VARCHAR},
-			</if>
-			<if test="userEmail!=null and userEmail!=''">
-				user_email=#{userEmail,jdbcType=VARCHAR},
-			</if>
-			<if test="userGender!=null and userGender!=''">
-				user_gender=#{userGender,jdbcType=VARCHAR},
-			</if>
-			<if test="userUniversityName!=null and userUniversityName!=''">
-				user_university_name=#{userUniversityName,jdbcType=VARCHAR},
-			</if>
-			<if test="userMajor!=null and userMajor!=''">
-				user_major=#{userMajor,jdbcType=VARCHAR},
-			</if>
-			<if test="userGrade!=null and userGrade!=''">
-				user_grade=#{userGrade,jdbcType=VARCHAR},
-			</if>
-			<if test="userClassNum!=null and userClassNum!=''">
-				user_class_num=#{userClassNum,jdbcType=VARCHAR},
-			</if>
-			<if test="userPhotoPath!=null and userPhotoPath!=''">
-				user_photo_path=#{userPhotoPath,jdbcType=VARCHAR}
-			</if>
-		</set>
-		where 1=1
-		<if test="userId != null and userId!=''">
-			and user_id=#{userId,jdbcType=VARCHAR}
-		</if>
-		<if test="userEmail != null and userEmail!=''">
-			and user_email=#{userEmail,jdbcType=VARCHAR}
-		</if>
-	</update>
-	
-	<insert id="addUser" parameterType="UserEntity">
+	<insert id="addBillInfo" parameterType="BillEntity">
 		insert into 
-		t_user(user_id,user_name,user_password,user_email,user_gender,user_university_name,
-		user_major,user_grade,user_class_num,user_photo_path,user_register_time,
-		user_recent_in_time,user_recent_out_time)
-		values(#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},
-			#{userPassword,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},
-			#{userGender,jdbcType=VARCHAR},#{userUniversityName,jdbcType=VARCHAR},
-			#{userMajor,jdbcType=VARCHAR},#{userGrade,jdbcType=VARCHAR},
-			#{userClassNum,jdbcType=VARCHAR},#{userPhotoPath,jdbcType=VARCHAR},
-			#{userRegisterTime,jdbcType=TIMESTAMP},#{userRecentInTime,jdbcType=TIMESTAMP},
-			#{userRecentOutTime,jdbcType=TIMESTAMP}
-		);
+		t_bill(bill_id,bill_amount,bill_date,bill_comment,spend_cate_id,income_cate_id,user_id,cate_num)
+		values(#{billId,jdbcType=VARCHAR},#{billAmount,jdbcType=FLOAT},#{billDate,jdbcType=TIMESTAMP},
+				#{billComment,jdbcType=VARCHAR},#{spendCateId,jdbcType=VARCHAR},#{incomeCateId,jdbcType=VARCHAR},
+				#{userId,jdbcType=VARCHAR},#{cateNum,jdbcType=VARCHAR})
 	</insert>
 
+	<insert id="addSpendCate" parameterType="SpendCateEntity">
+		insert into t_spend_cate(spend_cate_id,spend_cate_name)
+		values(#{spendCateId,jdbcType=VARCHAR},#{spendCateName,jdbcType=VARCHAR})
+	</insert>
+	<select id="selectAllSpendCate" resultMap="spendCateResultMap">
+		select spend_cate_id,spend_cate_name from t_spend_cate
+	</select>
+	
+	<insert id="addIncomeCate" parameterType="IncomeCateEntity">
+		insert into t_income_cate(income_cate_id,income_cate_name)
+		values(#{incomeCateId,jdbcType=VARCHAR},#{incomeCateName,jdbcType=VARCHAR})
+	</insert>
+	<select id="selectAllIncomeCate" resultMap="incomeCateResultMap">
+		select income_cate_id,income_cate_name from t_income_cate
+	</select>
 </mapper>

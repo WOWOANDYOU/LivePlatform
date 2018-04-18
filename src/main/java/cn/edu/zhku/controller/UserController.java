@@ -2,7 +2,9 @@ package cn.edu.zhku.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -219,8 +221,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request,HttpServletResponse response) {
 		request.getSession().removeAttribute("userSession");
+		Cookie cookieUserName = new Cookie("cookieUserName",null);
+		Cookie cookieUserPad = new Cookie("cookieUserPad",null);
+		cookieUserName.setMaxAge(0);
+		cookieUserPad.setMaxAge(0);
+		response.addCookie(cookieUserName); 
+		response.addCookie(cookieUserPad);
 		return "signinup";
 	}
 }

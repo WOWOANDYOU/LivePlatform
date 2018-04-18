@@ -19,7 +19,9 @@ import com.alibaba.fastjson.JSON;
 
 import cn.edu.zhku.pojo.CourseYearAnaEntity;
 import cn.edu.zhku.pojo.RecordLevelEntity;
+import cn.edu.zhku.pojo.SpendCateEntity;
 import cn.edu.zhku.pojo.UserEntity;
+import cn.edu.zhku.service.BillService;
 import cn.edu.zhku.service.RecordService;
 import cn.edu.zhku.service.UserService;
 
@@ -30,7 +32,8 @@ public class TestMybatis {
 	private UserService userService;
 	@Autowired
 	private RecordService recordService;
-	
+	@Autowired
+	private BillService billService;
 	
 	private JavaMailSenderImpl senderImpl;
 	private SimpleMailMessage mailMessage;
@@ -111,5 +114,10 @@ public class TestMybatis {
 		r.setaLevel(1.834f);
 		r.setbLevel(0.88f);
 		System.out.println(JSON.toJSONString(r));
+	}
+	@Test
+	public void testCate() {
+		ArrayList<SpendCateEntity> list = billService.selectAllSpendCate();
+		System.out.println(list.size());
 	}
 }

@@ -1,42 +1,47 @@
 $(document).ready(function(){
-	createCode();
-	
-	$("#userSignup").hide();
-	
-	$("#toSignup").click(function(){
-		$(".pInfo").text("");
-		$("input").val();
-		$("#userSignin").hide();
-		$("#userSignup").show();
-	});
-	$("#toSignin").click(function(){
-		$(".pInfo").text("");
-		$("input").val();
+	debugger
+	var cookieUserName = $.cookie('cookieUserName');
+	var cookieUserPad = $.cookie('cookieUserPad');
+	if(cookieUserName!=null || cookieUserPad!=null){
+		$('#inputName').val(cookieUserName);
+		$('#inputPassword').val(cookieUserPad);
+		signinFun();
+	}else{
+		createCode();
 		$("#userSignup").hide();
-		$("#userSignin").show();
-	});
-	
-	$(".signinSub").click(signinValidate);
-	
-	$(".btn-getCode").click(getMessCodeFun);
-	
-	$(".signupSub").click(signupValidate);
-	
-	$("#testbtn").click(function(){
-	});
-	
-	$("#btnSubhaha").click(function(){
-		alert("hah");
-		$("#testForm").ajaxSubmit({
-			url:'./haha.action',
-			dataType:'json',
-			success:function(data){
-				alert("hahah");
-			}
+		$("#toSignup").click(function(){
+			$(".pInfo").text("");
+			$("input").val();
+			$("#userSignin").hide();
+			$("#userSignup").show();
 		});
-	});
+		$("#toSignin").click(function(){
+			$(".pInfo").text("");
+			$("input").val();
+			$("#userSignup").hide();
+			$("#userSignin").show();
+		});
+		$(".signinSub").click(signinValidate);
+		
+		$(".btn-getCode").click(getMessCodeFun);
+		
+		$(".signupSub").click(signupValidate);
+		
+		$("#testbtn").click(function(){
+		});
+		
+		$("#btnSubhaha").click(function(){
+			alert("hah");
+			$("#testForm").ajaxSubmit({
+				url:'./haha.action',
+				dataType:'json',
+				success:function(data){
+					alert("hahah");
+				}
+			});
+		});
+	}
 });
-
 var code ; //在全局 定义验证码  
 function createCode(){   
   code = "";  
@@ -72,6 +77,14 @@ function signinValidate(){
 	}else{
 		$(".signinSub").attr("disabled","true");
 		$("#myModal_gifInfo").modal("show");
+		debugger
+		if($(".rememberMe").is(':checked')){
+			var cookieUserName = $("#inputName").val();
+			var cookieUserPad = $("#inputPassword").val();
+			//存入cookie 7天内有效
+			$.cookie('cookieUserName',cookieUserName,{expires:7});
+			$.cookie('cookieUserPad',cookieUserPad,{expires:7});
+		}
 		signinFun();
 	}
 }

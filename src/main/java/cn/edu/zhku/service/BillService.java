@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import cn.edu.zhku.pojo.BillEntity;
+import cn.edu.zhku.pojo.IncomeCateEntity;
+import cn.edu.zhku.pojo.SpendCateEntity;
 
 public interface BillService {
 	public int addBillInfo(BillEntity billInfo);
@@ -20,4 +22,14 @@ public interface BillService {
 	//更新数据
 	public int updateBillInfo(BillEntity billInfo);
 	
+	//添加消费类别
+	public int addSpendCate(SpendCateEntity spendEntity);
+	
+	//查询所有消费 类别
+	public  ArrayList<SpendCateEntity> selectAllSpendCate();
+	//添加 收入类别
+	public int addIncomeCate(IncomeCateEntity incomeEntity);
+	
+	//查询 所有 收入
+	public ArrayList<IncomeCateEntity> selectAllIncomeCate();
 }
