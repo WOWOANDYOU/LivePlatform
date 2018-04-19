@@ -32,4 +32,6 @@ public interface BillService {
 	
 	//查询 所有 收入
 	public ArrayList<IncomeCateEntity> selectAllIncomeCate();
+
+	public Integer userBillTotalNum(String userId, String cateNum);
 }

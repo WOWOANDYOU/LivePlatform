@@ -1,5 +1,6 @@
 package cn.edu.zhku.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.edu.zhku.pojo.BillEntity;
 import cn.edu.zhku.pojo.IncomeCateEntity;
 import cn.edu.zhku.pojo.JsonReturn;
+import cn.edu.zhku.pojo.PagesEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
 import cn.edu.zhku.pojo.UserEntity;
 import cn.edu.zhku.service.BillService;
@@ -62,10 +65,60 @@ public class BillController {
 				if(cateNum==null || "".equals(cateNum.trim()) || currentPage==null || "".equals(currentPage.trim())) {
 					jr.setInfo("false");
 				}else {
+					int currentPageJ = Integer.parseInt(currentPage);
+					if(currentPageJ<=0) {
+						currentPageJ = 1;
+					}
+					String userId = user.getUserId();
+					PagesEntity pageEntity = new PagesEntity();
+					int start = (currentPageJ-1)*PagesEntity.pageSize;
+					int pagesize = pageEntity.pageSize;
+					pageEntity.setCurrentPage(currentPageJ);
+					if(currentPageJ==1) {
+						pageEntity.setTotalNum(billService.userBillTotalNum(userId,cateNum));//总记录数
+						//总页数
+						if(PagesEntity.totalNum % PagesEntity.pageSize == 0) {
+							pageEntity.setPageTotal(PagesEntity.totalNum / PagesEntity.pageSize);
+						}else{
+							pageEntity.setPageTotal((PagesEntity.totalNum / PagesEntity.pageSize) + 1);
+						}
+					}
 					Map<String,Object> map = new HashMap<String,Object>();
-					map.put("userId", user.getUserId());
-					
+					map.put("userId", userId);
+					map.put("start", start);
+					map.put("pagesize", pagesize);
+					int cateNumber = Integer.parseInt(cateNum);
+					map.put("cateNum", cateNumber);
+					ArrayList<BillEntity> list = billService.selectUserAllBillPage(map);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					for(BillEntity bill:list) {
+						bill.setStrTime(sdf.format(bill.getBillDate()));
+					}
+					pageEntity.setObject(list);
+					jr.setObject(pageEntity);
+					jr.setInfo("true");
 				}
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr,SerializerFeature.DisableCircularReferenceDetect);
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="deleteBillInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteBillInfo(String billId,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				int num = billService.delectBillInfo(billId);
+				jr.setInfo(num<0?"false":"true");
 			}
 		}catch(Exception e) {
 			jr.setInfo("false");
@@ -74,7 +127,6 @@ public class BillController {
 			return JSON.toJSONString(jr);
 		}
 	}
-	
 	
 	@SuppressWarnings("finally")
 	@RequestMapping("addCate")

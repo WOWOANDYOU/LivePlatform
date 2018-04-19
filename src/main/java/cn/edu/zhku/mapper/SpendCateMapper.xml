@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.mapper.SpendCateMapper">
+	<resultMap type="cn.edu.zhku.pojo.SpendCateEntity" id="BaseResultMap">
+		<id column="spend_cate_id" jdbcType="VARCHAR" property="spendCateId" />
+	    <result column="spend_cate_name" jdbcType="VARCHAR" property="spendCateName" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		spend_cate_id,spend_cate_name
+	</sql>
+	
+	<!-- 查询 所有用户 -->
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from t_spend_cate where spend_cate_id=#{spendCateId,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

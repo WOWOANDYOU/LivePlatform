@@ -3,6 +3,7 @@ package cn.edu.zhku.service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class BillServiceImpl implements BillService {
 	
 	@Override
 	public int delectBillInfo(String billInfoId) {
-		return 0;
+		return billMapper.deleteBillInfo(billInfoId);
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class BillServiceImpl implements BillService {
 
 	@Override
 	public ArrayList<BillEntity> selectUserAllBillPage(Map map) {
-		return null;
+		return billMapper.selectUserBillPage(map);
 	}
 
 	@Override
@@ -62,6 +63,15 @@ public class BillServiceImpl implements BillService {
 	@Override
 	public ArrayList<IncomeCateEntity> selectAllIncomeCate() {
 		return billMapper.selectAllIncomeCate();
+	}
+
+	@Override
+	public Integer userBillTotalNum(String userId, String cateNum) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("userId", userId);
+		int cateNumber = Integer.parseInt(cateNum);
+		map.put("cateNum", cateNumber);
+		return billMapper.selectBillTotalNum(map);
 	}
 
 }

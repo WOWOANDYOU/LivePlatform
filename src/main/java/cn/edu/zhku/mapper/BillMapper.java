@@ -25,4 +25,6 @@ public interface BillMapper {
 	public ArrayList<SpendCateEntity> selectAllSpendCate();
 
 	public ArrayList<IncomeCateEntity> selectAllIncomeCate();
+
+	public Integer selectBillTotalNum(Map<String, Object> map);
 }
