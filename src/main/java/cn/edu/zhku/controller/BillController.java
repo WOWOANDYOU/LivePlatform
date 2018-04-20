@@ -129,6 +129,52 @@ public class BillController {
 	}
 	
 	@SuppressWarnings("finally")
+	@RequestMapping(value="showBillDetail",method=RequestMethod.POST)
+	@ResponseBody
+	public String showBillDetail(String billId,String cateNum,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				int cateNumber = Integer.parseInt(cateNum);
+				BillEntity bill = billService.selectOne(billId);
+				ArrayList<Object> array = new ArrayList<Object>();
+				array.add(bill);
+				array.add(cateNumber==-1?billService.selectAllSpendCate():billService.selectAllIncomeCate());
+				jr.setInfo(bill==null?"false":"true");
+				jr.setObject(array);
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(value="	updateBill",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateBill(BillEntity billEntity,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				int num = billService.updateBillInfo(billEntity);
+				jr.setInfo(num<0?"false":"true");
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	@SuppressWarnings("finally")
 	@RequestMapping("addCate")
 	@ResponseBody
 	public String addSpendCate(String CateName,String spendIncome) {

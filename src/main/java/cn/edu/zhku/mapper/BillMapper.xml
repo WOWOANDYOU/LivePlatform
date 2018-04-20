@@ -73,4 +73,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteBillInfo" parameterType="java.lang.String">
 		delete from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}
 	</delete>
+	
+	<select id="selectOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateBillInfo" parameterType="BillEntity">
+		update t_bill
+		<set>
+			<if test="billAmount!=null">
+				bill_amount=#{billAmount,jdbcType=FLOAT},
+			</if>
+			<if test="billComment!=null">
+				bill_comment=#{billComment,jdbcType=VARCHAR},
+			</if>
+			<if test="spendCateId!=null">
+				spend_cate_id=#{spendCateId,jdbcType=VARCHAR}
+			</if>
+			<if test="incomeCateId!=null">
+				income_cate_id=#{incomeCateId,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where
+		bill_id=#{billId,jdbcType=VARCHAR}
+	</update>
 </mapper>

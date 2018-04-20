@@ -31,8 +31,7 @@ public class BillServiceImpl implements BillService {
 
 	@Override
 	public BillEntity selectOne(String billInfoId) {
-		// TODO Auto-generated method stub
-		return null;
+		return billMapper.selectOne(billInfoId);
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class BillServiceImpl implements BillService {
 
 	@Override
 	public int updateBillInfo(BillEntity billInfo) {
-		return 0;
+		return billMapper.updateBillInfo(billInfo);
 	}
 
 	@Override

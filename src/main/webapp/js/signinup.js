@@ -1,14 +1,12 @@
 $(document).ready(function(){
 	debugger
+	$("#userSignup").hide();
 	var cookieUserName = $.cookie('cookieUserName');
 	var cookieUserPad = $.cookie('cookieUserPad');
 	if(cookieUserName!=null || cookieUserPad!=null){
-		$('#inputName').val(cookieUserName);
-		$('#inputPassword').val(cookieUserPad);
-		signinFun();
+		signinFun2(cookieUserName,cookieUserPad);
 	}else{
 		createCode();
-		$("#userSignup").hide();
 		$("#toSignup").click(function(){
 			$(".pInfo").text("");
 			$("input").val();
@@ -306,6 +304,28 @@ function signinFun(){
 	
 }
 
+function signinFun2(userName,userPassword){
+	$.ajax({
+		url:'/LivePlatform/user/signin.action',
+		type:'post',
+		data:'userName='+userName+'&userPassword='+userPassword,
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			$(".signinSub").removeAttr("disabled");
+			$("#myModal_gifInfo").modal("hide");
+			if(data.info == "error"){
+				createCode();
+				$(".pInfo").text("用户名或者密码错误");
+			}else if(data.info == "false"){
+				createCode();
+				$(".pInfo").text("服务器出错，请稍后再试");
+			}else{
+				window.location.replace("/LivePlatform/index.action");
+			}
+		}
+	});
+}
 function signupFun(){
 	debugger
 	$("#userSignup").ajaxSubmit({

@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	$(".myAlertFail").hide();
 	$(".btnSureDelete").click(relDeleteBill);
+	$(".btnSureUpdate").click(relUpdateBill);
 	ajaxSpendFirstPage();
 });
 //全局变量 默认是 消费 -1 1表示 收入
@@ -37,7 +38,7 @@ function ajaxSpendFirstPage(){
 											+"<td>"+pageInfo[i].billComment+"</td>"
 											+"<td>"+pageInfo[i].strTime+"</td>"
 											+"<td>"
-											+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;)'>"
+											+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;,&quot;"+pageInfo[i].cateNum+"&quot;)'>"
 											+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 											+"</button></a>&nbsp;&nbsp;"
 											+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].billId+"&quot;)'>"
@@ -80,7 +81,7 @@ function ajaxIncomeFirstPage(){
 											+"<td>"+pageInfo[i].billComment+"</td>"
 											+"<td>"+pageInfo[i].strTime+"</td>"
 											+"<td>"
-											+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;)'>"
+											+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;,&quot;"+pageInfo[i].cateNum+"&quot;)'>"
 											+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 											+"</button></a>&nbsp;&nbsp;"
 											+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].billId+"&quot;)'>"
@@ -222,7 +223,7 @@ function ajaxPageData(currentPageNum){
 												+"<td>"+pageInfo[i].billComment+"</td>"
 												+"<td>"+pageInfo[i].strTime+"</td>"
 												+"<td>"
-												+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;)'>"
+												+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;,&quot;"+pageInfo[i].cateNum+"&quot;)'>"
 												+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
 												+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].billId+"&quot;)'>"
@@ -237,7 +238,7 @@ function ajaxPageData(currentPageNum){
 												+"<td>"+pageInfo[i].billComment+"</td>"
 												+"<td>"+pageInfo[i].strTime+"</td>"
 												+"<td>"
-												+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;)'>"
+												+"<a href='#' onclick='sureUpdate(&quot;"+pageInfo[i].billId+"&quot;,&quot;"+pageInfo[i].cateNum+"&quot;)'>"
 												+"<button class='btn btn-warning btn-xs'><i class='fa fa-pencil fa-fw'></i>"
 												+"</button></a>&nbsp;&nbsp;"
 												+"<a href='#' onclick='sureDelete(&quot;"+deleteUrl+pageInfo[i].billId+"&quot;)'>"
@@ -283,11 +284,11 @@ function sureDelete(deleteUrl){
 	$("#myDeleteModal").modal("show");
 }
 
-
+var relUpdateUrl='';
 //myUpdateModal  修改成绩
-function sureUpdate(billId){
+function sureUpdate(billId,cateNum){
 	//先查询数据
-	var updateSearchUrl = "/LivePlatform/bill/showBillDetail.action?billId="+billId;
+	var updateSearchUrl = "/LivePlatform/bill/showBillDetail.action?billId="+billId+"&cateNum="+cateNum;
 	ajaxFun(updateSearchUrl,null,"post",function(data){
 		console.log(data);
 		var time = new Date().getTime();
@@ -302,56 +303,92 @@ function sureUpdate(billId){
 								"<strong>修改失败！</strong>请稍后再试！"+
 							"</div>"+
 							"<div class='col-sm-12'>"+
-								"<form id='updateRecordForm'>"+
+								"<form id='updateBillForm'>"+
 									"<div class='col-sm-6'>"+
-										"<label class='control-label'>课程名称:</label>"+
-										"<input class='form-group form-control updateCourseName' name='courseName' type='text'>"+
-										"<label>学期数:</label>"+
-										"<select name='courseTermNumStr' class='form-control recordTermNum'>"+
-					               			"<option value='第一学期'>第一学期</option>"+
-					               			"<option value='第二学期'>第二学期</option>"+
-					               			"<option value='第三学期'>第三学期</option>"+
-					               			"<option value='第四学期'>第四学期</option>"+
-					               			"<option value='第五学期'>第五学期</option>"+
-					               			"<option value='第六学期'>第六学期</option>"+
-					               			"<option value='第七学期'>第七学期</option>"+
-					               			"<option value='第八学期'>第八学期</option>"+
-					               		"</select>"+
-										"<label class='control-label'>课程分数:</label>"+
-										"<input class='form-group form-control updateRecordNum' name='courseRecord' type='text'>"+
-										"<input type='hidden' class='updateCourseId' name='courseId'>"+
+										"<label class='control-label'>金额/￥(元):</label>"+
+										"<input class='form-group form-control updateBillAmount' name='billAmount' type='text'>"+
 									"</div>"+
 									"<div class='col-sm-6'>"+
-										"<label>课程类别:</label>"+
-										"<select class='form-control form-group updatePhyArtCate' name='coursePhyArtCateName'>"+
-					            			"<option value='文科类'>文科类</option>"+
-					            			"<option value='理科类'>理科类</option>"+
+										"<label class='cateName'></label>"+
+										"<select class='form-control form-group updateCateId' name=''>"+
 					            		"</select>"+
-										"<label>课程性质:</label>"+
-										"<select class='form-control form-group updateMajorCate' name='courseMajorCateName'>"+
-					            			"<option value='必修类'>必修类</option>"+
-					            			"<option value='选修类'>选修类</option>"+
-					            		"</select>"+
+									"</div>"+
+									"<div class='col-sm-12'>" +
+										"<label>备注信息:</label>"+
+										"<textarea rows='6' cols='60' class='form-control updateBillComment' name='billComment' placeholder='请输入备注信息'></textarea>"+
+										"<input type='hidden' class='updateBillId' name='billId'>"+
 									"</div>"+
 					        	"</form>"+
 							"</div>");
 			$(".updatePanelBody").append($html);
 			$(".myAlertUpdateFail").hide();
-			$(".updateCourseName").val(data.object.courseName);
-			$(".updateCourseTermNum").val(data.object.courseTermNumStr);
-			$(".updateRecordNum").val(data.object.courseRecord);
-			$(".updateCourseId").val(data.object.courseId);
-			$(".recordTermNum").val(data.object.courseTermNumStr);
-			$(".updatePhyArtCate").val(data.object.coursePhyArtCateName);
-			$(".updateMajorCate").val(data.object.courseMajorCateName);
+			$(".updateBillId").val(data.object[0].billId);
+			debugger
+			var $cate;
+			var cateStr = '';
+			$(".updateBillAmount").val(data.object[0].billAmount);
+			$(".updateBillComment").val(data.object[0].billComment);
+			if(cateNum==-1){
+				$(".cateName").text("消费类别");
+				$(".updateCateId").attr("name","spendCateId");
+				for(var i=0;i<data.object[1].length;i++){
+					cateStr+="<option value='"+data.object[1][i].spendCateId+"'>"+data.object[1][i].spendCateName+"</option>"
+				}
+				$cate = $(cateStr);
+				$(".updateCateId").html($cate);
+				$(".updateCateId").val(data.object[0].spendCateEntity.spendCateId);
+			}else{
+				$(".cateName").text("收入类别");
+				$(".updateCateId").attr("name","incomeCateId");
+				for(var i=0;i<data.object[1].length;i++){
+					cateStr+="<option value='"+data.object[1][i].incomeCateId+"'>"+data.object[1][i].incomeCateName+"</option>"
+				}
+				$cate = $(cateStr);
+				$(".updateCateId").html($cate);
+				$(".updateCateId").val(data.object[0].incomeCateEntity.incomeCateId);
+			}
+			
 			$("#myUpdateModal").modal("show");
 			
-			relUpdateUrl = "/LivePlatform/record/updateRecord.action?recordId="+recordId;
+			relUpdateUrl = "/LivePlatform/bill/updateBill.action";
 		}
 	},
 	function(error){console.log(error)});
 }
-
+function relUpdateBill(){
+	var inputBillAmount = $(".updateBillAmount").val();
+	if(inputBillAmount==""){
+		layer.msg("请输入金额！",{icon:5});
+	}else if(isNaN(inputBillAmount) || inputBillAmount<0){
+		layer.msg("金额请输入大于0的数字！",{icon:5});
+	}else{
+		$("#updateBillForm").ajaxSubmit({
+			url:relUpdateUrl,
+			type:'post',
+			dataType:'json',
+			success:function(data){
+				$("#myUpdateModal").modal("hide");
+				var time = new Date().getTime();
+				if(data.isLogin=="false"){
+					window.location.href="/LivePlatform/user/signinupUI.action?"+time;
+				}else{
+					if(data.info=="true"){
+						layer.msg("修改成功");
+						if(spendIncome==-1){
+							ajaxSpendFirstPage();
+						}else{
+							ajaxIncomeFirstPage();
+						}
+					}else{
+						layer.msg("修改失败,请稍后再试",{icon:5});
+					}
+				}
+			},
+			error:function(){}
+		});
+	}
+	
+}
 //ajax 函数
 function ajaxFun(parUrl,parData,parType,parSucFun,parErrFun){
 	debugger
