@@ -20,6 +20,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import cn.edu.zhku.pojo.BillEntity;
 import cn.edu.zhku.pojo.IncomeCateEntity;
 import cn.edu.zhku.pojo.JsonReturn;
+import cn.edu.zhku.pojo.MonthSIEntity;
 import cn.edu.zhku.pojo.PagesEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
 import cn.edu.zhku.pojo.UserEntity;
@@ -41,6 +42,16 @@ public class BillController {
 		}
 	}
 	
+	@RequestMapping("analyzeBillUI")
+	public String analyzeBillUI(HttpServletRequest request) {
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+		if(user==null) {
+			return "signinup";
+		}else {
+			return "analyzeBill";
+		}
+	}
+	
 	@RequestMapping("showBillUI")
 	public String showBillUI(HttpServletRequest request) {
 		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
@@ -51,6 +62,57 @@ public class BillController {
 		}
 	}
 	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="anaSpendIncome",method=RequestMethod.POST)
+	@ResponseBody
+	public String anaSpendIncome(String yearNum,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("userId", user.getUserId());
+				map.put("yearNum", yearNum);
+				map.put("cateNum", -1);
+				ArrayList<MonthSIEntity> spendList =  billService.selectMonthSIData(map);
+				map.put("cateNum", 1);
+				ArrayList<MonthSIEntity> incomeList =  billService.selectMonthSIData(map);
+				ArrayList<MonthSIEntity> relSpendList = new ArrayList<MonthSIEntity>();
+				ArrayList<MonthSIEntity> relIncomeList = new ArrayList<MonthSIEntity>();
+				for(int i=0;i<12;i++) {
+					MonthSIEntity msi = new MonthSIEntity();
+					MonthSIEntity msi2 = new MonthSIEntity();
+					msi.setMonthNum(i+1+"");
+					msi.setTotalNum(0f);
+					msi2.setMonthNum(i+1+"");
+					msi2.setTotalNum(0f);
+					relSpendList.add(msi);
+					relIncomeList.add(msi2);
+				}
+				for(int i=0;i<spendList.size();i++) {
+					int mun = Integer.parseInt(spendList.get(i).getMonthNum());
+					relSpendList.get(mun-1).setTotalNum(spendList.get(i).getTotalNum());
+				}
+				for(int i=0;i<incomeList.size();i++) {
+					int mun = Integer.parseInt(incomeList.get(i).getMonthNum());
+					relIncomeList.get(mun-1).setTotalNum(incomeList.get(i).getTotalNum());
+				}
+				
+				Map<String,Object> sIMap = new HashMap<String,Object>();
+				sIMap.put("spendList", relSpendList);
+				sIMap.put("incomeList", relIncomeList);
+				jr.setObject(sIMap);
+				jr.setInfo("true");
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr,SerializerFeature.DisableCircularReferenceDetect);
+		}
+	}
 	
 	@SuppressWarnings("finally")
 	@RequestMapping(value="showBillInfoPage",method=RequestMethod.POST)
@@ -155,7 +217,7 @@ public class BillController {
 	}
 
 	@SuppressWarnings("finally")
-	@RequestMapping(value="	updateBill",method=RequestMethod.POST)
+	@RequestMapping(value="updateBill",method=RequestMethod.POST)
 	@ResponseBody
 	public String updateBill(BillEntity billEntity,HttpServletRequest request) {
 		JsonReturn jr = new JsonReturn();

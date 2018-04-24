@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cn.edu.zhku.pojo.BillEntity;
 import cn.edu.zhku.pojo.IncomeCateEntity;
+import cn.edu.zhku.pojo.MonthSIEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
 
 public interface BillService {
@@ -34,4 +35,6 @@ public interface BillService {
 	public ArrayList<IncomeCateEntity> selectAllIncomeCate();
 
 	public Integer userBillTotalNum(String userId, String cateNum);
+
+	public ArrayList<MonthSIEntity> selectMonthSIData(Map<String, Object> map);
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cn.edu.zhku.pojo.BillEntity;
 import cn.edu.zhku.pojo.IncomeCateEntity;
+import cn.edu.zhku.pojo.MonthSIEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
 
 public interface BillMapper {
@@ -27,4 +28,6 @@ public interface BillMapper {
 	public ArrayList<IncomeCateEntity> selectAllIncomeCate();
 
 	public Integer selectBillTotalNum(Map<String, Object> map);
+
+	public ArrayList<MonthSIEntity> selectMonthSIData(Map<String, Object> map);
 }

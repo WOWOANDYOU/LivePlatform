@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import cn.edu.zhku.mapper.BillMapper;
 import cn.edu.zhku.pojo.BillEntity;
 import cn.edu.zhku.pojo.IncomeCateEntity;
+import cn.edu.zhku.pojo.MonthSIEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
 @Service
 public class BillServiceImpl implements BillService {
@@ -71,6 +72,11 @@ public class BillServiceImpl implements BillService {
 		int cateNumber = Integer.parseInt(cateNum);
 		map.put("cateNum", cateNumber);
 		return billMapper.selectBillTotalNum(map);
+	}
+
+	@Override
+	public ArrayList<MonthSIEntity> selectMonthSIData(Map<String, Object> map) {
+		return billMapper.selectMonthSIData(map);
 	}
 
 }

@@ -28,6 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id column="income_cate_id" jdbcType="VARCHAR" property="incomeCateId" />
 	    <result column="income_cate_name" jdbcType="VARCHAR" property="incomeCateName" />
 	</resultMap>
+	
+	<resultMap type="cn.edu.zhku.pojo.MonthSIEntity" id="monthSIResultMap">
+		<result column="monthNum" jdbcType="VARCHAR" property="monthNum"/>
+		<result column="totalNum" jdbcType="FLOAT" property="totalNum"/>
+	</resultMap>
 	<sql id="Base_Column_List">
 		bill_id,bill_amount,bill_date,bill_comment,spend_cate_id,income_cate_id,user_id,cate_num
 	</sql>
@@ -98,4 +103,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		bill_id=#{billId,jdbcType=VARCHAR}
 	</update>
+	
+	<select id="selectMonthSIData" parameterType="java.util.Map" resultMap="monthSIResultMap">
+		SELECT
+			MONTH(bill_date) AS 'monthNum',
+			SUM(bill_amount) AS 'totalNum'
+		FROM
+			t_bill
+		WHERE
+			user_id = #{userId,jdbcType=VARCHAR}
+		AND YEAR(bill_date) = #{yearNum,jdbcType=VARCHAR}
+		AND cate_num = #{cateNum,jdbcType=INTEGER}
+		GROUP BY MONTH(bill_date)
+	</select>
 </mapper>
