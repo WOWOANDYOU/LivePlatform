@@ -64,7 +64,7 @@ function ajaxYearLevel(yearNum,majorType){
 			         innerSize: 100,
 			         depth: 45
 			      }
-			   };   
+			   }; 
 			   var relData = [{name:'优秀',y:data.object.aLevel},{name:'良好',y:data.object.bLevel},{name:'中等',y:data.object.cLevel},{name:'不及格',y:data.object.dLevel}];
 			   var series= [{
 			         name: '成绩等级比例',

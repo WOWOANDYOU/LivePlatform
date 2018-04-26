@@ -25,7 +25,8 @@
 
     <!-- Custom Fonts -->
     <link href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+	
+	<link href="/LivePlatform/css/bootstrap/3.3.6/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -169,12 +170,36 @@
 	            	相同类相加 >12就变成2行
 	            -->
 	                <div class="col-lg-9">
-	                	<div class="panel panel-info">
-	                		<div class="panel-heading"><i class="fa fa-bar-chart-o fa-fw"></i>年度收支图表统计
-	                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	选择年份：
+	                	<div class="panel panel-info panelChange">
+	                		<div class="panel-heading">
+	                			<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	选择年份：
 							  	<button class="btn btn-default btnYearSub"><span class="glyphicon glyphicon-chevron-left"></span></button>
 							  	 <font style="color: #009fe8; font-size: 18px;"><b class="yearNumClass"></b></font>
 							  	<button class="btn btn-default btnYearAdd"><span class="glyphicon glyphicon-chevron-right"></span></button>
+							  	 -->
+							  	<i class="fa fa-bar-chart-o fa-fw"></i>年度收支图表统计
+							  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								选择年份:
+							  	<div class="input-group date form_datetime col-md-2" style="position: absolute; left:32%;top:1%;" data-date="2018" data-date-format="yyyy" data-link-field="dtp_input1">
+				                    <input class="form-control yearNumInput" size="16" type="text" value="2018" readonly onChange="yearChange()">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+				                </div>
+							  	<div class="pull-right">选择类型：
+	                                <div class="btn-group">
+	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                       	<span value="all" class="span-type-text">收支曲线</span>
+	                                        <span class="caret"></span>
+	                                    </button>
+	                                    <ul class="dropdown-menu pull-right" role="menu">
+	                                        <li><a href="javascript:;" onclick="topPieLineChange('line')">收支曲线</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="javascript:;" onclick="topPieLineChange('pie')">收支比重</a>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+							  	
 	                		</div>
 	                		<div class="panel-body yearAnaTop">
 	                			<div class="alert alert-warning myAlertFail">
@@ -206,6 +231,11 @@
 	                                            <small class="pull-right text-muted">
 	                                                <i class="fa fa-clock-o fa-fw"></i>
 	                                            </small>
+	                                            <br>
+	                                            <strong class="primary-font tellrelIncomeTitle">净收入：<font style="color:green"></font></strong>
+	                                            <small class="pull-right text-muted">
+	                                                <i class="fa fa-clock-o fa-fw"></i>
+	                                            </small>
 	                                        </div>
 	                                        
 	                                    </div>
@@ -216,91 +246,19 @@
 	                </div>
                 </div> <!-- row -->
                 <div class="row">
-	                <div class="col-lg-4">
-	                	<div class="panel panel-warning">
-	                    	<div class="panel-heading">温馨提示</div>
-	                    	<div class="panel-body">
-		                       <ul class="chat">
-	                                <li class="left clearfix">
-	                                    <span class="chat-img pull-left">
-	                                        <img src="/LivePlatform/images/fff2.png" alt="User Avatar" class="img-circle" />
-	                                    </span>
-	                                    <div class="chat-body clearfix">
-	                                        <div class="header">
-	                                            <strong class="primary-font">文理、必修选修分析</strong>
-	                                            <small class="pull-right text-muted">
-	                                                <i class="fa fa-clock-o fa-fw"></i> 
-	                                            </small>
-	                                        </div>
-	                                        <p>
-	                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-	                                        </p>
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                    	</div>
-	                    </div>
-	                </div>
-	                <div class="col-lg-8">
-	                	<div class="panel panel-default">
-	                		<div class="panel-heading">
-	                			<i class="fa fa-bar-chart-o fa-fw"></i>成绩统计
-	                			<div class="pull-right">
-	                                <div class="btn-group">
-	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-	                                       	<span value="all" class="span-major-text">所有学科</span>
-	                                        <span class="caret"></span>
-	                                    </button>
-	                                    <ul class="dropdown-menu pull-right" role="menu">
-	                                        <li><a href="javascript:;" onclick="majorSelectChange('必修类')">必修类</a>
-	                                        </li>
-	                                        <li><a href="javascript:;" onclick="majorSelectChange('选修类')">选修类</a>
-	                                        </li>
-	                                        <li class="divider"></li>
-	                                        <li><a href="javascript:;" onclick="majorSelectChange('所有学科')">所有学科</a>
-	                                        </li>
-	                                    </ul>
-	                                   
-	                                </div>
-	                            </div>
-	                            <div class="pull-right">&nbsp;</div>
-	                            <div class="pull-right">
-	                                <div class="btn-group">
-	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-	                                       	<span value="1" class="span-year-text">第一学年</span>
-	                                        <span class="caret"></span>
-	                                    </button>
-	                                    <ul class="dropdown-menu pull-right" role="menu">
-	                                        <li><a href="javascript:;" onclick="yearSelectChange('第一学年')">第一学年</a>
-	                                        </li>
-	                                        <li><a href="javascript:;" onclick="yearSelectChange('第二学年')">第二学年</a>
-	                                        </li>
-	                                        <li><a href="javascript:;" onclick="yearSelectChange('第三学年')">第三学年</a>
-	                                        </li>
-	                                        <li><a href="javascript:;" onclick="yearSelectChange('第四学年')">第四学年</a>
-	                                        </li>
-	                                        <li class="divider"></li>
-	                                        <li><a href="javascript:;" onclick="yearSelectChange('所有学年')">所有学年</a>
-	                                        </li>
-	                                    </ul>
-	                                    <!-- <select class="form-control selectYearNum" style="height:32px;" onchange="selectChange()">
-	                                        	<option value="1">第一学年</option>
-	                                        	<option value="2">第二学年</option>
-	                                        	<option value="3">第三学年</option>
-	                                        	<option value="4">第四学年</option>
-	                                        	<option value="5">所有学年</option>
-	                                     </select> -->
-	                                </div>
-	                            </div>
+	                <div class="col-lg-6">
+	                	<div class="panel panel-success">
+	                		<div class="panel-heading">收入比重</div>
+	                		<div class="panel-body">
+	                			
 	                		</div>
-	                		<!-- panel heading -->
-	                		<div class="panel-body anaYearMajorType">
-	                			<div class="alert alert-warning myAlertFail2">
-										<a href="#" class="close" data-dismiss="alert">
-											&times;
-										</a>
-										<strong>出错了我！</strong>操作失败，请稍后再试。
-								</div>
+	                	</div>
+	                </div>
+	                <div class="col-lg-6">
+	                <div class="panel panel-danger">
+	                		<div class="panel-heading">支出比重</div>
+	                		<div class="panel-body">
+	                			
 	                		</div>
 	                	</div>
 	                </div>
@@ -332,6 +290,7 @@
 	<script type="text/javascript" src="/LivePlatform/js/highcharts.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/highcharts-3d.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/analyzeBill.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/bootstrap/3.3.6/bootstrap-datetimepicker.js"></script>
 </body>
 
 </html>
