@@ -1,9 +1,11 @@
 package cn.edu.zhku.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import cn.edu.zhku.pojo.BillEntity;
+import cn.edu.zhku.pojo.CatePie;
 import cn.edu.zhku.pojo.IncomeCateEntity;
 import cn.edu.zhku.pojo.MonthSIEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
@@ -37,4 +39,6 @@ public interface BillService {
 	public Integer userBillTotalNum(String userId, String cateNum);
 
 	public ArrayList<MonthSIEntity> selectMonthSIData(Map<String, Object> map);
+
+	public List<CatePie> selectCatePie(Map<String, Object> map);
 }

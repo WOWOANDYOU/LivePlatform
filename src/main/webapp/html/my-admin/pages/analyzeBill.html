@@ -180,10 +180,11 @@
 							  	<i class="fa fa-bar-chart-o fa-fw"></i>年度收支图表统计
 							  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								选择年份:
-							  	<div class="input-group date form_datetime col-md-2" style="position: absolute; left:32%;top:1%;" data-date="2018" data-date-format="yyyy" data-link-field="dtp_input1">
+							  	<div class="input-group date spendIncome_dateTime col-md-2" style="position: absolute; left:32%;top:1%;" data-date="2018" data-date-format="yyyy" data-link-field="dtp_input1">
 				                    <input class="form-control yearNumInput" size="16" type="text" value="2018" readonly onChange="yearChange()">
 									<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 				                </div>
+				                
 							  	<div class="pull-right">选择类型：
 	                                <div class="btn-group">
 	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -246,22 +247,101 @@
 	                </div>
                 </div> <!-- row -->
                 <div class="row">
+                	<div class="col-lg-6">
+	                	<div class="panel panel-warning">
+	                		<div class="panel-heading">支出比重
+	                			&nbsp;&nbsp;&nbsp;&nbsp;
+	                			<span class='chooseYear'>
+					                <span>选择年份:</span>
+								  	<div class="input-group date spend_date_yearType col-md-2" style="position: absolute; left:34%;top:0.8%;width:25%;" data-date="2018" data-date-format="yyyy" data-link-field="dtp_input1">
+					                    <input class="form-control yearNumSpendInput" size="16" type="text" value="2018" readonly onChange="timeSpendChange(this)">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+				                </span>
+				                
+				                <span class='chooseYearMonth'>
+					                <span>选择年月:</span>
+								  	<div class="input-group date spend_date_monthType col-md-2" style="position: absolute; left:34%;top:0.8%;width:25%;" data-date="2018-4" data-date-format="yyyy-m" data-link-field="dtp_input1">
+					                    <input class="form-control yearMonNumSpendInput" size="16" type="text" value="2018" readonly onChange="timeSpendChange(this)">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+				                </span>
+				                
+				                <span class='chooseYearMonthDay'> 
+					                <span>选择年月日:</span>
+								  	<div class="input-group date spend_date_dayType col-md-2" style="position: absolute; left:36%;top:0.8%;width:26%;" data-date="2018-5-1" data-date-format="yyyy-m-d" data-link-field="dtp_input1">
+					                    <input class="form-control yearMonDayNumSpendInput" size="16" type="text" value="2018" readonly onChange="timeSpendChange(this)">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+				                </span>
+				                
+				                
+				                <div class="pull-right">选择时间类型:
+	                                <div class="btn-group">
+	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                       	<span value="all" class="span-Timetype-text">年份类</span>
+	                                        <span class="caret"></span>
+	                                    </button>
+	                                    <ul class="dropdown-menu pull-right" role="menu">
+	                                    	<li><a href="javascript:;" onclick="leftPieTimeChange('年份类')">年份类</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="javascript:;" onclick="leftPieTimeChange('年月类')">年月类</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="javascript:;" onclick="leftPieTimeChange('年月日类')">年月日类</a>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                		</div>
+	                		<div class="panel-body spendCatePie">
+	                			
+	                		</div>
+	                	</div>
+	                </div>
+	                
 	                <div class="col-lg-6">
 	                	<div class="panel panel-success">
-	                		<div class="panel-heading">收入比重</div>
-	                		<div class="panel-body">
+	                		<div class="panel-heading">收入比重
+	                			&nbsp;&nbsp;&nbsp;&nbsp;
+	                			<span class="incomeYearCate">
+		                			<span>选择年份:</span>
+								  	<div class="input-group date income_dateTime col-md-2" style="position: absolute; left:32%;top:0.8%;width:24%;" data-date="2018" data-date-format="yyyy" data-link-field="dtp_input1">
+					                    <input class="form-control yearIncomeNumInput" size="16" type="text" value="2018" readonly onChange="timeIncomeChange(this)">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+					            </span>
+					            <span class="incomeYearMonCate">
+					                <span>选择年月:</span><!-- monthIncomeNumInput -->
+					                <div class="input-group date col-md-2 form_dateMon" style="position: absolute; left:32%;top:0.8%;width:24%;" data-date="" data-date-format="yyyy-m" data-link-field="dtp_input1">
+					                    <input class="form-control yearMonIncomeNumInput" size="16" type="text" value="" readonly onChange="timeIncomeChange(this)">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+				                </span>
+				                <div class="pull-right">选择时间类型:
+	                                <div class="btn-group">
+	                                	<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                       	<span value="all" class="span-incomeTimetype-text">年份类</span>
+	                                        <span class="caret"></span>
+	                                    </button>
+	                                    <ul class="dropdown-menu pull-right" role="menu">
+	                                    	<li><a href="javascript:;" onclick="rightPieTimeChange('年份类')">年份类</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="javascript:;" onclick="rightPieTimeChange('年月类')">年月类</a>
+	                                        </li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+				                
+	                		</div>
+	                		<div class="panel-body incomeCatePie">
 	                			
 	                		</div>
 	                	</div>
 	                </div>
-	                <div class="col-lg-6">
-	                <div class="panel panel-danger">
-	                		<div class="panel-heading">支出比重</div>
-	                		<div class="panel-body">
-	                			
-	                		</div>
-	                	</div>
-	                </div>
+	                
 	            </div>
 	            <!-- /.row -->
         </div>
@@ -291,6 +371,7 @@
 	<script type="text/javascript" src="/LivePlatform/js/highcharts-3d.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/analyzeBill.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/bootstrap/3.3.6/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/layer/layer.js"></script>
 </body>
 
 </html>

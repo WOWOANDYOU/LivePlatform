@@ -33,6 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="monthNum" jdbcType="VARCHAR" property="monthNum"/>
 		<result column="totalNum" jdbcType="FLOAT" property="totalNum"/>
 	</resultMap>
+	
+	<resultMap type="cn.edu.zhku.pojo.CatePie" id="catePieResultMap">
+		<result column="cateName" jdbcType="VARCHAR" property="cateName"/>
+		<result column="totalNum" jdbcType="FLOAT" property="totalNum"/>
+	</resultMap>
 	<sql id="Base_Column_List">
 		bill_id,bill_amount,bill_date,bill_comment,spend_cate_id,income_cate_id,user_id,cate_num
 	</sql>
@@ -103,6 +108,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		bill_id=#{billId,jdbcType=VARCHAR}
 	</update>
+	
+	<select id="selectIncomeCatePie" parameterType="java.util.Map" resultMap="catePieResultMap">
+		SELECT
+			income_cate_name AS 'cateName',
+			T.totalNum
+		FROM
+			(
+				SELECT
+					income_cate_id AS 'incomeCateId',
+					sum(bill_amount) AS 'totalNum'
+				FROM
+					t_bill
+				WHERE
+					user_id = #{userId,jdbcType=VARCHAR}
+				AND cate_num = #{cateNum,jdbcType=INTEGER}
+				<if test="year!=null">
+					AND YEAR (bill_date) = #{year,jdbcType=VARCHAR}
+				</if>
+				<if test="month!=null">
+					AND MONTH (bill_date) = #{month,jdbcType=VARCHAR}
+				</if>
+				<if test="day!=null">
+					AND DAY (bill_date) = #{day,jdbcType=VARCHAR}
+				</if>
+				GROUP BY
+					income_cate_id
+			) T,
+			t_income_cate
+		WHERE
+			T.incomeCateId = income_cate_id;
+	</select>
+	
+	<select id="selectSpendCatePie" parameterType="java.util.Map" resultMap="catePieResultMap">
+		SELECT
+			spend_cate_name AS 'cateName',
+			T.totalNum
+		FROM
+			(
+				SELECT
+					spend_cate_id AS 'spendCateId',
+					sum(bill_amount) AS 'totalNum'
+				FROM
+					t_bill
+				WHERE
+					user_id = #{userId,jdbcType=VARCHAR}
+				AND cate_num =#{cateNum,jdbcType=INTEGER}
+				<if test="year!=null">
+					AND YEAR (bill_date) = #{year,jdbcType=VARCHAR}
+				</if>
+				<if test="month!=null">
+					AND MONTH (bill_date) = #{month,jdbcType=VARCHAR}
+				</if>
+				<if test="day!=null">
+					AND DAY (bill_date) = #{day,jdbcType=VARCHAR}
+				</if>
+				GROUP BY
+					spend_cate_id
+			) T,
+			t_spend_cate
+		WHERE
+			T.spendCateId = spend_cate_id;
+	</select>
 	
 	<select id="selectMonthSIData" parameterType="java.util.Map" resultMap="monthSIResultMap">
 		SELECT

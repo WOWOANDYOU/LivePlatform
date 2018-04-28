@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.zhku.mapper.BillMapper;
 import cn.edu.zhku.pojo.BillEntity;
+import cn.edu.zhku.pojo.CatePie;
 import cn.edu.zhku.pojo.IncomeCateEntity;
 import cn.edu.zhku.pojo.MonthSIEntity;
 import cn.edu.zhku.pojo.SpendCateEntity;
@@ -77,6 +79,16 @@ public class BillServiceImpl implements BillService {
 	@Override
 	public ArrayList<MonthSIEntity> selectMonthSIData(Map<String, Object> map) {
 		return billMapper.selectMonthSIData(map);
+	}
+
+	@Override
+	public List<CatePie> selectCatePie(Map<String, Object> map) {
+		if((Integer)map.get("cateNum")==1) {
+			return billMapper.selectIncomeCatePie(map);
+		}else {
+			return billMapper.selectSpendCatePie(map);
+		}
+		
 	}
 
 }

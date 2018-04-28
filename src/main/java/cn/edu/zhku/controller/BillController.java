@@ -3,6 +3,7 @@ package cn.edu.zhku.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.edu.zhku.pojo.BillEntity;
+import cn.edu.zhku.pojo.CatePie;
 import cn.edu.zhku.pojo.IncomeCateEntity;
 import cn.edu.zhku.pojo.JsonReturn;
 import cn.edu.zhku.pojo.MonthSIEntity;
@@ -105,6 +107,37 @@ public class BillController {
 				sIMap.put("incomeList", relIncomeList);
 				jr.setObject(sIMap);
 				jr.setInfo("true");
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr,SerializerFeature.DisableCircularReferenceDetect);
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="anaSpendIncomePie",method=RequestMethod.POST)
+	@ResponseBody
+	public String anaSpendIncomePie(String dateStr,String cateNum,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				Integer cateNumber = Integer.parseInt(cateNum);
+				String [] timeArr = dateStr.split("-");
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("year", timeArr[0]);
+				map.put("month", timeArr.length==2?timeArr[1]:null);
+				map.put("day", timeArr.length==3?timeArr[2]:null);
+				map.put("userId", user.getUserId());
+				map.put("cateNum",cateNumber);
+				
+				List<CatePie> pielist = billService.selectCatePie(map);
+				jr.setInfo("true");
+				jr.setObject(pielist);
 			}
 		}catch(Exception e) {
 			jr.setInfo("false");
