@@ -30,17 +30,6 @@ $(document)
 						showMeridian : 1
 					});
 
-					$('.income_dateTime').datetimepicker({
-						// language: 'fr',
-						weekStart : 1,
-						todayBtn : 1,
-						autoclose : 1,
-						todayHighlight : 1,
-						startView : 4,
-						minView : 4,
-						forceParse : 0,
-						showMeridian : 1
-					});
 
 					$('.spend_date_yearType').datetimepicker({
 						weekStart : 1,
@@ -77,6 +66,18 @@ $(document)
 						showMeridian : 1
 					});
 
+					$('.income_dateTime').datetimepicker({
+						// language: 'fr',
+						weekStart : 1,
+						todayBtn : 1,
+						autoclose : 1,
+						todayHighlight : 1,
+						startView : 4,
+						minView : 4,
+						forceParse : 0,
+						showMeridian : 1
+					});
+					
 					$('.form_dateMon').datetimepicker({
 						language : 'zh-CN',
 						weekStart : 1,

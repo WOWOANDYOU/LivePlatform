@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.mapper.UnusedMapper">
+	<resultMap type="cn.edu.zhku.pojo.GoodEntity" id="BaseResultMap">
+		<id column="good_id" jdbcType="VARCHAR" property="goodId" />
+	    <result column="good_title" jdbcType="VARCHAR" property="goodTitle" />
+	    <result column="good_price" jdbcType="FLOAT" property="goodPrice" />
+	    <result column="good_up_time" jdbcType="TIMESTAMP" property="goodUpTime" />
+	    <result column="good_user_id" jdbcType="VARCHAR" property="goodUserId" />
+	    <result column="good_cate" jdbcType="INTEGER" property="goodCate" />
+	    <result column="good_img_path" jdbcType="VARCHAR" property="goodImgPath" />
+	    <result column="good_content" jdbcType="VARCHAR" property="goodContent" />
+	   		
+	    <!-- <association column="spend_cate_id" jdbcType="VARCHAR" property="spendCateEntity"
+	            select="cn.edu.zhku.mapper.SpendCateMapper.selectByPrimaryKey" />
+	    <association column="income_cate_id" jdbcType="VARCHAR" property="incomeCateEntity"
+	            select="cn.edu.zhku.mapper.IncomeCateMapper.selectByPrimaryKey" /> -->
+	</resultMap>
+	
+	<!-- <resultMap type="cn.edu.zhku.pojo.SpendCateEntity" id="spendCateResultMap">
+		<id column="spend_cate_id" jdbcType="VARCHAR" property="spendCateId" />
+	    <result column="spend_cate_name" jdbcType="VARCHAR" property="spendCateName" />
+	</resultMap>
+	
+	<resultMap type="cn.edu.zhku.pojo.IncomeCateEntity" id="incomeCateResultMap">
+		<id column="income_cate_id" jdbcType="VARCHAR" property="incomeCateId" />
+	    <result column="income_cate_name" jdbcType="VARCHAR" property="incomeCateName" />
+	</resultMap>
+	
+	<resultMap type="cn.edu.zhku.pojo.MonthSIEntity" id="monthSIResultMap">
+		<result column="monthNum" jdbcType="VARCHAR" property="monthNum"/>
+		<result column="totalNum" jdbcType="FLOAT" property="totalNum"/>
+	</resultMap>
+	
+	<resultMap type="cn.edu.zhku.pojo.CatePie" id="catePieResultMap">
+		<result column="cateName" jdbcType="VARCHAR" property="cateName"/>
+		<result column="totalNum" jdbcType="FLOAT" property="totalNum"/>
+	</resultMap> -->
+	
+	<sql id="Base_Column_List">
+		good_id,good_title,good_price,good_up_time,good_user_id,good_cate,good_img_path,good_content
+	</sql>
+	
+	<insert id="addGoodInfo" parameterType="GoodEntity">
+		insert into 
+		t_good(good_id,good_title,good_price,good_up_time,good_user_id,good_cate,good_img_path,good_content)
+		values(#{goodId,jdbcType=VARCHAR},#{goodTitle,jdbcType=VARCHAR},#{goodPrice,jdbcType=FLOAT},
+				#{goodUpTime,jdbcType=TIMESTAMP},
+				#{goodUserId,jdbcType=VARCHAR},#{goodCate,jdbcType=INTEGER},#{goodImgPath,jdbcType=VARCHAR},
+				#{goodContent,jdbcType=VARCHAR})
+	</insert>
+
+	
+	
+	
+	
+	<!-- 查总数 -->
+	<select id="selectBillTotalNum" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from t_bill where user_id=#{userId,jdbcType=VARCHAR} and cate_num=#{cateNum,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 分页查询数据 -->
+	<select id="selectUserBillPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/> 
+		from t_bill 
+		where user_id=#{userId,jdbcType=VARCHAR} and cate_num=#{cateNum,jdbcType=INTEGER}
+		order by bill_date desc
+		limit #{start,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
+	</select>
+	
+	<delete id="deleteBillInfo" parameterType="java.lang.String">
+		delete from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="selectOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>
