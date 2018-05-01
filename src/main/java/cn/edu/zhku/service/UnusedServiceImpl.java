@@ -29,7 +29,7 @@ public class UnusedServiceImpl implements UnusedService {
 
 	@Override
 	public ArrayList<GoodEntity> selectPageGoodInfo(Map map) {
-		return null;
+		return unUsedMapper.selectPageGoodInfo(map);
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class UnusedServiceImpl implements UnusedService {
 	@Override
 	public GoodEntity selectOne(String goodId) {
 		return null;
+	}
+
+	@Override
+	public Integer userGoodInfoTotalNum(String userId) {
+		return unUsedMapper.selectUserGoodInfoTotal(userId);
 	}
 
 }

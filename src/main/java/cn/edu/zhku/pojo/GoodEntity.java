@@ -11,7 +11,15 @@ public class GoodEntity {
 	private Integer goodCate;//闲置商品的分类 只卖  书籍类 以及 生活工具类 1表示 书籍  0表示 其他生活工具类
 	private String goodImgPath;//商品 图片路径 位置
 	private String goodUserId;
+	private String strTime;
 	
+	
+	public String getStrTime() {
+		return strTime;
+	}
+	public void setStrTime(String strTime) {
+		this.strTime = strTime;
+	}
 	public String getGoodUserId() {
 		return goodUserId;
 	}

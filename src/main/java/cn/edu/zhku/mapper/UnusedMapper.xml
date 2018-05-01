@@ -52,23 +52,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{goodContent,jdbcType=VARCHAR})
 	</insert>
 
-	
-	
-	
-	
 	<!-- 查总数 -->
-	<select id="selectBillTotalNum" parameterType="java.util.Map" resultType="java.lang.Integer">
-		select count(*) from t_bill where user_id=#{userId,jdbcType=VARCHAR} and cate_num=#{cateNum,jdbcType=INTEGER}
+	<select id="selectUserGoodInfoTotal" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from t_good where good_user_id=#{userId,jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 分页查询数据 -->
-	<select id="selectUserBillPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+	<select id="selectPageGoodInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List"/> 
-		from t_bill 
-		where user_id=#{userId,jdbcType=VARCHAR} and cate_num=#{cateNum,jdbcType=INTEGER}
-		order by bill_date desc
+		from t_good 
+		where good_user_id=#{userId,jdbcType=VARCHAR}
+		order by good_up_time desc
 		limit #{start,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
 	</select>
+	
+	
 	
 	<delete id="deleteBillInfo" parameterType="java.lang.String">
 		delete from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}

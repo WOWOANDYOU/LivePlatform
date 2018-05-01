@@ -15,4 +15,6 @@ public interface UnusedService {
 	public int updateGoodInfo(GoodEntity goodInfo);
 	
 	public GoodEntity selectOne(String goodId);
+
+	public Integer userGoodInfoTotalNum(String userId);
 }

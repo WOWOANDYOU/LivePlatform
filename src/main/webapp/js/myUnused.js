@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	firstFonMyGoodFun();
 	$('.btnAddGoodInfo').click(function(){
 		$('#myAddInfoModal').modal('show');
 	});
@@ -8,6 +9,23 @@ $(document).ready(function(){
 		$('.imgAll ul').html("");
 	});
 });
+var currentPageJ = 1;//默认当前第一页
+function firstFonMyGoodFun(){
+	ajaxFun('/LivePlatform/unused/findMyGoodInfo.action','currentPage='+currentPageJ,'post',function(data){
+		console.log(data);
+		var time = new Date().getTime();
+		if(data.isLogin=="false"){
+			window.localtion.href="/LivePlatform/user/signinupUI.action?"+time;
+		}else{
+			if(data.info=="false"){
+				layer.msg("查询数据失败，请稍后再试！",{icon:5});
+			}else{
+				
+			}
+		}
+	},
+	function(error){});
+}
 function beforeAddInfo(){
 	var title = $('.inputTitle').val();
 	var inputGoodPrice = $('.inputGoodPrice').val();
@@ -48,5 +66,52 @@ function addGoodInfo(){
 		error:function(error){
 			
 		}
+	});
+}
+function clickTitle(title){
+	debugger
+	var before = title.nextElementSibling;
+	var after = before.nextElementSibling;
+	var close = title.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[5];
+	before.style.display="none";
+	after.style.display="block";
+	close.style.display="block";
+}
+function clickBefore(change){
+	debugger
+	var d_before = change;
+	var d_after = d_before.nextElementSibling;
+	var d_readLess = change.nextElementSibling.nextElementSibling.childNodes[5];
+
+	d_before.style.display = "none";
+	d_after.style.display = "block";
+	d_readLess.style.display = "block";
+}
+function clickAfter(change){
+	debugger
+	var d_after = change.parentElement.parentElement.previousElementSibling;
+	var d_before = d_after.previousElementSibling;
+	d_after.style.display="none";
+	//$('.btn-readLess').css("display","none");
+	change.parentElement.style.display = "none";
+	d_before.style.display="block";
+}
+function clickDownComment(btn){
+	var btnPN = btn.parentElement.nextElementSibling;
+	btnPN.style.display = "block";
+}
+function clickUpComment(btn){
+	btn.parentElement.style.display="none";
+	
+}
+function ajaxFun(parUrl,parData,parType,succFun,errorFun){
+	debugger
+	$.ajax({
+		url:parUrl,
+		type:parType,
+		data:parData,
+		dataType:'json',
+		success:succFun,
+		error:errorFun
 	});
 }

@@ -16,5 +16,7 @@ public interface UnusedMapper {
 	public int updateGoodInfo(GoodEntity goodInfo);
 	
 	public GoodEntity selectOne(String goodId);
+
+	public Integer selectUserGoodInfoTotal(String userId);
 	
 }
