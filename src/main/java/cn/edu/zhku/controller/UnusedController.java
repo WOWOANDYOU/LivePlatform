@@ -71,11 +71,14 @@ public class UnusedController {
 					}
 					String realPath = "E:\\java2018\\images\\";
 					String realImgPath[] = new String[file.length];
+					String picPath1 = "\\images\\";
 					String picPath = "";
 					for (int i = 0; i < file.length; i++) {
 						String uuid = UUID.randomUUID().toString();
 						realImgPath[i] = realPath + uuid + "." + type[i];
-						picPath += realImgPath[i] + ",";
+						picPath1 += uuid + "." + type[i];
+						picPath += picPath1 + ",";
+						picPath1 = "\\images\\";
 					}
 					picPath = picPath.substring(0, picPath.length() - 1);
 					good.setGoodImgPath(picPath);

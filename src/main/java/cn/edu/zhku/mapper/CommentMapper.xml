@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.zhku.mapper.CommentMapper">
+	<resultMap type="cn.edu.zhku.pojo.CommentEntity" id="BaseResultMap">
+		<id column="comment_id" jdbcType="VARCHAR" property="commentId" />
+	    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+	    <result column="comment_good_id" jdbcType="TIMESTAMP" property="commentGoodId" /> 
+	    <result column="comment_from_user_id" jdbcType="VARCHAR" property="commentFromUserId" />
+	    <result column="comment_to_user_id" jdbcType="VARCHAR" property="commentToUserId" />
+	    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+	   		
+	    <!-- <association column="spend_cate_id" jdbcType="VARCHAR" property="spendCateEntity"
+	            select="cn.edu.zhku.mapper.SpendCateMapper.selectByPrimaryKey" />
+	    <association column="income_cate_id" jdbcType="VARCHAR" property="incomeCateEntity"
+	            select="cn.edu.zhku.mapper.IncomeCateMapper.selectByPrimaryKey" /> -->
+	</resultMap>
+	
+	
+	<sql id="Base_Column_List">
+		comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time
+	</sql>
+	
+	<insert id="addCommentInfo" parameterType="CommentEntity">
+		insert into 
+		t_comment(comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time)
+		values(#{commentId,jdbcType=VARCHAR},#{commentContent,jdbcType=VARCHAR},#{commentGoodId,jdbcType=VARCHAR},
+				#{commentFromUserId,jdbcType=VARCHAR},#{commentToUserId,jdbcType=VARCHAR},#{commentTime,jdbcType=TIMESTAMP})
+	</insert>
+
+</mapper>

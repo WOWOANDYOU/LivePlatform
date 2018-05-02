@@ -10,6 +10,14 @@ public class CommentEntity {
 	private String commentFromUserId;//发起评论的人的id
 	private String commentToUserId;//接受评论的人的id
 	private Date commentTime;
+	private String strTime;
+	
+	public String getStrTime() {
+		return strTime;
+	}
+	public void setStrTime(String strTime) {
+		this.strTime = strTime;
+	}
 	public String getCommentId() {
 		return commentId;
 	}
