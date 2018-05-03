@@ -165,8 +165,8 @@
             </div>
             <!-- /.row -->
             <span class="myGoodInfoBody">
-	            <div class="row"> 
-	            	<div class="col-lg-10" style="border:solid 1px #ccc;margin:10px auto;border-radius:4px;">
+	           <!--  <div class="row">  -->
+	            	<!-- <div class="col-lg-10" style="border:solid 1px #ccc;margin:10px auto;border-radius:4px;">
 	            		<div class="col-lg-12 my-col-class" onclick="clickTitle(this)">
 	            			<h4 style="padding-left:8px;"><strong>华为P20滴血出让生活就像海洋只有意志坚强的人才能到达彼岸</strong></h4>
 	            		</div>
@@ -210,31 +210,29 @@
 							</div>
 							<div class="col-lg-5" style="color:#8590a6;font-size:15px;margin-bottom: 10px;">发布于 2018年4月31日  9:29:34</div>
 						</div>
-						<!-- afterBody -->
+						afterBody
 						
 						<div class="col-lg-12" style="margin-bottom: 10px;margin-top: 10px;">
-							<div class="col-lg-3 readComments" onclick="clickDownComment(this)">
+							<div class="col-lg-3 readComments" onclick="clickDownComment(this,'05e92cdf-a901-4af1-9459-a2bcb1c75783')">
 								<i class="fa fa-comments fa-fw"></i>查看评论
 							</div>
 	            			<div class="col-lg-3" style="">收藏</div>
 	            			<div class="col-lg-1 btn-readLess" style="float:right;display:none;">
 	            				<button type="button" class="btn myReadLess" onclick="clickAfter(this)">收起<i class="fa fa-angle-up fa-fw"></i></button>
 	            			</div>
-						</div>
+						</div> -->
 						
 						<!-- 评论区开始-->
-						<div class="col-lg-12" style="display:none;border:solid 1px #ccc;margin:10px auto;border-radius:4px;">
+					<!-- <div class="col-lg-12" style="display:none;border:solid 1px #ccc;margin:10px auto;border-radius:4px;">
 							<div class="col-lg-3" style="font-size:16px;margin:5px auto;"><strong>70条评论</strong></div>
-							
 							<div class="col-lg-2 myReadLess" onclick="clickUpComment(this)">
 	            				收起评论<i class="fa fa-angle-up fa-fw"></i>
 	            			</div>
-							
 							<div class="col-lg-3" style="float:right;margin:5px auto;">按时间先后顺序排序</div>
 							<div class="col-lg-12" style="margin:8px auto;">
 								<div style="border:solid 0.3px #ccc;background-color:#ccc;"></div>
 							</div>
-							<!-- 评论 头 分割线 -->
+							评论 头 分割线
 							
 							<div class="col-lg-12">
 								<div class="col-lg-1">
@@ -253,54 +251,33 @@
 									Q1财报发布以来已经一个跌停板了，弄不好下周三开盘再来一个。
 								</div>
 								
-								<div class="col-lg-2" style="color: #8590a6;cursor: pointer;"><i class="fa fa-reply fa-fw"></i>回复</div>
-								<div class="col-lg-12">
-									<div class="col-lg-11">
+								<div class="col-lg-2" style="color: #8590a6;cursor: pointer;" onclick='showCommentPanel(this)'><i class="fa fa-reply fa-fw"></i>回复</div>
+								<div class="col-lg-12" style='display:none;'>
+									<div class="col-lg-12">
 										<form action='' method='post'>
-										<input type='text' class="form-control" name='commentContent'>
-										<input type='hidden' value='061ef367-3e27-4fa1-bace-b6156057cfff' name='commentToUserId'>
-										<input type='hidden' value='05e92cdf-a901-4af1-9459-a2bcb1c75783' name='commentGoodId'>
+											<input type='text' class="form-control" name='commentContent' placeholder='回复昵称'>
+											<input type='hidden' value='061ef367-3e27-4fa1-bace-b6156057cfff' name='commentToUserId'>
+											<input type='hidden' value='05e92cdf-a901-4af1-9459-a2bcb1c75783' name='commentGoodId'>
+											<input type='reset' style='display:none'>
+										</form>
 									</div>
-									<button type='button' class="btn btn-info" onclick='toReplayFun(this)'>评论</button>
-									</form>
+									<div class='col-lg-12' style="margin-top:10px;margin-bottom: 5px;">
+										<button style='float:right;' type='button' class="btn btn-info" onclick='toReplayFun(this)'>评论</button>
+										<button style='float:right;cursor: pointer;background-color: #ffffff;margin-right:5px;' type='button' class='btn' onclick='closeForm(this)'><font style='color:#8590a6;'></font>取消</button>
+									</div>
 								</div>
 							</div>
 							
 							<div class="col-lg-12" style="margin:10px auto;">
 								<div style="border:solid 0.4px #f5f5f5;background-color:#ccc;"></div>
 							</div>
-							<!-- 分割线  -->
-							<!-- 一条评论 信息 -->
-							
-								<div class="col-lg-12">
-								<div class="col-lg-1">
-									<img alt="photo" style="border-radius:2px;" src="/images/84c9ed08-207d-4aff-aa7e-737f4d62dba1.jpg" width="28px;" height="28px;">
-								</div>
-								<span style="margin-left:-10px;">昵称</span>
-									&nbsp;&nbsp;
-								<span style="color: #8590a6;">回复</span>
-									&nbsp;&nbsp;
-								<span>大撒啊</span>
-								<div class="col-lg-3" style="float:right;">2018年5月1日 22:14:56</div>
-								
-								<div class="col-lg-12" style="margin:10px auto;">
-									说这些戏里吧啦的都没用，
-									唐20多w，腾势40w，跟tesla一个价位，自己财报竟然没赚钱。
-									Q1财报发布以来已经一个跌停板了，弄不好下周三开盘再来一个。
-								</div>
-							</div>
-							
-							<div class="col-lg-12" style="margin:10px auto;">
-								<div style="border:solid 0.4px #f5f5f5;background-color:#ccc;"></div>
-							</div>
-							<!-- 分割线  -->
-							<!-- 一条评论 信息 -->
-							
-						</div>
+							分割线 
+							一条评论 信息
+						<!-- </div> -->
 						<!-- 评论区结束 -->
-	            	</div> 
+	            	<!-- </div>  -->
 	            	<!-- col-lg-10 -->
-	            </div>
+	            <!-- </div> -->
 	            <!-- /.row -->
 	       </span>
 	       <!-- myGoodInfoBody -->  

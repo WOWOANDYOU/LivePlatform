@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	//firstFindMyGoodFun();
+	firstFindMyGoodFun();
 	$('.btnAddGoodInfo').click(function(){
 		$('#myAddInfoModal').modal('show');
 	});
@@ -68,71 +68,6 @@ function firstFindMyGoodFun(){
 					
 					$('.myGoodInfoBody').append($html);
 				}
-				
-				/*<div class="row"> 
-            	<div class="col-lg-10" style="border:solid 1px #ccc;margin:10px auto;border-radius:4px;">
-            		<div class="col-lg-12 my-col-class" onclick="clickTitle(this)">
-            			<h4 style="padding-left:8px;"><strong>华为P20滴血出让生活就像海洋只有意志坚强的人才能到达彼岸</strong></h4>
-            		</div>
-            		<div class="col-lg-12 beforeBody"  onclick="clickBefore(this)">
-            			<div class="col-lg-3 my-col-class" style="height:110px;">
-            				<img onclick="wowo()" alt="" src="/images/4911e78f-c319-4b4e-89db-711a834d062e.jpg" width="100%" height="100%" style="max-height:470px;max-width:640px;border-radius:4px;">
-						</div>
-            			<div class="col-lg-9 directionText">
-	            			这里没有刁钻尖锐的公式、数字或专有名词，从泛泛无边的真相中挑选出与你看似完全无关、又紧紧相连的一些，
-	            			再用谁都听得懂的语言去描述。想把最冷僻的知识，浪漫地说给你听。最近《国家地理》杂志改版了，
-	            			特别喜欢他们在官网上说的一句话：「请相信，我们有三个原则是不会改变的——我们永远站在科学、事实和地球的这一边。」
-	            			<button type="button" class="btn myReadAll">阅读全文<i class="fa fa-angle-down fa-fw"></i></button>
-            			</div>
-					</div>
-					
-					<div class="col-lg-12 afterBody" style="display:none;">
-						<div class="col-lg-12" style="font-size:16px;">
-							<blockquote>
-								如果中国不发展自己的汽车工业，我相信首先的问题就不是用禁止提供芯片这种方式“掐住喉咙”了。
-								是整个汽车工业产业链的每一个环节，都会被人捏在手里。你想反抗？想换一种活法？没有的事。
-								我想，能提出来“如果没有国产车，那么zf就不会搞出那么多的税来保护国产，合资和进口车就会更便宜”这种观点的人，
-								绝对是一个精致的利己主义者。在财富还没有达到他们所期望的程度的时候，无论在国内赚多少钱，都会嫌弃这个国家。
-								当他们的财富能够满足他们移民他国的时候，他们更是拍拍屁股不带走一丝留恋的离开。然后回头告诉所有人，
-								“看，这就是个*******的国家，连一台车都造不出来”。幸好，中国是有自主品牌的。
-								幸好，中国自主品牌的发展速度比利己主义者们想象得快得多。幸好，下一个时代的汽车工业话语权，很可能会被中国掌控。
-							</blockquote>
-						</div>
-						<div class="col-lg-12">
-							<div class="col-lg-6">
-								<img alt="" src="/images/75610593-1d4c-4469-93e3-6ad57690b464.jpg" width="100%" height="100%" style="max-height:700px;max-width:650px;margin:15px auto;">
-							</div>
-							<div class="col-lg-6">
-								<img alt="" src="/images/4911e78f-c319-4b4e-89db-711a834d062e.jpg" width="100%" height="100%" style="max-height:700px;max-width:650px;margin:15px auto;">
-							</div>
-							<div class="col-lg-6">
-								<img alt="" src="/images/4911e78f-c319-4b4e-89db-711a834d062e.jpg" width="100%" height="100%" style="max-height:700px;max-width:650px;margin:15px auto;">
-							</div>
-							<div class="col-lg-6">
-								<img alt="" src="/images/75610593-1d4c-4469-93e3-6ad57690b464.jpg" width="100%" height="100%" style="max-height:700px;max-width:650px;margin:15px auto;">
-							</div>
-						</div>
-						<div class="col-lg-5" style="color:#8590a6;font-size:15px;margin-bottom: 10px;">发布于 2018年4月31日  9:29:34</div>
-					</div>
-					<!-- afterBody -->
-					
-					<div class="col-lg-12" style="margin-bottom: 10px;margin-top: 10px;">
-						<div class="col-lg-3 readComments" onclick="clickDownComment(this)">
-							<i class="fa fa-comments fa-fw"></i>查看评论
-						</div>
-            			<div class="col-lg-3" style="">收藏</div>
-            			<div class="col-lg-1 btn-readLess" style="float:right;display:none;">
-            				<button type="button" class="btn myReadLess" onclick="clickAfter(this)">收起<i class="fa fa-angle-up fa-fw"></i></button>
-            			</div>
-					</div>
-					
-            	</div> 
-            	<!-- col-lg-10 -->
-            </div>
-            <!-- /.row -->*/
-				
-				
-				
 			}
 		}
 	},
@@ -208,28 +143,148 @@ function clickAfter(change){
 	change.parentElement.style.display = "none";
 	d_before.style.display="block";
 }
-
+function showCommentPanel(div){
+	debugger
+	var next_div = div.nextElementSibling;
+	next_div.style.display = 'block';
+}
 function toReplayFun(btn){
 	debugger
-	var form = btn.previousElementSibling.childNodes[1];
+	var form = btn.parentElement.previousElementSibling.childNodes[0];
+	var inputV = form[0].value;
+	if(inputV=='' || typeof(inputV) == 'undefined'){
+		layer.msg('请输入评论内容',{icon:5});
+	}else{
+		layer.load();
+		$(form).ajaxSubmit({
+			url:'/LivePlatform/comment/addComment.action',
+			type:'post',
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				btn.parentElement.parentElement.style.display = 'none';
+				$(form[3]).click();
+				layer.closeAll('loading');
+				debugger;
+				var p_div = btn.parentElement.parentElement.parentElement.parentElement;
+				 var $html = ("<div class='col-lg-12'>"+
+							"<div class='col-lg-1'>"+
+							"<img alt='photo' style='border-radius:2px;' src='"+data.object.commentFromUserPhotoPath+"' width='28px;' height='28px;'>"+
+						"</div>"+
+						"<span style='margin-left:-10px;'>"+data.object.commentFromUserName+"</span>&nbsp;&nbsp;"+
+						"<span style='color: #8590a6;'>回复</span>&nbsp;&nbsp;"+
+						"<span>"+data.object.commentToUserName+"</span>"+
+						"<div class='col-lg-3' style='float:right;'>"+data.object.strTime+"</div>"+
+						"<div class='col-lg-12' style='margin:10px auto;'>"+
+							data.object.commentContent+
+						"</div>"+
+						"<div class='col-lg-2' style='color: #8590a6;cursor: pointer;' onclick='showCommentPanel(this)'>" +
+							"<i class='fa fa-reply fa-fw'></i>回复" +
+						"</div>"+
+						"<div class='col-lg-12' style='display:none;'>"+
+							"<div class='col-lg-12'>"+
+								"<form method='post'>"+
+									"<input type='text' class='form-control' name='commentContent' placeholder='回复"+data.object.commentFromUserName+"'>"+
+									"<input type='hidden' value='"+data.object.commentFromUserId+"' name='commentToUserId'>"+
+									"<input type='hidden' value='"+data.object.commentGoodId+"' name='commentGoodId'>"+
+									"<input type='reset' style='display:none'>"+
+								"</form>"+
+							"</div>"+
+							"<div class='col-lg-12' style='margin-top:10px;margin-bottom: 5px;'>"+
+								"<button style='float:right;' type='button' class='btn btn-info' onclick='toReplayFun(this)'>评论</button>"+
+								"<button style='float:right;cursor: pointer;background-color: #f8f8f8;margin-right:5px;' type='button' class='btn' onclick='closeForm(this)'><font style='color:#8590a6;'>取消</font></button>"+
+							"</div>"+
+						"</div>"+
+					"</div>"+
+
+					"<div class='col-lg-12' style='margin:10px auto;'>"+
+						"<div style='border:solid 0.4px #f5f5f5;background-color:#ccc;'></div>"+
+					"</div>");
+				 $(p_div).append($html);
+				 layer.msg('回复成功',{icon:6});
+			},
+			error:function(error){
+				layer.msg('出错了~稍后再试',{icon:5});
+			}
+		});
+	}
 	
-	$(form).ajaxSubmit({
-		url:'/LivePlatform/comment/addComment.action',
-		type:'post',
-		dataType:'json',
-		success:function(data){
-			
-		},
-		error:function(error){
-			
-		}
-	});
+}
+
+function closeForm(btn){
+	var p_div = btn.parentElement.parentElement;
+	p_div.style.display = 'none';
 }
 function clickDownComment(btn,goodId){
 	debugger
-	
-	var btnPN = btn.parentElement.nextElementSibling;
-	btnPN.style.display = "block";
+	layer.load();
+	ajaxFun('/LivePlatform/comment/goodInfoComment.action','goodId='+goodId,'post',function(data){
+		layer.closeAll('loading');
+		console.log(data);
+		if(data.isLogin=='false'){
+			var time = new Date().getTime();
+			window.localtion.href = '/LivePlatform/user/signinupUI.action?'+time;
+		}else{
+			if(data.info=='false'){
+				layer.msg('查询出错了，请稍后再试！',{icon:5});
+			}else{
+				debugger
+				var p_div = btn.parentElement.parentElement;
+				var $commentBody = $("<div class='col-lg-12' style='display:none;border:solid 1px #ccc;margin:10px auto;border-radius:4px;'>"+
+										"<div class='col-lg-3' style='font-size:16px;margin:5px auto;'><strong>"+data.object.length+"条评论</strong></div>"+
+										"<div class='col-lg-2 myReadLess' onclick='clickUpComment(this)'>"+
+											"收起评论<i class='fa fa-angle-up fa-fw'></i>"+
+										"</div>"+
+										"<div class='col-lg-3' style='float:right;margin:5px auto;'>按时间先后顺序排序</div>"+
+										"<div class='col-lg-12' style='margin:8px auto;'>"+
+											"<div style='border:solid 0.3px #ccc;background-color:#ccc;'></div>"+
+										"</div>"+
+									"</div>");
+				$.each(data.object,function(i){
+					debugger
+					$($commentBody).append("<div class='col-lg-12'>"+
+												"<div class='col-lg-1'>"+
+													"<img alt='photo' style='border-radius:2px;' src='"+data.object[i].commentFromUserPhotoPath+"' width='28px;' height='28px;'>"+
+												"</div>"+
+												"<span style='margin-left:-10px;'>"+data.object[i].commentFromUserName+"</span>&nbsp;&nbsp;"+
+												"<span style='color: #8590a6;'>回复</span>&nbsp;&nbsp;"+
+												"<span>"+data.object[i].commentToUserName+"</span>"+
+												"<div class='col-lg-3' style='float:right;'>"+data.object[i].strTime+"</div>"+
+												"<div class='col-lg-12' style='margin:10px auto;'>"+
+													data.object[i].commentContent+
+												"</div>"+
+												"<div class='col-lg-2' style='color: #8590a6;cursor: pointer;' onclick='showCommentPanel(this)'>" +
+													"<i class='fa fa-reply fa-fw'></i>回复" +
+												"</div>"+
+												"<div class='col-lg-12' style='display:none;'>"+
+													"<div class='col-lg-12'>"+
+														"<form method='post'>"+
+															"<input type='text' class='form-control' name='commentContent' placeholder='回复"+data.object[i].commentFromUserName+"'>"+
+															"<input type='hidden' value='"+data.object[i].commentFromUserId+"' name='commentToUserId'>"+
+															"<input type='hidden' value='"+data.object[i].commentGoodId+"' name='commentGoodId'>"+
+															"<input type='reset' style='display:none'>"+
+														"</form>"+
+													"</div>"+
+													"<div class='col-lg-12' style='margin-top:10px;margin-bottom: 5px;'>"+
+														"<button style='float:right;' type='button' class='btn btn-info' onclick='toReplayFun(this)'>评论</button>"+
+														"<button style='float:right;cursor: pointer;background-color: #f8f8f8;margin-right:5px;' type='button' class='btn' onclick='closeForm(this)'><font style='color:#8590a6;'>取消</font></button>"+
+													"</div>"+
+												"</div>"+
+											"</div>"+
+						
+											"<div class='col-lg-12' style='margin:10px auto;'>"+
+												"<div style='border:solid 0.4px #f5f5f5;background-color:#ccc;'></div>"+
+											"</div>");
+				});
+				
+				$(p_div).append($commentBody);
+				
+			}
+		}
+		var btnPN = btn.parentElement.nextElementSibling;
+		btnPN.style.display = "block";
+	},
+	function(error){});
 }
 function clickUpComment(btn){
 	btn.parentElement.style.display="none";

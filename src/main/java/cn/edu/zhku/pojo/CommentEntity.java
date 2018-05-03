@@ -8,10 +8,39 @@ public class CommentEntity {
 	private String commentContent;
 	private String commentGoodId;
 	private String commentFromUserId;//发起评论的人的id
+	private String commentFromUserName;
+	private String commentFromUserPhotoPath;
 	private String commentToUserId;//接受评论的人的id
+	private String commentToUserName;
+	private String commentToUserPhotoPath;
 	private Date commentTime;
 	private String strTime;
 	
+	
+	public String getCommentFromUserName() {
+		return commentFromUserName;
+	}
+	public void setCommentFromUserName(String commentFromUserName) {
+		this.commentFromUserName = commentFromUserName;
+	}
+	public String getCommentFromUserPhotoPath() {
+		return commentFromUserPhotoPath;
+	}
+	public void setCommentFromUserPhotoPath(String commentFromUserPhotoPath) {
+		this.commentFromUserPhotoPath = commentFromUserPhotoPath;
+	}
+	public String getCommentToUserName() {
+		return commentToUserName;
+	}
+	public void setCommentToUserName(String commentToUserName) {
+		this.commentToUserName = commentToUserName;
+	}
+	public String getCommentToUserPhotoPath() {
+		return commentToUserPhotoPath;
+	}
+	public void setCommentToUserPhotoPath(String commentToUserPhotoPath) {
+		this.commentToUserPhotoPath = commentToUserPhotoPath;
+	}
 	public String getStrTime() {
 		return strTime;
 	}

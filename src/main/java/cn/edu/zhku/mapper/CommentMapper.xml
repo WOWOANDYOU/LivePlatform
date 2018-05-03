@@ -4,23 +4,124 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.zhku.mapper.CommentMapper">
 	<resultMap type="cn.edu.zhku.pojo.CommentEntity" id="BaseResultMap">
-		<id column="comment_id" jdbcType="VARCHAR" property="commentId" />
-	    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
-	    <result column="comment_good_id" jdbcType="TIMESTAMP" property="commentGoodId" /> 
-	    <result column="comment_from_user_id" jdbcType="VARCHAR" property="commentFromUserId" />
-	    <result column="comment_to_user_id" jdbcType="VARCHAR" property="commentToUserId" />
-	    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
-	   		
-	    <!-- <association column="spend_cate_id" jdbcType="VARCHAR" property="spendCateEntity"
-	            select="cn.edu.zhku.mapper.SpendCateMapper.selectByPrimaryKey" />
-	    <association column="income_cate_id" jdbcType="VARCHAR" property="incomeCateEntity"
-	            select="cn.edu.zhku.mapper.IncomeCateMapper.selectByPrimaryKey" /> -->
+		<id column="commentId" jdbcType="VARCHAR" property="commentId" />
+	    <result column="commentContent" jdbcType="VARCHAR" property="commentContent" />
+	    <result column="commentGoodId" jdbcType="TIMESTAMP" property="commentGoodId" />
+	    <result column="commentTime" jdbcType="TIMESTAMP" property="commentTime" /> 
+	    <result column="commentFromUserId" jdbcType="VARCHAR" property="commentFromUserId" />
+	    <result column="commentFromUserName" jdbcType="VARCHAR" property="commentFromUserName" />
+	    <result column="commentFromUserPhotoPath" jdbcType="VARCHAR" property="commentFromUserPhotoPath" />
+	    
+	    <result column="commentToUserId" jdbcType="VARCHAR" property="commentToUserId" />
+	    <result column="commentToUserName" jdbcType="VARCHAR" property="commentToUserName" />
+	    <result column="commentToUserPhotoPath" jdbcType="VARCHAR" property="commentToUserPhotoPath" />
+	    
 	</resultMap>
 	
 	
 	<sql id="Base_Column_List">
 		comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time
 	</sql>
+	
+	<select id="selectComment" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT
+			T1.T1_commentId AS 'commentId',
+			T1.T1_commentContent AS 'commentContent',
+			T1.T1_commentGoodId AS 'commentGoodId',
+			T1.T1_commentTime AS 'commentTime',
+			T1.T1_fromUserId AS 'commentFromUserId',
+			T1.T1_fromUserName AS 'commentFromUserName',
+			T1.T1_fromUserPhotoPath AS 'commentFromUserPhotoPath',
+			T2.T2_toUserId AS 'commentToUserId',
+			T2.T2_toUserName AS 'commentToUserName',
+			T2.T2_toUserPhotoPath AS 'commentToUserPhotoPath'
+		FROM
+			(
+				SELECT
+					u.user_id AS 'T1_fromUserId',
+					u.user_name AS 'T1_fromUserName',
+					u.user_photo_path AS 'T1_fromUserPhotoPath',
+					c.comment_id AS 'T1_commentId',
+					c.comment_content AS 'T1_commentContent',
+					c.comment_time AS 'T1_commentTime',
+					c.comment_good_id AS 'T1_commentGoodId'
+				FROM
+					t_comment c,
+					t_user u
+				WHERE
+					c.comment_good_id = #{goodId,jdbcType=VARCHAR}
+				AND c.comment_from_user_id = u.user_id
+			) T1,
+			(
+				SELECT
+					c.comment_id AS 'T2_commentId',
+					c.comment_content AS 'T2_commentContent',
+					c.comment_time AS 'T2_commentTime',
+					c.comment_good_id AS 'T2_commentGoodId',
+					u.user_id AS 'T2_toUserId',
+					u.user_name AS 'T2_toUserName',
+					u.user_photo_path AS 'T2_toUserPhotoPath'
+				FROM
+					t_comment c,
+					t_user u
+				WHERE
+					c.comment_good_id = #{goodId,jdbcType=VARCHAR}
+				AND c.comment_to_user_id = u.user_id
+			) T2
+		WHERE
+			T1.T1_commentId = T2.T2_commentId
+			order by T1.T1_commentTime;
+	</select>
+	
+	<select id="selectCommentByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT
+			T1.T1_commentId AS 'commentId',
+			T1.T1_commentContent AS 'commentContent',
+			T1.T1_commentGoodId AS 'commentGoodId',
+			T1.T1_commentTime AS 'commentTime',
+			T1.T1_fromUserId AS 'commentFromUserId',
+			T1.T1_fromUserName AS 'commentFromUserName',
+			T1.T1_fromUserPhotoPath AS 'commentFromUserPhotoPath',
+			T2.T2_toUserId AS 'commentToUserId',
+			T2.T2_toUserName AS 'commentToUserName',
+			T2.T2_toUserPhotoPath AS 'commentToUserPhotoPath'
+		FROM
+			(
+				SELECT
+					u.user_id AS 'T1_fromUserId',
+					u.user_name AS 'T1_fromUserName',
+					u.user_photo_path AS 'T1_fromUserPhotoPath',
+					c.comment_id AS 'T1_commentId',
+					c.comment_content AS 'T1_commentContent',
+					c.comment_time AS 'T1_commentTime',
+					c.comment_good_id AS 'T1_commentGoodId'
+				FROM
+					t_comment c,
+					t_user u
+				WHERE
+					c.comment_id = #{commentId,jdbcType=VARCHAR}
+				AND c.comment_from_user_id = u.user_id
+			) T1,
+			(
+				SELECT
+					c.comment_id AS 'T2_commentId',
+					c.comment_content AS 'T2_commentContent',
+					c.comment_time AS 'T2_commentTime',
+					c.comment_good_id AS 'T2_commentGoodId',
+					u.user_id AS 'T2_toUserId',
+					u.user_name AS 'T2_toUserName',
+					u.user_photo_path AS 'T2_toUserPhotoPath'
+				FROM
+					t_comment c,
+					t_user u
+				WHERE
+					c.comment_id = #{commentId,jdbcType=VARCHAR}
+				AND c.comment_to_user_id = u.user_id
+			) T2
+		WHERE
+			T1.T1_commentId = T2.T2_commentId
+			order by T1.T1_commentTime;
+	</select>
 	
 	<insert id="addCommentInfo" parameterType="CommentEntity">
 		insert into 
