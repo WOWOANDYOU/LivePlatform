@@ -10,4 +10,6 @@ public interface CommentService {
 	public ArrayList<CommentEntity> selectComment(String goodId);
 	
 	public CommentEntity selectCommentByPrimaryKey(String commentId);
+
+	public ArrayList<CommentEntity> selectCommentByToUserId(String userId);
 }

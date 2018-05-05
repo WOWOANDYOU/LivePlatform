@@ -1,0 +1,21 @@
+/* .redPoint{
+	display:block;
+	list-style:disc;
+	color:red;
+} */
+
+/* .redpoint{
+  display:inline-block;
+  height:6px;
+  width:6px;
+  line-height:10px;
+  text-align:center;
+  font-size:0.1em;
+  border-radius:6px;
+  color:#fff;
+  background:red;
+} */
+.myMesg:hover{
+	background-color: #f6f6f6;
+	cursor: pointer;
+}

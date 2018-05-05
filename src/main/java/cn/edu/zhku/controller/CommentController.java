@@ -28,23 +28,20 @@ public class CommentController {
 	@SuppressWarnings("finally")
 	@RequestMapping(value="goodInfoComment",method=RequestMethod.POST)
 	@ResponseBody
-	public String goodInfoComment(String goodId,HttpServletRequest request) {
+	public String goodInfoComment(String goodId,String goodUserId,HttpServletRequest request) {
 		JsonReturn jr = new JsonReturn();
 		try {
-			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
-			if(user==null) {
-				jr.setIsLogin("fasle");
-			}else {
-				ArrayList<CommentEntity> list = commentService.selectComment(goodId);
-				ArrayList<CommentEntity> list2 = new ArrayList<CommentEntity>();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				for(CommentEntity commentEntity:list) {
-					commentEntity.setStrTime(sdf.format(commentEntity.getCommentTime()));
-					list2.add(commentEntity);
-				}
-				jr.setObject(list2);
-				jr.setInfo("true");
+			ArrayList<CommentEntity> list = commentService.selectComment(goodId);
+			ArrayList<CommentEntity> list2 = new ArrayList<CommentEntity>();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			for(CommentEntity commentEntity:list) {
+				commentEntity.setStrTime(sdf.format(commentEntity.getCommentTime()));
+				list2.add(commentEntity);
 			}
+			jr.setObject(list2);
+			jr.setGoodId(goodId);
+			jr.setGoodUserId(goodUserId);
+			jr.setInfo("true");
 		}catch(Exception e) {
 			jr.setInfo("false");
 			e.printStackTrace();
@@ -61,7 +58,7 @@ public class CommentController {
 		try {
 			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
 			if(user==null) {
-				jr.setIsLogin("fasle");
+				jr.setIsLogin("false");
 			}else {
 				comment.setCommentFromUserId(user.getUserId());
 				String commentId = UUID.randomUUID().toString();
@@ -72,6 +69,33 @@ public class CommentController {
 				commentNew.setStrTime(sdf.format(commentNew.getCommentTime()));
 				jr.setObject(commentNew);
 				jr.setInfo((num>0 && commentNew!=null)?"true":"false");
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="findToMsg",method=RequestMethod.POST)
+	@ResponseBody
+	public String findToMsg(HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) {
+				jr.setIsLogin("false");
+			}else {
+				ArrayList<CommentEntity> list = commentService.selectCommentByToUserId(user.getUserId());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				for(CommentEntity comment:list) {
+					comment.setStrTime(sdf.format(comment.getCommentTime()));
+				}
+				jr.setObject(list);
+				jr.setInfo("true");
 			}
 		}catch(Exception e) {
 			jr.setInfo("false");

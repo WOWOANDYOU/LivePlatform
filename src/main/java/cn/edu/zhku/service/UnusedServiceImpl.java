@@ -43,8 +43,8 @@ public class UnusedServiceImpl implements UnusedService {
 	}
 
 	@Override
-	public Integer userGoodInfoTotalNum(String userId) {
-		return unUsedMapper.selectUserGoodInfoTotal(userId);
+	public Integer userGoodInfoTotalNum(Map map) {
+		return unUsedMapper.selectUserGoodInfoTotal(map);
 	}
 
 }

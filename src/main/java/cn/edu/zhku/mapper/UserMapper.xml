@@ -18,21 +18,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result column="user_recent_in_time" jdbcType="TIMESTAMP" property="userRecentInTime" />
 	    <result column="user_recent_out_time" jdbcType="TIMESTAMP" property="userRecentOutTime" />
 	   		
-	  <!--   <association column="goods_item" jdbcType="VARCHAR" property="item"
-	            select="cn.beautyprof.dao.GoodsItemEntityMapper.selectByPrimaryKey" />
-	    <association column="goods_pro_id" jdbcType="VARCHAR" property="pro"
-	            select="cn.beautyprof.dao.ProEntityMapper.selectByPrimaryKey" />
-	    <association column="goods_admin_id" jdbcType="VARCHAR" property="admin"
-	            select="cn.beautyprof.dao.UserEntityMapper.selectByPrimaryKey" />
-	    <association column="goods_detail_id" jdbcType="VARCHAR" property="detail"
-	            select="cn.beautyprof.dao.MallDissertationEntityMapper.selectByPrimaryKey" />
-	   -->
-	    <!-- 查出外表 -->       
-	   <!--  <collection column="goods_id" javaType="java.util.ArrayList" property="goodsSubitemList"
-	    select="cn.beautyprof.dao.GoodsSubitemEntityMapper.selectByGoodsKey" />
-	    <collection column="goods_id" javaType="java.util.ArrayList" property="goodsImageList"
-	    select="cn.beautyprof.dao.GoodsImageEntityMapper.selectByGoodsKey" /> 
-	    -->
 	</resultMap>
 	
 	<sql id="Base_Column_List">
@@ -41,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		user_recent_in_time,user_recent_out_time
 	</sql>
 	
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from t_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
 	<!-- 查询 所有用户 -->
 	<select id="selectAllUser" resultMap="BaseResultMap">
 		select 

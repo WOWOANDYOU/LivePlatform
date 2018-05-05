@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import cn.edu.zhku.pojo.BillEntity;
 import cn.edu.zhku.pojo.GoodEntity;
@@ -119,17 +120,14 @@ public class UnusedController {
 				int start = (currentPageJ - 1) * PagesEntity.pageSize;
 				int pagesize = pageEntity.pageSize;
 				pageEntity.setCurrentPage(currentPageJ);
+				Map<String, Object> map2 = new HashMap<String, Object>();
+				map2.put("userId", userId);
 				if (currentPageJ == 1) {
-					pageEntity.setTotalNum(unUsedService.userGoodInfoTotalNum(userId));// 总记录数
+					pageEntity.setTotalNum(unUsedService.userGoodInfoTotalNum(map2));// 总记录数
 					// 总页数
 					pageEntity.setPageTotal(PagesEntity.totalNum % PagesEntity.pageSize == 0
 							? (PagesEntity.totalNum / PagesEntity.pageSize)
 							: ((PagesEntity.totalNum / PagesEntity.pageSize) + 1));
-					/*
-					 * if(PagesEntity.totalNum % PagesEntity.pageSize == 0) {
-					 * pageEntity.setPageTotal(PagesEntity.totalNum / PagesEntity.pageSize); }else{
-					 * pageEntity.setPageTotal((PagesEntity.totalNum / PagesEntity.pageSize) + 1); }
-					 */
 				}
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("userId", userId);
@@ -148,7 +146,54 @@ public class UnusedController {
 			jr.setInfo("false");
 			e.printStackTrace();
 		} finally {
-			return JSON.toJSONString(jr);
+			return JSON.toJSONString(jr,SerializerFeature.DisableCircularReferenceDetect);
 		}
 	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value = "findGoodInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String findGoodInfo(String currentPage, HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			int currentPageJ = Integer.parseInt(currentPage);
+			if (currentPageJ <= 0) {
+				currentPageJ = 1;
+			}
+			PagesEntity pageEntity = new PagesEntity();
+			int start = (currentPageJ - 1) * PagesEntity.pageSize;
+			int pagesize = pageEntity.pageSize;
+			pageEntity.setCurrentPage(currentPageJ);
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("userId", null);
+			if (currentPageJ == 1) {
+				int totalNum = unUsedService.userGoodInfoTotalNum(map2);
+				pageEntity.setTotalNum(totalNum);// 总记录数
+				// 总页数
+				pageEntity.setPageTotal(PagesEntity.totalNum % PagesEntity.pageSize == 0
+						? (PagesEntity.totalNum / PagesEntity.pageSize)
+						: ((PagesEntity.totalNum / PagesEntity.pageSize) + 1));
+			}
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", null);
+			map.put("start", start);
+			map.put("pagesize", pagesize);
+			ArrayList<GoodEntity> list = unUsedService.selectPageGoodInfo(map);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			for (GoodEntity good : list) {
+				good.setStrTime(sdf.format(good.getGoodUpTime()));
+			}
+			pageEntity.setObject(list);
+			jr.setObject(pageEntity);
+			jr.setInfo("true");
+			
+		} catch (Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		} finally {
+			return JSON.toJSONString(jr,SerializerFeature.DisableCircularReferenceDetect);
+		}
+	}
+	
 }

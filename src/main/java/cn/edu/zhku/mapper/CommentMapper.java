@@ -10,4 +10,6 @@ public interface CommentMapper {
 	ArrayList<CommentEntity> selectComment(String goodId);
 
 	CommentEntity selectCommentByPrimaryKey(String commentId);
+
+	ArrayList<CommentEntity> selectCommentByToUserId(String userId);
 }

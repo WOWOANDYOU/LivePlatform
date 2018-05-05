@@ -6,7 +6,25 @@ public class JsonReturn {
 	private Integer megInfo;//-1 表示验证码错误  -2表示验证码超时   1表示验证码正确
 	private Integer existence;//用户注册是否存在  -1不存在  1存在
 	private String isLogin;
+	private String goodId;
+	private String goodUserId;
 	
+	public String getGoodUserId() {
+		return goodUserId;
+	}
+
+	public void setGoodUserId(String goodUserId) {
+		this.goodUserId = goodUserId;
+	}
+
+	public String getGoodId() {
+		return goodId;
+	}
+
+	public void setGoodId(String goodId) {
+		this.goodId = goodId;
+	}
+
 	public String getIsLogin() {
 		return isLogin;
 	}

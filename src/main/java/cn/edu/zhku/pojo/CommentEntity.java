@@ -15,8 +15,14 @@ public class CommentEntity {
 	private String commentToUserPhotoPath;
 	private Date commentTime;
 	private String strTime;
+	private Integer commentState;
 	
-	
+	public Integer getCommentState() {
+		return commentState;
+	}
+	public void setCommentState(Integer commentState) {
+		this.commentState = commentState;
+	}
 	public String getCommentFromUserName() {
 		return commentFromUserName;
 	}

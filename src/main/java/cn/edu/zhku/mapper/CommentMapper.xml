@@ -15,12 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result column="commentToUserId" jdbcType="VARCHAR" property="commentToUserId" />
 	    <result column="commentToUserName" jdbcType="VARCHAR" property="commentToUserName" />
 	    <result column="commentToUserPhotoPath" jdbcType="VARCHAR" property="commentToUserPhotoPath" />
-	    
+	    <result column="commentState" jdbcType="VARCHAR" property="commentState" />
 	</resultMap>
 	
-	
 	<sql id="Base_Column_List">
-		comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time
+		comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time,comment_state
 	</sql>
 	
 	<select id="selectComment" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -30,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			T1.T1_commentGoodId AS 'commentGoodId',
 			T1.T1_commentTime AS 'commentTime',
 			T1.T1_fromUserId AS 'commentFromUserId',
+			T1.T1_commentState as 'commentState',
 			T1.T1_fromUserName AS 'commentFromUserName',
 			T1.T1_fromUserPhotoPath AS 'commentFromUserPhotoPath',
 			T2.T2_toUserId AS 'commentToUserId',
@@ -44,7 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					c.comment_id AS 'T1_commentId',
 					c.comment_content AS 'T1_commentContent',
 					c.comment_time AS 'T1_commentTime',
-					c.comment_good_id AS 'T1_commentGoodId'
+					c.comment_good_id AS 'T1_commentGoodId',
+					c.comment_state as 'T1_commentState'
 				FROM
 					t_comment c,
 					t_user u
@@ -80,6 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			T1.T1_commentGoodId AS 'commentGoodId',
 			T1.T1_commentTime AS 'commentTime',
 			T1.T1_fromUserId AS 'commentFromUserId',
+			T1.T1_commentState as 'commentState',
 			T1.T1_fromUserName AS 'commentFromUserName',
 			T1.T1_fromUserPhotoPath AS 'commentFromUserPhotoPath',
 			T2.T2_toUserId AS 'commentToUserId',
@@ -94,7 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					c.comment_id AS 'T1_commentId',
 					c.comment_content AS 'T1_commentContent',
 					c.comment_time AS 'T1_commentTime',
-					c.comment_good_id AS 'T1_commentGoodId'
+					c.comment_good_id AS 'T1_commentGoodId',
+					c.comment_state as 'T1_commentState'
 				FROM
 					t_comment c,
 					t_user u
@@ -123,11 +126,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by T1.T1_commentTime;
 	</select>
 	
+	<select id="selectCommentByToUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT
+			c.comment_good_id AS 'commentGoodId',
+			c.comment_id AS 'commentId',
+			c.comment_content AS 'commentContent',
+			c.comment_from_user_id AS 'commentFromUserId',
+			c.comment_time AS 'commentTime',
+			u.user_name AS 'commentFromUserName',
+			u.user_photo_path AS 'commentFromUserPhotoPath'
+		FROM
+			t_comment c,
+			t_user u
+		WHERE
+			c.comment_to_user_id = #{userId,jdbcType=VARCHAR}
+		AND c.comment_state = 0
+		AND c.comment_from_user_id = u.user_id
+		ORDER BY c.comment_time DESC
+	</select>
+	
 	<insert id="addCommentInfo" parameterType="CommentEntity">
 		insert into 
-		t_comment(comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time)
+		t_comment(comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time,comment_state)
 		values(#{commentId,jdbcType=VARCHAR},#{commentContent,jdbcType=VARCHAR},#{commentGoodId,jdbcType=VARCHAR},
-				#{commentFromUserId,jdbcType=VARCHAR},#{commentToUserId,jdbcType=VARCHAR},#{commentTime,jdbcType=TIMESTAMP})
+				#{commentFromUserId,jdbcType=VARCHAR},#{commentToUserId,jdbcType=VARCHAR},#{commentTime,jdbcType=TIMESTAMP}
+				,#{comment_state,jdbcType=INTEGER})
 	</insert>
 
 </mapper>

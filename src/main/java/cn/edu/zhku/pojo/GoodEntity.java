@@ -12,8 +12,14 @@ public class GoodEntity {
 	private String goodImgPath;//商品 图片路径 位置
 	private String goodUserId;
 	private String strTime;
+	private UserEntity goodUser;
 	
-	
+	public UserEntity getGoodUser() {
+		return goodUser;
+	}
+	public void setGoodUser(UserEntity goodUser) {
+		this.goodUser = goodUser;
+	}
 	public String getStrTime() {
 		return strTime;
 	}

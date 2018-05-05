@@ -32,4 +32,9 @@ public class CommentServiceImpl implements CommentService {
 		return commentMapper.selectCommentByPrimaryKey(commentId);
 	}
 
+	@Override
+	public ArrayList<CommentEntity> selectCommentByToUserId(String userId) {
+		return commentMapper.selectCommentByToUserId(userId);
+	}
+
 }

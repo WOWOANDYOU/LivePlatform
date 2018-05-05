@@ -11,8 +11,10 @@ $(document).ready(function(){
 });
 var currentPageJ = 1;//默认当前第一页
 function firstFindMyGoodFun(){
+	layer.load();
 	ajaxFun('/LivePlatform/unused/findMyGoodInfo.action','currentPage='+currentPageJ,'post',function(data){
 		console.log(data);
+		layer.closeAll('loading');
 		var time = new Date().getTime();
 		if(data.isLogin=="false"){
 			window.localtion.href="/LivePlatform/user/signinupUI.action?"+time;
@@ -60,18 +62,26 @@ function firstFindMyGoodFun(){
 					
 					for(var j=0;j < imgs.length;j++){
 						var $imgHtml = $("<div class='col-lg-6'>"+
-											"<img alt='' src='"+imgs[j]+"' width='100%' height='100%' style='max-height:700px;max-width:650px;margin:15px auto;'>"+
+											"<img alt='' src='"+imgs[j]+"' width='372px' height='235px' style='max-height:700px;max-width:650px;margin:15px auto;'>"+
 										"</div>");
 						var $imgBody = $html[0].childNodes[0].childNodes[2].childNodes[1];
 						$($imgBody).append($imgHtml);
 					}
 					
 					$('.myGoodInfoBody').append($html);
+					if(data.object.pageTotal>1){
+						$('.myGoodInfoBody')[0].nextElementSibling.style.display = "block";
+					}
 				}
 			}
 		}
 	},
 	function(error){});
+}
+
+function readPageMore(){
+	currentPageJ++;
+	firstFindMyGoodFun();
 }
 function beforeAddInfo(){
 	var title = $('.inputTitle').val();
@@ -119,7 +129,7 @@ function clickTitle(title){
 	debugger
 	var before = title.nextElementSibling;
 	var after = before.nextElementSibling;
-	var close = title.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[5];
+	var close = title.nextElementSibling.nextElementSibling.nextElementSibling.childNodes[2];
 	before.style.display="none";
 	after.style.display="block";
 	close.style.display="block";
@@ -163,6 +173,7 @@ function toReplayFun(btn){
 			success:function(data){
 				console.log(data);
 				btn.parentElement.parentElement.style.display = 'none';
+				debugger
 				$(form[3]).click();
 				layer.closeAll('loading');
 				debugger;
@@ -201,7 +212,12 @@ function toReplayFun(btn){
 						"<div style='border:solid 0.4px #f5f5f5;background-color:#ccc;'></div>"+
 					"</div>");
 				 $(p_div).append($html);
+				 var commentNumDom = btn.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0];
+				 var commentNum = commentNumDom.textContent;
+				 commentNum++;
+				 commentNumDom.textContent = commentNum;
 				 layer.msg('回复成功',{icon:6});
+				 
 			},
 			error:function(error){
 				layer.msg('出错了~稍后再试',{icon:5});
@@ -212,8 +228,12 @@ function toReplayFun(btn){
 }
 
 function closeForm(btn){
+	debugger
 	var p_div = btn.parentElement.parentElement;
 	p_div.style.display = 'none';
+	var div2 = btn.parentElement.previousElementSibling.childNodes[0];
+	$(div2[3]).click();
+	
 }
 function clickDownComment(btn,goodId){
 	debugger
@@ -231,7 +251,7 @@ function clickDownComment(btn,goodId){
 				debugger
 				var p_div = btn.parentElement.parentElement;
 				var $commentBody = $("<div class='col-lg-12' style='display:none;border:solid 1px #ccc;margin:10px auto;border-radius:4px;'>"+
-										"<div class='col-lg-3' style='font-size:16px;margin:5px auto;'><strong>"+data.object.length+"条评论</strong></div>"+
+										"<div class='col-lg-3' style='font-size:16px;margin:5px auto;'><strong><span>"+data.object.length+"</span>条评论</strong></div>"+
 										"<div class='col-lg-2 myReadLess' onclick='clickUpComment(this)'>"+
 											"收起评论<i class='fa fa-angle-up fa-fw'></i>"+
 										"</div>"+
@@ -288,7 +308,6 @@ function clickDownComment(btn,goodId){
 }
 function clickUpComment(btn){
 	btn.parentElement.style.display="none";
-	
 }
 function ajaxFun(parUrl,parData,parType,succFun,errorFun){
 	debugger

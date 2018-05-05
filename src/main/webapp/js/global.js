@@ -7,3 +7,23 @@ function toPages(url){
 	var relUrl = url+"?"+timeStamp;
 	window.location.href=relUrl;
 }
+function findAllToMeCom(){
+	layer.load();
+	ajaxFun('/LivePlatform/comment/findToMsg.action',null,'post',function(data){
+		debugger
+		layer.closeAll('loading');
+		console.log(data);
+	},
+	function(error){});
+}
+function ajaxFun(parUrl,parData,parType,succFun,errorFun){
+	debugger
+	$.ajax({
+		url:parUrl,
+		type:parType,
+		data:parData,
+		dataType:'json',
+		success:succFun,
+		error:errorFun
+	});
+}

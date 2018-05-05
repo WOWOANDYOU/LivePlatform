@@ -16,5 +16,5 @@ public interface UnusedService {
 	
 	public GoodEntity selectOne(String goodId);
 
-	public Integer userGoodInfoTotalNum(String userId);
+	public Integer userGoodInfoTotalNum(Map<String, Object> map2);
 }
