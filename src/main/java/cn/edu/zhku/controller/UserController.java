@@ -28,7 +28,7 @@ public class UserController {
 	//登录注册页面
 	@RequestMapping("signinupUI")
 	public String signinup(HttpServletRequest request) {
-		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+		UserEntity user = (UserEntity) request.getSession().getAttribute("userSession"); 
 		if(user == null) {
 			return "signinup";
 		}else {
@@ -169,6 +169,7 @@ public class UserController {
 				// -1 表示验证码错误 -2表示验证码超时 1表示验证码正确 且在有效时间内 0表示 服务器异常
 				Integer i = userService.checkCode(userEntity.getEmailCode(), originMailTime);
 				if (i == 1) {
+					userEntity.setUserPhotoPath("\\images\\defaultPhoto.jpg");
 					int num = userService.addUser(userEntity);
 					if (num != 0) {
 						jr.setInfo("true");// 表示 注册成功
@@ -176,6 +177,7 @@ public class UserController {
 						UserEntity userEntity2 = userService.selectOne(userEntity);
 						if(userEntity2!=null) {
 							session.setAttribute("userSession", userEntity2);
+							userService.updateSiginTime(((UserEntity)session.getAttribute("userSession")).getUserId());
 						}
 					} else {
 						jr.setInfo("false");// 表示 注册失败
@@ -208,8 +210,7 @@ public class UserController {
 				jr.setObject(user);
 				jr.setInfo("true");
 				request.getSession().setAttribute("userSession", user);
-				UserEntity userEntity2 = (UserEntity) request.getSession().getAttribute("userSession");
-				System.out.println(userEntity2.getUserName());
+				userService.updateSiginTime(user.getUserId());
 			} else {
 				jr.setInfo("error"); //表示 用户名或者密码错误
 			}
@@ -222,6 +223,7 @@ public class UserController {
 	
 	@RequestMapping("logout")
 	public String logout(HttpServletRequest request,HttpServletResponse response) {
+		userService.updateLogoutTime(((UserEntity)(request.getSession().getAttribute("userSession"))).getUserId());
 		request.getSession().removeAttribute("userSession");
 		Cookie cookieUserName = new Cookie("cookieUserName",null);
 		Cookie cookieUserPad = new Cookie("cookieUserPad",null);

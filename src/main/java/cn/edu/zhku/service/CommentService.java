@@ -12,4 +12,6 @@ public interface CommentService {
 	public CommentEntity selectCommentByPrimaryKey(String commentId);
 
 	public ArrayList<CommentEntity> selectCommentByToUserId(String userId);
+
+	public int updateCommentState(String commentId);
 }

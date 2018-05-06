@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result column="commentToUserId" jdbcType="VARCHAR" property="commentToUserId" />
 	    <result column="commentToUserName" jdbcType="VARCHAR" property="commentToUserName" />
 	    <result column="commentToUserPhotoPath" jdbcType="VARCHAR" property="commentToUserPhotoPath" />
-	    <result column="commentState" jdbcType="VARCHAR" property="commentState" />
+	    <result column="commentState" jdbcType="INTEGER" property="commentState" />
 	</resultMap>
 	
 	<sql id="Base_Column_List">
@@ -150,7 +150,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		t_comment(comment_id,comment_content,comment_good_id,comment_from_user_id,comment_to_user_id,comment_time,comment_state)
 		values(#{commentId,jdbcType=VARCHAR},#{commentContent,jdbcType=VARCHAR},#{commentGoodId,jdbcType=VARCHAR},
 				#{commentFromUserId,jdbcType=VARCHAR},#{commentToUserId,jdbcType=VARCHAR},#{commentTime,jdbcType=TIMESTAMP}
-				,#{comment_state,jdbcType=INTEGER})
+				,#{commentState,jdbcType=INTEGER})
 	</insert>
 
+	<update id="updateCommentState" parameterType="java.lang.String">
+		update t_comment set comment_state = 1 where comment_id = #{commentId,jdbcType=VARCHAR}
+	</update>
 </mapper>

@@ -18,5 +18,9 @@ public interface UserService {
 	
 	public String sendMail(String to);//发送验证码
 	
-	public Integer checkCode(String emailCode,String originMailTime); 
+	public Integer checkCode(String emailCode,String originMailTime);
+
+	public int updateSiginTime(String userId);
+
+	public int updateLogoutTime(String userId); 
 }

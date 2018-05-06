@@ -15,15 +15,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 
 import cn.edu.zhku.pojo.CommentEntity;
+import cn.edu.zhku.pojo.GoodEntity;
 import cn.edu.zhku.pojo.JsonReturn;
 import cn.edu.zhku.pojo.UserEntity;
 import cn.edu.zhku.service.CommentService;
+import cn.edu.zhku.service.UnusedService;
 
 @Controller
 @RequestMapping("/comment")
-public class CommentController {
+public class CommentController { 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UnusedService unUsedService;
 	
 	@SuppressWarnings("finally")
 	@RequestMapping(value="goodInfoComment",method=RequestMethod.POST)
@@ -103,5 +108,39 @@ public class CommentController {
 		}finally {
 			return JSON.toJSONString(jr);
 		}
+	}
+	
+	@SuppressWarnings("finally")
+	@RequestMapping(value="checkComment",method=RequestMethod.POST)
+	@ResponseBody
+	public String checkComment(String commentId,String commentGoodId,HttpServletRequest request) {
+		JsonReturn jr = new JsonReturn();
+		try {
+			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
+			if(user==null) { 
+				jr.setIsLogin("false");
+			}else {
+				int num = commentService.updateCommentState(commentId);
+				
+				GoodEntity goodInfo = unUsedService.selectOne(commentGoodId);
+				
+				jr.setInfo((num>0 && goodInfo!=null)?"true":"false");
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				goodInfo.setStrTime(sdf.format(goodInfo.getGoodUpTime()));
+				
+				jr.setObject(goodInfo);
+			}
+		}catch(Exception e) {
+			jr.setInfo("false");
+			e.printStackTrace();
+		}finally {
+			return JSON.toJSONString(jr);
+		}
+	}
+	
+	@RequestMapping(value="messageUI")
+	public String messageUI() {
+		return "message";
 	}
 }

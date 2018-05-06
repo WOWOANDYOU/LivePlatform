@@ -29,7 +29,7 @@ import cn.edu.zhku.service.UnusedService;
 
 @Controller
 @RequestMapping("/unused")
-public class UnusedController {
+public class UnusedController { 
 	@Autowired
 	private UnusedService unUsedService;
 
@@ -48,6 +48,11 @@ public class UnusedController {
 		}
 	}
 
+	
+	@RequestMapping("searchResultUI")
+	public String searchResultUI() {
+		return "searchResult";
+	}
 	@SuppressWarnings("finally")
 	@RequestMapping(value = "addGoodInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -91,7 +96,9 @@ public class UnusedController {
 				}
 
 				int num = unUsedService.addGoodInfo(good);
+				GoodEntity goodInfo = unUsedService.selectOne(good.getGoodId());
 				jr.setInfo(num > 0 ? "true" : "false");
+				jr.setObject(goodInfo);
 			}
 		} catch (Exception e) {
 			jr.setInfo("false");
@@ -153,7 +160,7 @@ public class UnusedController {
 	@SuppressWarnings("finally")
 	@RequestMapping(value = "findGoodInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public String findGoodInfo(String currentPage, HttpServletRequest request) {
+	public String findGoodInfo(String currentPage,String goodInfoText, HttpServletRequest request) {
 		JsonReturn jr = new JsonReturn();
 		try {
 			UserEntity user = (UserEntity) request.getSession().getAttribute("userSession");
@@ -166,6 +173,8 @@ public class UnusedController {
 			int pagesize = pageEntity.pageSize;
 			pageEntity.setCurrentPage(currentPageJ);
 			Map<String, Object> map2 = new HashMap<String, Object>();
+			
+			map2.put("goodInfoText", goodInfoText==null?null:goodInfoText);
 			map2.put("userId", null);
 			if (currentPageJ == 1) {
 				int totalNum = unUsedService.userGoodInfoTotalNum(map2);
@@ -179,6 +188,7 @@ public class UnusedController {
 			map.put("userId", null);
 			map.put("start", start);
 			map.put("pagesize", pagesize);
+			map.put("goodInfoText", goodInfoText==null?null:goodInfoText);
 			ArrayList<GoodEntity> list = unUsedService.selectPageGoodInfo(map);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			for (GoodEntity good : list) {

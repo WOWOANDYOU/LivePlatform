@@ -17,7 +17,7 @@ public class BillEntity {
 		return strTime;
 	}
 	public void setStrTime(String strTime) {
-		this.strTime = strTime;
+		this.strTime = strTime; 
 	}
 	private IncomeCateEntity incomeCateEntity;
 	private SpendCateEntity spendCateEntity;

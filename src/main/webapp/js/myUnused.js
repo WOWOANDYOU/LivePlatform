@@ -108,7 +108,7 @@ function addGoodInfo(){
 			console.log(data);
 			var time = new Date().getTime();
 			if(data.isLogin=='false'){
-				window.localtion.href='/LivePlatform/user/signinupUI.action?'+time;
+				window.location.href='/LivePlatform/user/signinupUI.action?'+time;
 			}else{
 				if(data.info=='false'){
 					layer.msg("服务器异常，发布闲置信息失败！请稍后再试。",{icon:5});
@@ -117,6 +117,51 @@ function addGoodInfo(){
 					$('.imgAll ul').html("");
 					$('#myAddInfoModal').modal('hide');
 					layer.msg("发布成功！");
+					var goodInfo = data.object;
+					var imgs = goodInfo.goodImgPath.split(",");
+					var $html = $("<div class='row'>" +
+									"<div class='col-lg-10' style='border:solid 1px #ccc;margin:10px auto;border-radius:4px;'>" +
+										"<div class='col-lg-12 my-col-class' onclick='clickTitle(this)'>"+
+											"<h4 style='padding-left:8px;'><strong>"+goodInfo.goodTitle+"&nbsp;&nbsp;&nbsp;&nbsp;<font style='color:#777777e8;'>"+goodInfo.goodPrice+"元/￥</font></strong></h4>"+
+										"</div>"+
+										"<div class='col-lg-12 beforeBody'  onclick='clickBefore(this)'>"+
+											"<div class='col-lg-3 my-col-class' style='height:110px;'>"+
+												"<img alt='' src='"+imgs[0]+"' width='100%' height='100%' style='max-height:470px;max-width:640px;border-radius:4px;'>"+
+											"</div>"+
+											"<div class='col-lg-9 directionText'>"+goodInfo.goodContent+
+												"<button type='button' class='btn myReadAll'>阅读全文<i class='fa fa-angle-down fa-fw'></i></button>" +
+											"</div>"+
+										"</div>"+
+										"<div class='col-lg-12 afterBody' style='display:none;'>"+
+											"<div class='col-lg-12' style='font-size:16px;'>"+
+												"<blockquote>"+goodInfo.goodContent+"</blockquote>"+
+											"</div>"+
+											"<div class='col-lg-12'></div>"+
+											"<div class='col-lg-5' style='color:#8590a6;font-size:15px;margin-bottom: 10px;'>发布于 "+goodInfo.strTime+"</div>"	+
+										"</div>"+
+									
+										"<div class='col-lg-12' style='margin-bottom: 10px;margin-top: 10px;'>"+
+											"<div class='col-lg-3 readComments' onclick='clickDownComment(this,&quot;"+goodInfo.goodId+"&quot;)'>"+
+												"<i class='fa fa-comments fa-fw'></i>查看评论"+
+											"</div>"+
+											"<div class='col-lg-3' style=''>收藏</div>"+
+					            			"<div class='col-lg-1 btn-readLess' style='float:right;display:none;'>"+
+					            				"<button type='button' class='btn myReadLess' onclick='clickAfter(this)'>收起<i class='fa fa-angle-up fa-fw'></i></button>"+
+					            			"</div>"+
+				            			"</div>"+
+									
+									"</div>"+
+								"</div>");
+					
+					for(var j=0;j < imgs.length;j++){
+						var $imgHtml = $("<div class='col-lg-6'>"+
+											"<img alt='' src='"+imgs[j]+"' width='372px' height='235px' style='max-height:700px;max-width:650px;margin:15px auto;'>"+
+										"</div>");
+						var $imgBody = $html[0].childNodes[0].childNodes[2].childNodes[1];
+						$($imgBody).append($imgHtml);
+					}
+					
+					$('.myGoodInfoBody').prepend($html);
 				}
 			}
 		},

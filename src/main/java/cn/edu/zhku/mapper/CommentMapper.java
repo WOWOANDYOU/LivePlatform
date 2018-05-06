@@ -12,4 +12,6 @@ public interface CommentMapper {
 	CommentEntity selectCommentByPrimaryKey(String commentId);
 
 	ArrayList<CommentEntity> selectCommentByToUserId(String userId);
+
+	int updateCommentState(String commentId);
 }

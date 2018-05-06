@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,9 +25,9 @@
 
     <!-- Custom Fonts -->
     <link href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-	<!-- 我的样式 -->
-	<link href="/LivePlatform/css/record.css" rel="stylesheet">
+	
+	<link href="/LivePlatform/css/index.css" rel="stylesheet" type="text/css">
+	<link href="/LivePlatform/css/unusedMarket.css" rel="stylesheet">
 </head>
 
 <body>
@@ -82,7 +83,8 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i>用户设置</a>
                         </li>
-                       
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> -->
                         <li class="divider"></li>
                         <li><a href="#" onclick="toPages('/LivePlatform/user/logout.action')"><i class="fa fa-sign-out fa-fw"></i>登出</a>
                         </li>
@@ -111,13 +113,12 @@
                             <a href="/LivePlatform/index.action"><i class="fa fa-home fa-fw"></i>首页</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-book fa-fw"></i> 成绩管理<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>成绩管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="#" onclick="toPages('/LivePlatform/record/addRecordUI.action')">添加成绩</a>
                                 </li>
                                 <li>
-                                   <!--  <a href="morris.html">查看成绩</a> -->
                                     <a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
                                 </li>
                                 <li>
@@ -166,116 +167,21 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
+        <div id="page-wrapper" class='my-row'>
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">添加账单信息</h3>
+                    <h2 class="page-header">闲置消息</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-sm-10">
-                    <div class="panel panel-warning panel-warning-succ">
-                        <div class="panel-heading addBillHeading">
-                          	 输入<b>消费支出</b>信息
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                        	<div class="alert alert-warning myAlertSuccess">
-									<a href="#" class="close" data-dismiss="alert">
-										&times;
-									</a>
-									<strong>添加成功！</strong>
-									<a href="#" onclick="toPages('/LivePlatform/bill/showBillUI.action')" style="text-decoration:none;">点击查看记录</a>
-									&nbsp;
-									<button type="button" class="btn btn-link btnKeepAddRecord" style="text-decoration:none;">继续添加</button>
-							</div>
-							<form role="form" id="addBillForm">
-                            	<div class="col-sm-5">
-                            		<div class="form-group">
-	                            		<div class="input-group">
-											<span class="input-group-addon">选择支出<b> or </b>收入</span> 
-											<label class="radio-inline" style="padding-left: 0px;"> 
-												<select class="form-control" name="cateNum" onchange="selectChange(this)">
-														<option value="-1">消费支出</option>
-														<option value="1">收入</option>
-												</select>
-											</label>
-										</div>
-									</div>
-                            	</div>
-                            	<div class="col-sm-8">
-                            		<div class="form-group">
-                            			<label>输入金额:</label>
-	                           			<div class="input-group">
-	                           				<span class="input-group-addon">￥/元</span> <input
-											type="text" class="form-control inputBillAmount"
-											name="billAmount" placeholder="输入金额"
-											aria-label="Amount (to the nearest dollar)">
-	                           			</div>
-	                           		</div>
-                            	</div>
-                            	<div class="col-sm-9">
-                            		<div class="form-group">
-                            			<label>账单备注:</label>
-                            			<div class="input-group">
-											<textarea rows="6" cols="90" class="form-control" name="billComment" placeholder="请输入备注信息"></textarea>
-										</div>
-									</div>
-                            	</div>
-                            	<div class="col-sm-8">
-                            		<div class="form-group">
-                            			<div class="input-group">
-											<span class="input-group-addon textAddBill">选择消费类别</span> 
-											<label class="radio-inline" style="padding-left: 0px;">
-												<select class="form-control selectCateJs" name="">  
-														<option value="0">选择类别</option>
-												</select>
-											</label> 
-											<label class="radio-inline">
-												<button type="button" class="btn btn-default btnAddBillType">
-													<span class="glyphicon glyphicon-plus"></span>添加类别
-												</button>
-											</label>
-										</div>
-									</div>
-                            	</div>
-                            	<div class="col-sm-9">
-                            		<div class='form-group'>
-                            			<div class="input-group" style="float: right;">
-											<button class="btn btn-primary submitAddBill" type="button">提交账单信息</button>
-										</div>
-										<button type="reset" class="btnReset"></button>
-                            		</div>
-                            	</div>
-                            
-                            </form>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                
-                <div class="modal fade" id="myAddBillTypeModal" data-backdrop="false">
-					<div class="modal-dialog"  style="width:22%;">
-						<div class="modal-content">
-					    	<div class="modal-header">
-					            <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-					            <h4 class="modal-title addBillTitle"></h4>
-					        </div>
-					        <div class="modal-body addBillInput">
-					        </div>
-				          	<div class="modal-footer">
-				           		<button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-				            	<button class="btn btn-primary btnSureAddType" type="button">添加</button>
-				          	</div>
-						</div><!-- /.modal-content -->
-					</div><!-- /.modal-dialog -->
-			    </div>
-			
-            </div>
-            <!-- row -->
+           	<span class="goodInfoBody">
+            	<!-- 消息对应的货物信息 -->  
+            </span>
+            <!-- /.goodInfoBody -->
+        </div>
+        <!-- /#page-wrapper -->
+
     </div>
     <!-- /#wrapper -->
 
@@ -288,21 +194,17 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Flot Charts JavaScript -->
-    <script src="/LivePlatform/html/my-admin/vendor/flot/excanvas.min.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.pie.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.resize.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot/jquery.flot.time.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-    <script src="/LivePlatform/html/my-admin/data/flot-data.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="/LivePlatform/html/my-admin/vendor/raphael/raphael.min.js"></script>
+    <script src="/LivePlatform/html/my-admin/vendor/morrisjs/morris.min.js"></script>
+    <script src="/LivePlatform/html/my-admin/data/morris-data.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
-	<script src="/LivePlatform/js/jquery/jquery.form.js"></script>
-	<script src="/LivePlatform/js/layer/layer.js"></script>
-	<script type="text/javascript" src="/LivePlatform/js/addBill.js"></script>
+    <script type="text/javascript" src="/LivePlatform/js/jquery/jquery.form.js"></script>
+    <script type="text/javascript" src="/LivePlatform/js/layer/layer.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/global.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/message.js"></script>
 </body>
 
 </html>

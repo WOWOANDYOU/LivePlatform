@@ -16,7 +16,6 @@ public class CommentEntity {
 	private Date commentTime;
 	private String strTime;
 	private Integer commentState;
-	
 	public Integer getCommentState() {
 		return commentState;
 	}

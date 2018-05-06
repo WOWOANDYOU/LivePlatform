@@ -36,7 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="userId!=null">
 			and good_user_id=#{userId,jdbcType=VARCHAR}
 		</if> 
-		
+		<if test="goodInfoText!=null">
+			and good_title like "%"#{goodInfoText,jdbcType=VARCHAR}"%"
+		</if>
 	</select>
 	
 	<!-- 分页查询数据 -->
@@ -47,8 +49,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="userId!=null">
 			and good_user_id=#{userId,jdbcType=VARCHAR}
 		</if>
+		<if test="goodInfoText!=null">
+			and good_title like "%"#{goodInfoText,jdbcType=VARCHAR}"%"
+		</if>
 		order by good_up_time desc
 		limit #{start,jdbcType=INTEGER},#{pagesize,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List"/>
+		from t_good where good_id=#{goodId,jdbcType=VARCHAR}
 	</select>
 	
 	
@@ -57,9 +67,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}
 	</delete>
 	
-	<select id="selectOne" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List"/>
-		from t_bill where bill_id=#{billInfoId,jdbcType=VARCHAR}
-	</select>
+	
 	
 </mapper>

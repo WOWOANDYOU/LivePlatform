@@ -3,65 +3,76 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>生活管理平台</title>
+<title>生活管理平台</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/LivePlatform/html/my-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Core CSS -->
+<link
+	href="/LivePlatform/html/my-admin/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+<!-- MetisMenu CSS -->
+<link
+	href="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.css"
+	rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/LivePlatform/html/my-admin/dist/css/sb-admin-2.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="/LivePlatform/html/my-admin/dist/css/sb-admin-2.css"
+	rel="stylesheet">
 
-    <!-- Morris Charts CSS -->
-    <link href="/LivePlatform/html/my-admin/vendor/morrisjs/morris.css" rel="stylesheet">
+<!-- Morris Charts CSS -->
+<link href="/LivePlatform/html/my-admin/vendor/morrisjs/morris.css"
+	rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
-	<link href="/LivePlatform/css/index.css" rel="stylesheet" type="text/css">
+<!-- Custom Fonts -->
+<link
+	href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+<link href="/LivePlatform/css/index.css" rel="stylesheet"
+	type="text/css">
 </head>
 
 <body>
 
-    <div id="wrapper">
+	<div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/LivePlatform/index.action">生活管理平台</a>
-            </div>
-            <!-- /.navbar-header -->
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/LivePlatform/index.action">生活管理平台</a>
+			</div>
+			<!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick='findAllToMeCom()'>
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul style='width:320px;height:300px;overflow-y:scroll;' class="dropdown-menu dropdown-alerts appendMsg">
-                        <li>
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" onclick='findAllToMeCom()'> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul style='width: 340px; height: 300px; overflow-y: scroll;'
+						class="dropdown-menu dropdown-alerts indexAppendMsg">
+						<!--  <li>
                             <div style='margin-left:15px;cursor: pointer;'>
                             	消息
-                            	<span class="badge" style='background-color:red;'>50</span>
-                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            	<span class='badge' style='background-color:red;'>50</span>
+                                <span class='pull-right text-muted small'>4 minutes ago</span>
                             </div>
                         </li>
-                        <li class="divider"></li>
+                        <li class='divider'></li>
                         
-                        <!-- <div class='col-lg-12 myMesg' style='border-bottom: 0.4px solid #ccc;'>
+                        <div class='col-lg-12 myMesg' style='border-bottom: 0.4px solid #ccc;'>
                         	<div class='col-lg-2' style='margin-top: 5px;'>
                         		<img alt="photo" src="/images/2bd54dc8-4b81-4696-866a-e67538799798.jpg" width='40px' height='40px' style='border-radius: 4px;margin-left:-10px;'>
                         	</div>
@@ -70,182 +81,175 @@
                         		<div class='col-lg-10' style='color:#8590a6;margin-left:-8px;width:230px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>生活就像海洋只有意志坚强的人才能到达彼岸啊哈哈哈</div>
                         	</div>
                         </div> -->
-                        
-                    </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>用户设置</a>
-                        </li>
-                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i>用户设置</a></li>
+						<!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li> -->
-                        <li class="divider"></li>
-                        <li><a href="#" onclick="toPages('/LivePlatform/user/logout.action')"><i class="fa fa-sign-out fa-fw"></i>登出</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+						<li class="divider"></li>
+						<li><a href="#"
+							onclick="toPages('/LivePlatform/user/logout.action')"><i
+								class="fa fa-sign-out fa-fw"></i>登出</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        <li>
-                            <a href="/LivePlatform/index.action"><i class="fa fa-home fa-fw"></i>首页</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>成绩管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/record/addRecordUI.action')">添加成绩</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/record/analyzeRecordUI.action')">统计分析</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-book fa-fw"></i>财务管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/bill/addBillUI.action')">添加账单记录</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/bill/showBillUI.action')">查看账单详情</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/bill/analyzeBillUI.action')">账簿统计</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
-                        <li>
-                            <a href="#"><i class="fa fa-shopping-cart fa-fw"></i>闲置管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/unused/unusedMarketUI.action')">闲置市场</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="toPages('/LivePlatform/unused/myUnusedUI.action')">我的闲置</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        
-                        <li>
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="sidebar-search">
+							<div class="input-group custom-search-form">
+								<input type="text" class="form-control"
+									placeholder="搜索闲置货品信息..."> <span
+									class="input-group-btn">
+									<button class="btn btn-default" type="button"
+										onclick='searchGoodInfo(this)'>
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div> <!-- /input-group -->
+						</li>
+						<li><a href="/LivePlatform/index.action"><i
+								class="fa fa-home fa-fw"></i>首页</a></li>
+						<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>成绩管理<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/record/addRecordUI.action')">添加成绩</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/record/analyzeRecordUI.action')">统计分析</a>
+								</li>
+							</ul> <!-- /.nav-second-level --></li>
+
+						<li><a href="#"><i class="fa fa-book fa-fw"></i>财务管理<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/bill/addBillUI.action')">添加账单记录</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/bill/showBillUI.action')">查看账单详情</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/bill/analyzeBillUI.action')">账簿统计</a>
+								</li>
+							</ul> <!-- /.nav-second-level --></li>
+
+						<li><a href="#"><i class="fa fa-shopping-cart fa-fw"></i>闲置管理<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/unused/unusedMarketUI.action')">闲置市场</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/unused/myUnusedUI.action')">我的闲置</a>
+								</li>
+							</ul> <!-- /.nav-second-level --></li>
+
+						<!-- <li>
                             <a href="tables.html"><i class="fa fa-play-circle fa-fw"></i>生活娱乐</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+                        </li> -->
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">首页</h2>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">  
-            <!-- .col-xs-* 针对超小屏幕 手机（<768px）  .col-sm-* 小屏幕 平板 (≥768px) 
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2 class="page-header">首页</h2>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<!-- .col-xs-* 针对超小屏幕 手机（<768px）  .col-sm-* 小屏幕 平板 (≥768px) 
             col-md-* 中等屏幕 桌面显示器 (≥992px)(栅格参数) .col-lg-* 针对特大的（≥1200px）
             	相同类相加 >12就变成2行
             -->
-                <div class="col-lg-6 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-bar-chart-o fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">成绩管理</div>
-                                    <div>记录你的成绩!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">查看成绩</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-book fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">财务管理</div>
-                                    <div>生成账单</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">查看你的账单</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">二手市场</div>
-                                    <div>淘好货 做买卖</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">现在去</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
+				<div class='col-lg-1 col-md-1'></div>
+				<div class="col-lg-9 col-md-9" style='cursor: pointer;' onclick='locaPage("record")'>
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-bar-chart-o fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">成绩管理</div>
+									<div>记录你的成绩!</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<span class="pull-left">查看成绩</span> <span class="pull-right"><i
+								class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-lg-1 col-md-1'></div>
+				<div class="col-lg-9 col-md-9" style='cursor: pointer;' onclick='locaPage("bill")'>
+					<div class="panel panel-green">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-book fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">财务管理</div>
+									<div>生成账单</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<span class="pull-left">查看你的账单</span> <span class="pull-right"><i
+								class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class='row'>
+				<div class='col-lg-1 col-md-1'></div>
+				<div class="col-lg-9 col-md-9" style='cursor: pointer;' onclick='locaPage("unUsed")'>
+					<div class="panel panel-yellow">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-shopping-cart fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">二手市场</div>
+									<div>淘好货 做买卖</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<span class="pull-left">现在去</span> <span class="pull-right"><i
+								class="fa fa-arrow-circle-right"></i></span>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="col-lg-6 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -266,32 +270,34 @@
                             </div>
                         </a>
                     </div>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
+                </div> -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+	</div>
+	<!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/LivePlatform/html/my-admin/vendor/jquery/jquery.min.js"></script>
+	<!-- jQuery -->
+	<script src="/LivePlatform/html/my-admin/vendor/jquery/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/LivePlatform/html/my-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="/LivePlatform/html/my-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.js"></script>
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="/LivePlatform/html/my-admin/vendor/raphael/raphael.min.js"></script>
-    <script src="/LivePlatform/html/my-admin/vendor/morrisjs/morris.min.js"></script>
-    <script src="/LivePlatform/html/my-admin/data/morris-data.js"></script>
+	<!-- Morris Charts JavaScript -->
+	<script src="/LivePlatform/html/my-admin/vendor/raphael/raphael.min.js"></script>
+	<script src="/LivePlatform/html/my-admin/vendor/morrisjs/morris.min.js"></script>
+	<script src="/LivePlatform/html/my-admin/data/morris-data.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
-    <script type="text/javascript" src="/LivePlatform/js/layer/layer.js"></script>
+	<!-- Custom Theme JavaScript -->
+	<script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/layer/layer.js"></script>
 	<script type="text/javascript" src="/LivePlatform/js/global.js"></script>
 </body>
 

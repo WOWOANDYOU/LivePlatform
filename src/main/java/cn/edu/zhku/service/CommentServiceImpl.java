@@ -19,7 +19,8 @@ public class CommentServiceImpl implements CommentService {
 	public int addCommentInfo(CommentEntity comment) {
 		Timestamp time = new Timestamp(new Date().getTime());
 		comment.setCommentTime(time);
-		return commentMapper.addCommentInfo(comment);
+		comment.setCommentState(0);
+		return commentMapper.addCommentInfo(comment); 
 	}
 
 	@Override
@@ -35,6 +36,11 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public ArrayList<CommentEntity> selectCommentByToUserId(String userId) {
 		return commentMapper.selectCommentByToUserId(userId);
+	}
+
+	@Override
+	public int updateCommentState(String commentId) {
+		return commentMapper.updateCommentState(commentId);
 	}
 
 }

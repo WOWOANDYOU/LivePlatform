@@ -117,4 +117,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		);
 	</insert>
 
+	<update id="updateSigninTime" parameterType="java.util.Map">
+		update t_user
+		set user_recent_in_time = #{time,jdbcType=TIMESTAMP}
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateLogOutTime" parameterType="java.util.Map">
+		update t_user
+		set user_recent_out_time = #{time,jdbcType=TIMESTAMP}
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
 </mapper>
