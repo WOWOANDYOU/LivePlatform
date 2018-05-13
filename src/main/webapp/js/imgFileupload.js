@@ -1,4 +1,5 @@
 ~(function(win){
+	debugger
 	var clickNum = 0;
 	var htmls = '<input type="file" name="file" id="" class="imgFiles" style="display:none;" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple>'+
 				'<div class="header">'+

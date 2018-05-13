@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>生活管理平台</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="/LivePlatform/html/my-admin/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link
+	href="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.css"
+	rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="/LivePlatform/html/my-admin/dist/css/sb-admin-2.css"
+	rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="/LivePlatform/html/my-admin/vendor/morrisjs/morris.css"
+	rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link
+	href="/LivePlatform/html/my-admin/vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+<link href="/LivePlatform/css/index.css" rel="stylesheet"
+	type="text/css">
+<link href='/LivePlatform/css/userSetting.css' rel="stylesheet"
+	type="text/css">
+</head>
+
+<body>
+
+	<div id="wrapper">
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/LivePlatform/index.action">生活管理平台</a>
+			</div>
+			<!-- /.navbar-header -->
+
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" onclick='findAllToMeCom()'> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul style='width: 340px; height: 300px; overflow-y: scroll;'
+						class="dropdown-menu dropdown-alerts indexAppendMsg">
+						<!--  <li>
+                            <div style='margin-left:15px;cursor: pointer;'>
+                            	消息
+                            	<span class='badge' style='background-color:red;'>50</span>
+                                <span class='pull-right text-muted small'>4 minutes ago</span>
+                            </div>
+                        </li>
+                        <li class='divider'></li>
+                        
+                        <div class='col-lg-12 myMesg' style='border-bottom: 0.4px solid #ccc;'>
+                        	<div class='col-lg-2' style='margin-top: 5px;'>
+                        		<img alt="photo" src="/images/2bd54dc8-4b81-4696-866a-e67538799798.jpg" width='40px' height='40px' style='border-radius: 4px;margin-left:-10px;'>
+                        	</div>
+                        	<div class='col-lg-10' style='margin-left:-10px;margin-bottom: 8px;'>
+                        		<div class='col-lg-8' style='margin-left:-8px;'>上诉陈</div>
+                        		<div class='col-lg-10' style='color:#8590a6;margin-left:-8px;width:230px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;'>生活就像海洋只有意志坚强的人才能到达彼岸啊哈哈哈</div>
+                        	</div>
+                        </div> -->
+
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"
+							onclick="toPages('/LivePlatform/user/userSettingUI.action')"><i class="fa fa-user fa-fw"></i>用户设置</a></li>
+						<li class="divider"></li>
+						<li><a href="#"
+							onclick="toPages('/LivePlatform/user/logout.action')"><i
+								class="fa fa-sign-out fa-fw"></i>登出</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li class="sidebar-search">
+							<div class="input-group custom-search-form">
+								<input type="text" class="form-control"
+									placeholder="搜索闲置货品信息..."> <span
+									class="input-group-btn">
+									<button class="btn btn-default" type="button"
+										onclick='searchGoodInfo(this)'>
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div> <!-- /input-group -->
+						</li>
+						<li><a href="/LivePlatform/index.action"><i
+								class="fa fa-home fa-fw"></i>首页</a></li>
+						<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>成绩管理<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/record/addRecordUI.action')">添加成绩</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/record/showRecordUI.action')">查看成绩</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/record/analyzeRecordUI.action')">统计分析</a>
+								</li>
+							</ul> <!-- /.nav-second-level --></li>
+
+						<li><a href="#"><i class="fa fa-book fa-fw"></i>财务管理<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/bill/addBillUI.action')">添加账单记录</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/bill/showBillUI.action')">查看账单详情</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/bill/analyzeBillUI.action')">账簿统计</a>
+								</li>
+							</ul> <!-- /.nav-second-level --></li>
+
+						<li><a href="#"><i class="fa fa-shopping-cart fa-fw"></i>闲置管理<span
+								class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/unused/unusedMarketUI.action')">闲置市场</a>
+								</li>
+								<li><a href="#"
+									onclick="toPages('/LivePlatform/unused/myUnusedUI.action')">我的闲置</a>
+								</li>
+							</ul> <!-- /.nav-second-level --></li>
+
+						<!-- <li>
+                            <a href="tables.html"><i class="fa fa-play-circle fa-fw"></i>生活娱乐</a>
+                        </li> -->
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
+
+		<div id="page-wrapper">
+			<div class='row'>
+				<div class='col-lg-12 userInfoBackground'>
+					<!-- <div class='col-lg-2'>
+						<img alt="" class='photoImg' style="border-radius: 6px;" src="/images/958e7343-20e6-4838-aa62-1a868ec47c92.jpg" width="163px" height="163px">
+						<i class='fa fa-camera fa-2x' style='cursor:pointer;position:absolute;bottom:1%;right:1%;' onclick='changePhoto()'></i>
+					</div>
+					
+					<div class='col-lg-8'>
+						<div class='row' style='margin-bottom: 5px;'>
+							<div class='col-lg-4' style='margin-left:10px;font-size:22px;'><strong>wowo</strong></div>
+						</div>
+						<div class='row' style='font-size:16px;'>
+							<div class='col-lg-8' style='margin-bottom: 15px;'>
+								<div class='col-lg-3'>
+									<font style='color:'><b>学校：</b></font>
+								</div>
+								<span>
+									<span style='margin-left:-40px;'>清华大学</span>
+									&nbsp;&nbsp;<span style='color:#175199;cursor: pointer;' onclick='showForm(this)'><i class='fa fa-edit fa-fw'></i>修改</span>
+								</span>
+								<form style='display:none;' method='post' enctype="multipart/form-data">
+									<input type='text' class='form-control' style='float:left;width:45%;margin-top:-5px;margin-left:-20px;'>
+									<button type='button' class='btn btn-info' style='margin-top:-5px;margin-left:10px;' onclick='subInfo(this)'>保存</button>
+									<button type='button' class='btn btn-default' style='margin-top:-5px;margin-left:10px;' onclick='reSet(this)'>取消</button>
+								</form>
+							</div>
+							
+							<div class='col-lg-8' style='margin-bottom: 15px;'>
+								<div class='col-lg-3'>
+									<font style='color:'><b>专业：</b></font>
+								</div>
+								<span>
+									<span style='margin-left:-40px;'>计算机科学与技术</span>
+									&nbsp;&nbsp;<span style='color:#175199;cursor: pointer;' onclick='showForm(this)'><i class='fa fa-edit fa-fw'></i>修改</span>
+								</span>
+								<form style='display:none;' method='post' enctype="multipart/form-data">
+									<input type='text' class='form-control' style='float:left;width:45%;margin-top:-5px;margin-left:-20px;'>
+									<button type='button' class='btn btn-info' style='margin-top:-5px;margin-left:10px;' onclick='subInfo(this)'>保存</button>
+									<button type='button' class='btn btn-default' style='margin-top:-5px;margin-left:10px;' onclick='reSet(this)'>取消</button>
+								</form>
+							</div>
+							
+							
+							<div class='col-lg-8' style='margin-bottom: 15px;'>
+								<div class='col-lg-3'>
+									<font style='color:'><b>班级：</b></font>
+								</div>
+								<span>
+									<span style='margin-left:-40px;'>计算机142班</span>
+									&nbsp;&nbsp;<span style='color:#175199;cursor: pointer;' onclick='showForm(this)'><i class='fa fa-edit fa-fw'></i>修改</span>
+								</span>
+								<form style='display:none;' method='post' enctype="multipart/form-data">
+									<input type='text' class='form-control' style='float:left;width:45%;margin-top:-5px;margin-left:-20px;'>
+									<button type='button' class='btn btn-info' style='margin-top:-5px;margin-left:10px;' onclick='subInfo(this)'>保存</button>
+									<button type='button' class='btn btn-default' style='margin-top:-5px;margin-left:10px;' onclick='reSet(this)'>取消</button>
+								</form>
+							</div>
+							
+							
+							<div class='col-lg-8' style='margin-bottom: 15px;'>
+								<div class='col-lg-3'>
+									<font style='color:'><b>性别：</b></font>
+								</div>
+								<span>
+									<span style='margin-left:-40px;'>男</span>
+									&nbsp;&nbsp;<span style='color:#175199;cursor: pointer;' onclick='showForm(this)'><i class='fa fa-edit fa-fw'></i>修改</span>
+								</span>
+								<form style='display:none;' method='post' enctype="multipart/form-data">
+									<select name='userGender' class='form-control' style='float:left;width:45%;margin-top:-5px;margin-left:-20px;'>
+										<option value='男'>男</option>
+										<option value='女'>女</option>
+									</select>
+									<input type='text' class='form-control' style='float:left;width:45%;margin-top:-5px;margin-left:-20px;'>
+									<button type='button' class='btn btn-info' style='margin-top:-5px;margin-left:10px;' onclick='subInfo(this)'>保存</button>
+									<button type='button' class='btn btn-default' style='margin-top:-5px;margin-left:10px;' onclick='reSet(this)'>取消</button>
+								</form>
+							</div>
+							
+						</div>
+					</div> -->
+					<!-- lg-8 -->
+				</div>
+				<!-- lg-12 -->
+				
+				<div class='col-lg-12' style='margin-top:10px;'>
+					<div class='col-lg-1'>
+						<button type='button' class='btn btn-outline btn-primary' onclick="toPages('/LivePlatform/unused/myUnusedUI.action')">我的闲置</button>
+					</div>
+					<div class='col-lg-1' style='margin-left:10px;'>
+						<button type='button' class='btn btn-outline btn-danger changePad'>修改密码</button>
+					</div>
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+		<!-- /#page-wrapper -->
+
+		<div class="modal fade" id="myUpdateImgModal" data-backdrop="false">
+			<div class="modal-dialog"  style="width:45%;">
+				<div class="modal-content">
+			        <div class="modal-body my-modal-body">
+			        	<div class="row">
+			        		<div class="col-sm-12">
+			        			<div class="panel panel-info">
+			        				<div class="panel-body updatePanelBody">
+			        					<form method='post' enctype="multipart/form-data" id='changePhotoForm'>
+			        						<div class='col-sm-12'>
+			        							<div class="box" style="width:450px;margin:10px auto"></div>	
+			        						</div>
+			        						<input type='reset' style='display:none;' id='changePhotoReset'>
+			        					</form>
+			        				</div><!-- panel-body  -->
+			        			</div>
+			        		</div>
+			        	</div>
+			        </div>
+		          	<div class="modal-footer">
+		           		<button data-dismiss="modal" class="btn btn-default resetBtn" type="button">取消</button>
+		            	<button class="btn btn-primary btnSureUpdate" type="button">确定修改</button>
+		          	</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+			
+			
+		<div class="modal fade" id="myUpdatePadModal" data-backdrop="false">
+		<div class="modal-dialog"  style="width:25%;">
+			<div class="modal-content">
+		        <div class="modal-body my-modal-body">
+		        	<div class="row">
+		        		<div class="col-sm-12">
+		        			<div class="panel panel-info">
+		        				<div class="panel-body">
+		        					<form method='post' enctype="multipart/form-data" id='changePadForm'>
+		        						<input type='password' placeholder='输入原密码' class='form-control' style='margin-bottom: 10px;'>
+		        						<input type='password' placeholder='输入新密码' class='form-control'>
+		        						<input type='reset' style='display:none;' id='changepadReset'>
+		        					</form>
+		        				</div><!-- panel-body  -->
+		        			</div>
+		        		</div>
+		        	</div>
+		        </div>
+	          	<div class="modal-footer">
+	           		<button data-dismiss="modal" class="btn btn-default resetBtnPad" type="button">取消</button>
+	            	<button class="btn btn-primary btnSureUpdatePad" type="button">确定修改</button>
+	          	</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+			
+			
+	</div>
+	<!-- /#wrapper -->
+
+	<!-- jQuery -->
+	<script src="/LivePlatform/html/my-admin/vendor/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="/LivePlatform/html/my-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="/LivePlatform/html/my-admin/vendor/metisMenu/metisMenu.min.js"></script>
+
+	<!-- Morris Charts JavaScript -->
+	<script src="/LivePlatform/html/my-admin/vendor/raphael/raphael.min.js"></script>
+	<script src="/LivePlatform/html/my-admin/vendor/morrisjs/morris.min.js"></script>
+	<script src="/LivePlatform/html/my-admin/data/morris-data.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="/LivePlatform/html/my-admin/dist/js/sb-admin-2.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/layer/layer.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/global.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/jquery/jquery.form.js"></script>
+	<script src="/LivePlatform/js/userSetting.js"></script>
+	<script type="text/javascript" src="/LivePlatform/js/imgFileupload.js"></script>
+	<script type="text/javascript">
+		var imgFile = new ImgUploadeFiles('.box',function(e){
+			this.init({
+				MAX : 1, //限制个数
+				MH : 5800, //像素限制高度
+				MW : 5900, //像素限制宽度
+				callback : function(arr){
+					console.log(arr)
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

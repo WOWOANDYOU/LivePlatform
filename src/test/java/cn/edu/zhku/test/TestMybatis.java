@@ -38,7 +38,6 @@ public class TestMybatis {
 	private JavaMailSenderImpl senderImpl;
 	private SimpleMailMessage mailMessage;
 	
-	
 	@Test
 	public void testUserSelect() {
 		ArrayList<UserEntity> list = userService.selectAllUser();
@@ -117,7 +116,17 @@ public class TestMybatis {
 	}
 	@Test
 	public void testCate() {
-		ArrayList<SpendCateEntity> list = billService.selectAllSpendCate();
-		System.out.println(list.size());
+		String str = "ABC中国123";
+		String [] aStr = str.split("");
+		System.out.println(str.charAt(19));
 	}
+	public static void main(String[] args) {
+		String str = "ABC中国123";
+		String [] aStr = str.split("");
+		if(48<=str.charAt(str.length()-1) && str.charAt(str.length()-1)<=57) {
+			System.out.println(str.charAt(str.length()-1));
+		}
+		System.out.println();
+	}
+	
 }

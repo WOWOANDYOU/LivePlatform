@@ -67,7 +67,7 @@ public class UnusedController {
 				good.setGoodId(UUID.randomUUID().toString());
 				if (file != null && file.length != 0) {
 					String type[] = new String[file.length];
-					;// 文件类型
+					// 文件类型
 					String fileName[] = new String[file.length];
 					for (int i = 0; i < fileName.length; i++) {
 						fileName[i] = file[i].getOriginalFilename();

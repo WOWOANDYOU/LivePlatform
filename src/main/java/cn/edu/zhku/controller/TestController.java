@@ -32,7 +32,10 @@ public class TestController {
 			//type=fileName.indexOf(".")!=-1?fileName.substring(fileName.lastIndexOf(".")+1, fileName.length()):null;
 			//String realPath=request.getSession().getServletContext().getRealPath("/");
 			String realPath="E:\\java2018\\images\\";
-			System.out.println(realPath);
+			StringBuffer sb = new StringBuffer("wo");
+			StringBuilder sber = new StringBuilder("you");
+			sber.append(sb);
+			System.out.println(realPath+" "+sber);
 			//realPath+="images/";
 			String realImgPath[] = new String[file.length];
 			for(int i=0;i<file.length;i++) {

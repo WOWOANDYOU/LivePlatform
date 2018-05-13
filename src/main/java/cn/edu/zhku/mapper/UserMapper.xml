@@ -55,6 +55,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="userEmail!=null and userEmail!=''">
 			and user_email=#{userEmail,jdbcType=VARCHAR}
 		</if>
+		
+		<if test="userId!=null and userId!=''">
+			and user_id=#{userId,jdbcType=VARCHAR}
+		</if>
 	</select>
 	
 	<delete id="deleteUser" parameterType="java.lang.String">
